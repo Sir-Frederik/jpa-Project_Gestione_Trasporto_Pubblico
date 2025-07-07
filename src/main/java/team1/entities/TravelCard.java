@@ -11,17 +11,16 @@ import java.time.LocalDate;
         private long id;
         private LocalDate expiration_date;
         private  LocalDate start_date;
-        //da aspettare per l import
-        //@ManyToOne
-        // private Utente utente;
+
+        @ManyToOne
+         private User user;
 
         public TravelCard(){}
 
-        public TravelCard(LocalDate start_date){
-            //da aggiungere utente negli argomenti
+        public TravelCard(LocalDate start_date, User user){
             this.start_date = start_date;
             this.expiration_date = start_date.plusYears(1);
-            //this.utente = utente;
+            this.user =user;
         }
 
         public long getId() {
@@ -44,12 +43,21 @@ import java.time.LocalDate;
             this.start_date = start_date;
         }
 
+        public User getUser() {
+            return user;
+        }
+
+        public void setUser(User user) {
+            this.user = user;
+        }
+
         @Override
         public String toString() {
             return "TravelCard{" +
                     "id=" + id +
                     ", expiration_date=" + expiration_date +
                     ", start_date=" + start_date +
+                    ", user=" + user +
                     '}';
         }
     }

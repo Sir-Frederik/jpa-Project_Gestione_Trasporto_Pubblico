@@ -5,6 +5,7 @@ import team1.entities.enums.Availability;
 import team1.entities.enums.VehiclesType;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "vehicles")
@@ -31,7 +32,14 @@ public class Vehicles {
     @Column(name = "service_start_date")
     private LocalDate serviceStartDate;
 
-    //Biglietti vidimati che va preso dalla relazione con biglietti
+
+    @ManyToMany
+    @JoinTable(name = "associated_ticket",
+            joinColumns = @JoinColumn(name = "ticket", nullable = false)
+            , inverseJoinColumns = @JoinColumn(name = "vehicle", nullable = false))
+    private List<Ticket> all_tickets;
+
+
     //Va collegato anche con tratta e preso le informazioni
 
     //COSTRUTTORI
@@ -45,6 +53,8 @@ public class Vehicles {
         this.maintenanceEndDate = maintenanceEndDate;
         this.serviceStartDate = serviceStartDate;
     }
+
+
 
     //GETTER
     public long getVehiclesId() {
@@ -71,6 +81,9 @@ public class Vehicles {
     public LocalDate getServiceStartDate() {
         return serviceStartDate;
     }
+    public List<Ticket> getAll_tickets() {
+        return all_tickets;
+    }
 
     //SETTER
     public void setAvailability(Availability availability) {
@@ -90,6 +103,9 @@ public class Vehicles {
     }
     public void setServiceStartDate(LocalDate serviceStartDate) {
         this.serviceStartDate = serviceStartDate;
+    }
+    public void setAll_tickets(List<Ticket> all_tickets) {
+        this.all_tickets = all_tickets;
     }
 
     @Override

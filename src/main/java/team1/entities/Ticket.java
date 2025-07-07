@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import team1.entities.enums.TicketType;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -11,7 +12,6 @@ import java.util.UUID;
 public class Ticket {
     @Id
     @GeneratedValue
-
     private long id;
 
 private TicketType typology;
@@ -24,11 +24,19 @@ private LocalDate purchaseDate;
 @Column (name = "stamped_date")
 private LocalDate stampedDate;
 
+
+    @ManyToOne
+    private User user;
+
+    @ManyToMany(mappedBy = "associated_ticket")
+    private List<Vehicles> all_vehicles;
+
     public Ticket() {
     }
 
 
-    public Ticket(long id, TicketType typology, boolean stamped, boolean valid, LocalDate expiration, LocalDate purchaseDate, LocalDate stampedDate) {
+    public Ticket(long id, TicketType typology, boolean stamped, boolean valid, LocalDate expiration,
+                  LocalDate purchaseDate, LocalDate stampedDate, User user) {
         this.id = id;
         this.typology = typology;
         this.stamped = stamped;
@@ -36,6 +44,7 @@ private LocalDate stampedDate;
         this.expiration = expiration;
         this.purchaseDate = purchaseDate;
         this.stampedDate = stampedDate;
+        this.user= user;
     }
 
     @Override
@@ -48,9 +57,9 @@ private LocalDate stampedDate;
                 ", expiration=" + expiration +
                 ", purchaseDate=" + purchaseDate +
                 ", stampedDate=" + stampedDate +
+                ", user=" + user +
                 '}';
     }
-
 
     public long getId() {
         return id;
@@ -106,5 +115,13 @@ private LocalDate stampedDate;
 
     public void setStampedDate(LocalDate stampedDate) {
         this.stampedDate = stampedDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
