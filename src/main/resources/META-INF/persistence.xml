@@ -8,6 +8,8 @@
 <class> team1.entities.User</class>
 
 
+        <class>team1.entities.Line</class>
+        <class>team1.entities.TravelCard</class>
         <properties>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/Trasporto_Pubblico"/>
             <property name="jakarta.persistence.jdbc.user" value="postgres"/>
