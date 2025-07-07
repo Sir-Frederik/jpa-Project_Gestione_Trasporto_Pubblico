@@ -1,11 +1,10 @@
 package team1.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
-    @Entity
+import java.util.List;
+
+@Entity
     public class Line {
         @Id
         @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -15,7 +14,9 @@ import jakarta.persistence.Id;
         private int line_number;
         private int estimated_duration;
         private int  actual_duration;
-        //da collegare ai mezzi
+
+        @ManyToMany(mappedBy = "associated_line")
+        private List<Vehicles> all_vehicles;
 
         public Line(){};
 

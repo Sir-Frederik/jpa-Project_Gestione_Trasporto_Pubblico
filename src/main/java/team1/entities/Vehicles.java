@@ -40,7 +40,12 @@ public class Vehicles {
     private List<Ticket> all_tickets;
 
 
-    //Va collegato anche con tratta e preso le informazioni
+
+    @ManyToMany
+    @JoinTable(name = "associated_line",
+            joinColumns = @JoinColumn(name = "line", nullable = false)
+            , inverseJoinColumns = @JoinColumn(name = "vehicle", nullable = false))
+    private List<Line> all_lines;
 
     //COSTRUTTORI
     public Vehicles(){}
