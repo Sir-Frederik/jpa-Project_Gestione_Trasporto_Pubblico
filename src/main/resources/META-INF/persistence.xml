@@ -4,8 +4,10 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
     <persistence-unit name="trasporto">
 
-
-
+        <class>team1.entities.Vehicles</class>
+        <class>team1.entities.Sellers</class>
+        <class>team1.entities.sellersSons.TicketMachine</class>
+        <class>team1.entities.sellersSons.TicketSeller</class>
 
         <properties>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/Trasporto_Pubblico"/>
@@ -13,8 +15,6 @@
             <property name="jakarta.persistence.jdbc.password" value="1234"/>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
-            <!-- Quest'ultima impostazione serve per chiedere a Hibernate di crearci le tabelle se non esistono ancora
-            oppure se esistono aggiornarle se necessario -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
