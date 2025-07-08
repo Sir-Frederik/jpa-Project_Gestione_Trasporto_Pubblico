@@ -14,15 +14,15 @@ public class Ticket {
     @GeneratedValue
     private long id;
 
-private TicketType typology;
-private boolean stamped;
-private  boolean valid;
-@Column (name = "expiration_date")
-private LocalDate expiration;
-@Column (name = "purchase_date")
-private LocalDate purchaseDate;
-@Column (name = "stamped_date")
-private LocalDate stampedDate;
+    private TicketType typology;
+    private boolean stamped;
+    private  boolean valid;
+    @Column (name = "expiration_date")
+    private LocalDate expiration;
+    @Column (name = "purchase_date")
+    private LocalDate purchaseDate;
+    @Column (name = "stamped_date")
+    private LocalDate stampedDate;
 
 
     @ManyToOne
