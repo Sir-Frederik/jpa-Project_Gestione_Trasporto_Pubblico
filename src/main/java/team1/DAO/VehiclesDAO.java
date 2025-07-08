@@ -21,7 +21,7 @@ public class VehiclesDAO {
         System.out.println("The element has been saved");
     }
 
-    public Vehicles foundVehiclesById(long vehiclesId) {
+    public Vehicles findVehiclesById(long vehiclesId) {
         Vehicles found = entityManager.find(Vehicles.class, vehiclesId);
         if (found == null) throw new EntityNotFoundException("Element not found");
         return found;
