@@ -3,15 +3,19 @@
              xmlns="http://xmlns.jcp.org/xml/ns/persistence"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
     <persistence-unit name="trasporto">
-        <class> team1.entities.Ticket</class>
-        <class> team1.entities.User</class>
+        <class>team1.entities.Ticket</class>
+        <class>team1.entities.User</class>
         <class>team1.entities.Line</class>
         <class>team1.entities.TravelCard</class>
-
         <class>team1.entities.Vehicles</class>
+        <class>team1.entities.VehicleLineJourney</class>
+        <class>team1.entities.VehiclesMaintenance</class>
         <class>team1.entities.Sellers</class>
         <class>team1.entities.sellersSons.TicketMachine</class>
         <class>team1.entities.sellersSons.TicketSeller</class>
+        <class>team1.entities.ticketSons.SubscriptionTicket</class>
+        <class>team1.entities.ticketSons.DisposableTicket</class>
+
 
         <properties>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/Trasporto_Pubblico"/>

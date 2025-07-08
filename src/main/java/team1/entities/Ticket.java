@@ -34,8 +34,8 @@ private LocalDate stampedDate;
 
 
 
-    @ManyToMany(mappedBy = "associated_ticket")
-    private List<Vehicles> all_vehicles;
+    @ManyToOne
+  private Vehicles vehicles;
 
     @ManyToOne ()
     private Sellers selles;
@@ -59,9 +59,7 @@ private LocalDate stampedDate;
 
 
 
-    public List<Vehicles> getAll_vehicles() {
-        return all_vehicles;
-    }
+
 
 
     public long getTicketId() {

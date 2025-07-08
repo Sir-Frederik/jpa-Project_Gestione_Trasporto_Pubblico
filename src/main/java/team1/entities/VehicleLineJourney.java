@@ -1,12 +1,15 @@
 package team1.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
+
 @Table(name = "journey_times")
 public class VehicleLineJourney {
+
+    @Id
+    @GeneratedValue
+    private long id;
     private double estimated_time;
     private double actual_time;
 
