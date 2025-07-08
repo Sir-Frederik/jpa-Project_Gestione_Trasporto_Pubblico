@@ -2,6 +2,8 @@ package team1.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "sellers")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -12,10 +14,16 @@ public class Sellers {
     @Column(name = "sellers_id")
     protected long sellersId;
 
-    //list biglietto collegata con i biglietti
+    @OneToMany
+    @JoinColumn(name = "selled_tickets")
+ public List<Ticket> selledTickets;
 
     //COSTRUTTORI
     public Sellers() {}
+
+    public Sellers(long sellersId) {
+        this.sellersId = sellersId;
+    }
 
     //GETTER
     public long getSellersId() {

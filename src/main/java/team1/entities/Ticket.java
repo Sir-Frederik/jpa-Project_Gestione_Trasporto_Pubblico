@@ -37,6 +37,9 @@ private LocalDate stampedDate;
     @ManyToMany(mappedBy = "associated_ticket")
     private List<Vehicles> all_vehicles;
 
+    @ManyToOne ()
+    private Sellers selles;
+
 
     public LocalDate getPurchaseDate() {
         return purchaseDate;
