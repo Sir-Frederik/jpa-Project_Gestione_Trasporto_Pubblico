@@ -27,8 +27,7 @@ private LocalDate stampedDate;
     public Ticket() {
     }
 
-    public Ticket(long ticketId, LocalDate purchaseDate, LocalDate stampedDate) {
-        this.ticketId = ticketId;
+    public Ticket( LocalDate purchaseDate, LocalDate stampedDate) {
         this.purchaseDate = purchaseDate;
         this.stampedDate = stampedDate;
     }

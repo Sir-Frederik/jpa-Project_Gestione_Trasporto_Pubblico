@@ -14,9 +14,7 @@ import java.util.List;
 @Table(name = "Subscription_ticket")
 
 public class SubscriptionTicket extends Ticket {
-    @Id
-    @GeneratedValue
-    private long id;
+
     @Enumerated(EnumType.STRING)
     TicketType type;
     private LocalDate expiration;
@@ -28,20 +26,14 @@ public class SubscriptionTicket extends Ticket {
 
     public SubscriptionTicket(){}
 
-    public SubscriptionTicket(long ticketId, LocalDate purchaseDate, LocalDate stampedDate,
-                              User user, List<Vehicles> all_vehicles, TicketType type, long id1,
-                              LocalDate expiration, TravelCard travelCard) {
-        super(ticketId, purchaseDate, stampedDate, all_vehicles);
+    public SubscriptionTicket(LocalDate purchaseDate, LocalDate stampedDate,
+                              TicketType type, LocalDate expiration, TravelCard travelCard) {
+        super(purchaseDate, stampedDate);
         this.type = type;
-        this.id = id;
         this.expiration = expiration;
         this.travelCard = travelCard;
     }
 
-
-    public long getticketId() {
-        return id;
-    }
 
     public TicketType getType() {
         return type;
@@ -65,5 +57,14 @@ public class SubscriptionTicket extends Ticket {
 
     public void setTravelCard(TravelCard travelCard) {
         this.travelCard = travelCard;
+    }
+
+    @Override
+    public String toString() {
+        return "SubscriptionTicket{" +
+                "type=" + type +
+                ", expiration=" + expiration +
+                ", travelCard=" + travelCard +
+                '}';
     }
 }
