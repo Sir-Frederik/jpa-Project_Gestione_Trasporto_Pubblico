@@ -3,10 +3,10 @@ package team1.entities;
 import jakarta.persistence.*;
 
 import java.util.List;
-import java.util.UUID;
+
 
 @Entity
-@Table (name = "user")
+@Table (name = "users")
 public class User {
     @Id
     @GeneratedValue
@@ -21,7 +21,12 @@ private List<TravelCard> all_travel_cards;
     public User() {
     }
 
-
+    public User(long id, String name, String surname, List<TravelCard> all_travel_cards) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.all_travel_cards = all_travel_cards;
+    }
 
     @Override
     public String toString() {
