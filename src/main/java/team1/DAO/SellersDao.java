@@ -23,7 +23,7 @@ public class SellersDao {
         System.out.println("The element has been saved");
     }
 
-    public Sellers getById(long id) {
+    public Sellers findById(long id) {
         Sellers sellerFromId = entityManager.find(Sellers.class, id);
         if (sellerFromId == null) {
             throw new EntityNotFoundException("Element not found");

@@ -22,7 +22,7 @@ public class TicketDao {
         System.out.println("The element has been saved");
     }
 
-    public Ticket getById(long id) {
+    public Ticket findById(long id) {
         Ticket ticketFromId = entityManager.find(Ticket.class, id);
         if (ticketFromId == null) {
             throw new EntityNotFoundException("Element not found");
