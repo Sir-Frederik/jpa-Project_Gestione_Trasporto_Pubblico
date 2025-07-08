@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table (name = "ticket")
+@Table (name = "tickets")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Ticket {
     @Id

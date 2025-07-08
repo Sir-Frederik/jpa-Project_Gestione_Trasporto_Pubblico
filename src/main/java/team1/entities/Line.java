@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@Table (name = "lines")
     public class Line {
         @Id
         @GeneratedValue(strategy = GenerationType.SEQUENCE)

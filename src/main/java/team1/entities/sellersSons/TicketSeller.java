@@ -5,7 +5,7 @@ import jakarta.persistence.Table;
 import team1.entities.Sellers;
 
 @Entity
-@Table(name = "ticket_seller")
+@Table(name = "ticket_sellers")
 public class TicketSeller extends Sellers {
 
     //COSTRUTTORI

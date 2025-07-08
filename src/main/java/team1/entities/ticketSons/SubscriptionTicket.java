@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "Subscription_ticket")
+@Table(name = "subscription_tickets")
 
 public class SubscriptionTicket extends Ticket {
 

@@ -6,7 +6,7 @@ import team1.entities.enums.Active;
 
 
 @Entity
-@Table(name = "ticket_machine")
+@Table(name = "ticket_machines")
 public class TicketMachine extends Sellers {
 
     @Column(name = "status")

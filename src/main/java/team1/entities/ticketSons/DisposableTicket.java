@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "Disposable_ticket")
+@Table(name = "disposable_tickets")
 
 
 public class DisposableTicket extends Ticket {

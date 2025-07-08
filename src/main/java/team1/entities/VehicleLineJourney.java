@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 
-@Table(name = "journey_times")
+@Table(name = "vehicle_line_journeys")
 public class VehicleLineJourney {
 
     @Id

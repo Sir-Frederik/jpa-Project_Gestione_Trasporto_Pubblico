@@ -3,7 +3,8 @@ package team1.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-
+@Entity
+@Table  (name="vehicles_maintenances")
 public class VehiclesMaintenance {
 
 
