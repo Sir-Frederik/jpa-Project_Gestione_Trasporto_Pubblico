@@ -21,12 +21,13 @@ public class SellersDao {
         transaction.begin();
         entityManager.persist(seller);
         transaction.commit();
+        System.out.println("The element has been saved");
     }
 
     public Sellers getById(long id) {
         Sellers sellerFromId = entityManager.find(Sellers.class, id);
         if (sellerFromId == null) {
-            throw new EntityNotFoundException("evento non trovato");
+            throw new EntityNotFoundException("Element not found");
         }
         return sellerFromId;
     }

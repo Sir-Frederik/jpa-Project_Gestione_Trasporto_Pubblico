@@ -19,12 +19,13 @@ public class TicketDao {
         transaction.begin();
         entityManager.persist(ticket);
         transaction.commit();
+        System.out.println("The element has been saved");
     }
 
     public Ticket getById(long id) {
         Ticket ticketFromId = entityManager.find(Ticket.class, id);
         if (ticketFromId == null) {
-            throw new EntityNotFoundException("evento non trovato");
+            throw new EntityNotFoundException("Element not found");
         }
         return ticketFromId;
     }
