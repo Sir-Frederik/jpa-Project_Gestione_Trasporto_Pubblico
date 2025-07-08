@@ -10,13 +10,33 @@ public class VehicleLineJourney {
     @Id
     @GeneratedValue
     private long id;
-    private double estimated_time;
-    private double actual_time;
+    private double actualTime;
 
     @ManyToOne
-    private Vehicles vehicle_id;
-
+    @JoinColumn(name = "vehicles_id")
+    private Vehicles vehiclesId;
     @ManyToOne
-    private Line line_id;
-     //in vehicle da togliere la manytomany delle lines
+    @JoinColumn(name = "line_id")
+    private Line lineId;
+
+    public VehicleLineJourney(){}
+    public VehicleLineJourney( double actualTime, Vehicles vehiclesId, Line lineId) {
+        this.actualTime = actualTime;
+        this.vehiclesId = vehiclesId;
+        this.lineId = lineId;
+    }
+
+    //GETTER
+    public long getId() {
+        return id;
+    }
+    public double getActualTime() {
+        return actualTime;
+    }
+    public Vehicles getVehiclesId() {
+        return vehiclesId;
+    }
+    public Line getLineId() {
+        return lineId;
+    }
 }

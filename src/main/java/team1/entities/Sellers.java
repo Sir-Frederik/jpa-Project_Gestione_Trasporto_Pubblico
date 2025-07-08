@@ -16,17 +16,16 @@ public class Sellers {
 
     @OneToMany
     @JoinColumn(name = "selled_tickets")
- public List<Ticket> selledTickets;
+    public List<Ticket> selledTickets;
 
     //COSTRUTTORI
     public Sellers() {}
 
-    public Sellers(long sellersId) {
-        this.sellersId = sellersId;
-    }
-
     //GETTER
     public long getSellersId() {
         return sellersId;
+    }
+    public List<Ticket> getSelledTickets() {
+        return selledTickets;
     }
 }

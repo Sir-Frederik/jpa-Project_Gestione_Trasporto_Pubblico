@@ -27,16 +27,16 @@ public class Vehicles {
     @Column(name = "plate")
     private String plate;
 
-    @OneToMany
-    private List<Ticket> all_tickets;
 
     //RELAZIONI
+    @OneToMany
+    private List<Ticket> all_tickets;
     @OneToMany(mappedBy = "vehicles")
     private List<VehiclesMaintenance> vehiclesMaintenances;
 
     //COSTRUTTORI
     public Vehicles(){}
-    public Vehicles(VehiclesType vehiclesType,Availability availability,long capacity, String plate, LocalDate maintenanceStartDate, LocalDate maintenanceEndDate, LocalDate serviceStartDate) {
+    public Vehicles(VehiclesType vehiclesType,Availability availability,long capacity, String plate) {
         this.vehiclesType =  vehiclesType;
         this.availability = availability;
         this.capacity = capacity;

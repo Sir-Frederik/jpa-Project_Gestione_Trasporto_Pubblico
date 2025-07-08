@@ -10,22 +10,39 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue
-
     private long id;
-private String name;
-private String surname;
+    private String name;
+    private String surname;
 
-@OneToMany
-private List<TravelCard> all_travel_cards;
+    @OneToMany
+    private List<TravelCard> allTravelCards;
 
+    //COSTRUTTORI
     public User() {
     }
-
-    public User(long id, String name, String surname, List<TravelCard> all_travel_cards) {
-        this.id = id;
+    public User(String name, String surname) {
         this.name = name;
         this.surname = surname;
-        this.all_travel_cards = all_travel_cards;
+    }
+
+    //GETTER SETTER
+    public long getId() {
+        return id;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getSurname() {
+        return surname;
+    }
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+    public List<TravelCard> getAllTravelCards() {
+        return allTravelCards;
     }
 
     @Override
@@ -35,26 +52,5 @@ private List<TravelCard> all_travel_cards;
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 '}';
-    }
-
-    public long getId() {
-        return id;
-    }
-
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
 }

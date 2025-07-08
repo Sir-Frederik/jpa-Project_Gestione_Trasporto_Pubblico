@@ -12,35 +12,28 @@ import java.util.UUID;
 @Table (name = "tickets")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Ticket {
+
     @Id
     @GeneratedValue
     private long ticketId;
+    @Column (name = "purchase_date")
+    private LocalDate purchaseDate;
+    @Column (name = "stamped_date")
+    private LocalDate stampedDate;
 
-
-
-@Column (name = "purchase_date")
-private LocalDate purchaseDate;
-@Column (name = "stamped_date")
-private LocalDate stampedDate;
-
-
-    public Ticket() {
-    }
-
+    //COSTRUTTORI
+    public Ticket() {}
     public Ticket( LocalDate purchaseDate, LocalDate stampedDate) {
         this.purchaseDate = purchaseDate;
         this.stampedDate = stampedDate;
     }
-
-
-
+    //RELAZIONI
     @ManyToOne
-  private Vehicles vehicles;
-
+    private Vehicles vehicles;
     @ManyToOne ()
-    private Sellers selles;
+    private Sellers sellers;
 
-
+    //GETTER SETTER
     public LocalDate getPurchaseDate() {
         return purchaseDate;
     }
@@ -56,11 +49,6 @@ private LocalDate stampedDate;
     public void setStampedDate(LocalDate stampedDate) {
         this.stampedDate = stampedDate;
     }
-
-
-
-
-
 
     public long getTicketId() {
         return ticketId;

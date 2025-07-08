@@ -12,11 +12,14 @@ public class TicketMachine extends Sellers {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private Active active;
+    @Column(name = "identification_code")
+    private long identificationCode;
 
     //COSTRUTTORI
     public TicketMachine(){}
-    public TicketMachine(Active active) {
+    public TicketMachine(Active active,long identificationCode) {
         this.active = active;
+        this.identificationCode = identificationCode;
     }
 
     //GETTER
