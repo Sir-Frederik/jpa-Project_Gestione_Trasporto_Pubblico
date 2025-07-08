@@ -22,15 +22,15 @@ public class SubscriptionTicket extends Ticket {
     private LocalDate expiration;
 
     @ManyToOne
-    @JoinColumn(name = "ticket_id")
+    @JoinColumn(name = "travel_card_id")
     private TravelCard travelCard;
-
-
 
 
     public SubscriptionTicket(){}
 
-    public SubscriptionTicket(long ticketId, LocalDate purchaseDate, LocalDate stampedDate, User user, List<Vehicles> all_vehicles, TicketType type, long id1, LocalDate expiration, TravelCard travelCard) {
+    public SubscriptionTicket(long ticketId, LocalDate purchaseDate, LocalDate stampedDate,
+                              User user, List<Vehicles> all_vehicles, TicketType type, long id1,
+                              LocalDate expiration, TravelCard travelCard) {
         super(ticketId, purchaseDate, stampedDate, all_vehicles);
         this.type = type;
         this.id = id;

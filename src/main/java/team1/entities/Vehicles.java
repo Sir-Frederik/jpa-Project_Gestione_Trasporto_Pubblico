@@ -5,6 +5,7 @@ import team1.entities.enums.Availability;
 import team1.entities.enums.VehiclesType;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,6 +26,9 @@ public class Vehicles {
     private long capacity;
     @Column(name = "plate")
     private String plate;
+
+    @OneToMany
+    private List<Ticket> all_tickets;
 
     //RELAZIONI
     @OneToMany(mappedBy = "vehicles")

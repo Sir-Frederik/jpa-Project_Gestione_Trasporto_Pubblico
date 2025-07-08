@@ -1,10 +1,8 @@
 package team1.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -16,6 +14,9 @@ public class User {
     private long id;
 private String name;
 private String surname;
+
+@OneToMany
+private List<TravelCard> all_travel_cards;
 
     public User() {
     }

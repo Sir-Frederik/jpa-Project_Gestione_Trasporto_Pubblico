@@ -1,9 +1,12 @@
 package team1.entities;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
+import team1.entities.ticketSons.SubscriptionTicket;
 
-    @Entity
+import java.time.LocalDate;
+import java.util.List;
+
+@Entity
     @Table(name = "travel_cards")
     public class TravelCard {
         @Id
@@ -13,7 +16,12 @@ import java.time.LocalDate;
         private  LocalDate start_date;
 
         @ManyToOne
-         private User user;
+        private User user;
+        //questo per avere nel costruttore l utente
+
+        @OneToMany
+        @JoinColumn(name = "associated_tickets")
+        private List<SubscriptionTicket> subscriptionTickets;
 
         public TravelCard(){}
 

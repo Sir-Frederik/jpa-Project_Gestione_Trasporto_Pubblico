@@ -23,19 +23,14 @@ private LocalDate purchaseDate;
 @Column (name = "stamped_date")
 private LocalDate stampedDate;
 
-@OneToMany
-@JoinColumn(name = "travelCard")
-private List<SubscriptionTicket> subscriptionTickets;
 
     public Ticket() {
     }
 
-    public Ticket(long ticketId, LocalDate purchaseDate, LocalDate stampedDate,  List<Vehicles> all_vehicles) {
+    public Ticket(long ticketId, LocalDate purchaseDate, LocalDate stampedDate) {
         this.ticketId = ticketId;
         this.purchaseDate = purchaseDate;
         this.stampedDate = stampedDate;
-
-        this.all_vehicles = all_vehicles;
     }
 
 
@@ -66,11 +61,8 @@ private List<SubscriptionTicket> subscriptionTickets;
         return all_vehicles;
     }
 
-    public void setAll_vehicles(List<Vehicles> all_vehicles) {
-        this.all_vehicles = all_vehicles;
-    }
 
-    public long getticketId() {
+    public long getTicketId() {
         return ticketId;
     }
 }
