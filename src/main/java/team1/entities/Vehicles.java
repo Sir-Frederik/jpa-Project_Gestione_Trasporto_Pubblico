@@ -25,27 +25,10 @@ public class Vehicles {
     private long capacity;
     @Column(name = "plate")
     private String plate;
-    @Column(name = "maintenance_start_date")
-    private LocalDate maintenanceStartDate;
-    @Column(name = "maintenance_end_date")
-    private LocalDate maintenanceEndDate;
-    @Column(name = "service_start_date")
-    private LocalDate serviceStartDate;
 
-
-    @ManyToMany
-    @JoinTable(name = "associated_ticket",
-            joinColumns = @JoinColumn(name = "ticket", nullable = false)
-            , inverseJoinColumns = @JoinColumn(name = "vehicle", nullable = false))
-    private List<Ticket> all_tickets;
-
-
-
-    @ManyToMany
-    @JoinTable(name = "associated_line",
-            joinColumns = @JoinColumn(name = "line", nullable = false)
-            , inverseJoinColumns = @JoinColumn(name = "vehicle", nullable = false))
-    private List<Line> all_lines;
+    //RELAZIONI
+    @OneToMany(mappedBy = "vehicles")
+    private List<VehiclesMaintenance> vehiclesMaintenances;
 
     //COSTRUTTORI
     public Vehicles(){}
@@ -54,12 +37,7 @@ public class Vehicles {
         this.availability = availability;
         this.capacity = capacity;
         this.plate = plate;
-        this.maintenanceStartDate = maintenanceStartDate;
-        this.maintenanceEndDate = maintenanceEndDate;
-        this.serviceStartDate = serviceStartDate;
     }
-
-
 
     //GETTER
     public long getVehiclesId() {
@@ -77,18 +55,6 @@ public class Vehicles {
     public String getPlate() {
         return plate;
     }
-    public LocalDate getMaintenanceStartDate() {
-        return maintenanceStartDate;
-    }
-    public LocalDate getMaintenanceEndDate() {
-        return maintenanceEndDate;
-    }
-    public LocalDate getServiceStartDate() {
-        return serviceStartDate;
-    }
-    public List<Ticket> getAll_tickets() {
-        return all_tickets;
-    }
 
     //SETTER
     public void setAvailability(Availability availability) {
@@ -100,18 +66,6 @@ public class Vehicles {
     public void setPlate(String plate) {
         this.plate = plate;
     }
-    public void setMaintenanceStartDate(LocalDate maintenanceStartDate) {
-        this.maintenanceStartDate = maintenanceStartDate;
-    }
-    public void setMaintenanceEndDate(LocalDate maintenanceEndDate) {
-        this.maintenanceEndDate = maintenanceEndDate;
-    }
-    public void setServiceStartDate(LocalDate serviceStartDate) {
-        this.serviceStartDate = serviceStartDate;
-    }
-    public void setAll_tickets(List<Ticket> all_tickets) {
-        this.all_tickets = all_tickets;
-    }
 
     @Override
     public String toString() {
@@ -121,9 +75,6 @@ public class Vehicles {
                 ", availability=" + availability +
                 ", capacity=" + capacity +
                 ", plate='" + plate + '\'' +
-                ", maintenanceStartDate=" + maintenanceStartDate +
-                ", maintenanceEndDate=" + maintenanceEndDate +
-                ", serviceStartDate=" + serviceStartDate +
                 '}';
     }
 }
