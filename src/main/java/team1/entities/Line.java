@@ -13,9 +13,6 @@ import java.util.List;
         private  String final_stop;
         private int line_number;
 
-        @ManyToMany(mappedBy = "associated_line")
-        private List<Vehicles> all_vehicles;
-
         public Line(){};
 
         public Line(String departure, String final_stop, int line_number){
