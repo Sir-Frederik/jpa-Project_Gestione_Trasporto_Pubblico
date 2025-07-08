@@ -12,19 +12,16 @@ import java.util.List;
         private String departure;
         private  String final_stop;
         private int line_number;
-        private int estimated_duration;
-        private int  actual_duration;
 
         @ManyToMany(mappedBy = "associated_line")
         private List<Vehicles> all_vehicles;
 
         public Line(){};
 
-        public Line(String departure, String final_stop, int line_number, int estimated_duration){
+        public Line(String departure, String final_stop, int line_number){
             this.line_number = line_number;
             this.final_stop = final_stop;
             this.departure = departure;
-            this.estimated_duration = estimated_duration;
         }
 
         public long getId() {
@@ -56,21 +53,6 @@ import java.util.List;
             this.line_number = line_number;
         }
 
-        public int getEstimated_duration() {
-            return estimated_duration;
-        }
-
-        public void setEstimated_duration(int estimated_duration) {
-            this.estimated_duration = estimated_duration;
-        }
-
-        public int getActual_duration() {
-            return actual_duration;
-        }
-
-        public void setActual_duration(int actual_duration) {
-            this.actual_duration = actual_duration;
-        }
 
         @Override
         public String toString() {
@@ -79,8 +61,6 @@ import java.util.List;
                     ", departure='" + departure + '\'' +
                     ", final_stop='" + final_stop + '\'' +
                     ", line_number=" + line_number +
-                    ", estimated_duration=" + estimated_duration +
-                    ", actual_duration=" + actual_duration +
                     '}';
         }
     }
