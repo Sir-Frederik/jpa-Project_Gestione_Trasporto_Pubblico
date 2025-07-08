@@ -14,25 +14,14 @@ import java.util.List;
 
 public class DisposableTicket extends Ticket {
 
-    @Id
-    @GeneratedValue
-    private long ticketId;
-
-
 
     public DisposableTicket() {
     }
 
 
-    public DisposableTicket(long ticketId, LocalDate purchaseDate, LocalDate stampedDate, User user, List<Vehicles> all_vehicles) {
-        super(ticketId, purchaseDate, stampedDate, user, all_vehicles);
-        this.ticketId = ticketId;
+    public DisposableTicket(LocalDate purchaseDate, LocalDate stampedDate, long ticketId) {
+        super(purchaseDate, stampedDate);
     }
-
-    public long getticketId() {
-        return ticketId;
-    }
-
 
 
 }
