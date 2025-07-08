@@ -9,21 +9,29 @@ import java.util.UUID;
 
 @Entity
 @Table (name = "ticket")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Ticket {
     @Id
     @GeneratedValue
     private long id;
 
-private TicketType typology;
-private boolean stamped;
-private  boolean valid;
-@Column (name = "expiration_date")
-private LocalDate expiration;
+
+
 @Column (name = "purchase_date")
 private LocalDate purchaseDate;
 @Column (name = "stamped_date")
 private LocalDate stampedDate;
 
+    public Ticket() {
+    }
+
+    public Ticket(long id, LocalDate purchaseDate, LocalDate stampedDate, User user, List<Vehicles> all_vehicles) {
+        this.id = id;
+        this.purchaseDate = purchaseDate;
+        this.stampedDate = stampedDate;
+        this.user = user;
+        this.all_vehicles = all_vehicles;
+    }
 
     @ManyToOne
     private User user;
@@ -31,75 +39,6 @@ private LocalDate stampedDate;
     @ManyToMany(mappedBy = "associated_ticket")
     private List<Vehicles> all_vehicles;
 
-    public Ticket() {
-    }
-
-
-    public Ticket(long id, TicketType typology, boolean stamped, boolean valid, LocalDate expiration,
-                  LocalDate purchaseDate, LocalDate stampedDate, User user) {
-        this.id = id;
-        this.typology = typology;
-        this.stamped = stamped;
-        this.valid = valid;
-        this.expiration = expiration;
-        this.purchaseDate = purchaseDate;
-        this.stampedDate = stampedDate;
-        this.user= user;
-    }
-
-    @Override
-    public String toString() {
-        return "Ticket{" +
-                "id=" + id +
-                ", typology=" + typology +
-                ", stamped=" + stamped +
-                ", valid=" + valid +
-                ", expiration=" + expiration +
-                ", purchaseDate=" + purchaseDate +
-                ", stampedDate=" + stampedDate +
-                ", user=" + user +
-                '}';
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public TicketType getTypology() {
-        return typology;
-    }
-
-    public void setTypology(TicketType typology) {
-        this.typology = typology;
-    }
-
-    public boolean isStamped() {
-        return stamped;
-    }
-
-    public void setStamped(boolean stamped) {
-        this.stamped = stamped;
-    }
-
-    public boolean isValid() {
-        return valid;
-    }
-
-    public void setValid(boolean valid) {
-        this.valid = valid;
-    }
-
-    public LocalDate getExpiration() {
-        return expiration;
-    }
-
-    public void setExpiration(LocalDate expiration) {
-        this.expiration = expiration;
-    }
 
     public LocalDate getPurchaseDate() {
         return purchaseDate;
@@ -123,5 +62,17 @@ private LocalDate stampedDate;
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Vehicles> getAll_vehicles() {
+        return all_vehicles;
+    }
+
+    public void setAll_vehicles(List<Vehicles> all_vehicles) {
+        this.all_vehicles = all_vehicles;
+    }
+
+    public long getId() {
+        return id;
     }
 }
