@@ -16,7 +16,7 @@ public class DisposableTicket extends Ticket {
 
     @Id
     @GeneratedValue
-    private long id;
+    private long ticketId;
 
 
 
@@ -24,13 +24,13 @@ public class DisposableTicket extends Ticket {
     }
 
 
-    public DisposableTicket(long id, LocalDate purchaseDate, LocalDate stampedDate, User user, List<Vehicles> all_vehicles, long id1) {
-        super(id, purchaseDate, stampedDate, user, all_vehicles);
-        this.id = id1;
+    public DisposableTicket(long ticketId, LocalDate purchaseDate, LocalDate stampedDate, User user, List<Vehicles> all_vehicles) {
+        super(ticketId, purchaseDate, stampedDate, user, all_vehicles);
+        this.ticketId = ticketId;
     }
 
-    public long getId() {
-        return id;
+    public long getticketId() {
+        return ticketId;
     }
 
 

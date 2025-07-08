@@ -2,6 +2,7 @@ package team1.entities;
 
 import jakarta.persistence.*;
 import team1.entities.enums.TicketType;
+import team1.entities.ticketSons.SubscriptionTicket;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.UUID;
 public class Ticket {
     @Id
     @GeneratedValue
-    private long id;
+    private long ticketId;
 
 
 
@@ -22,19 +23,22 @@ private LocalDate purchaseDate;
 @Column (name = "stamped_date")
 private LocalDate stampedDate;
 
+@OneToMany
+@JoinColumn(name = "travelCard")
+private List<SubscriptionTicket> subscriptionTickets;
+
     public Ticket() {
     }
 
-    public Ticket(long id, LocalDate purchaseDate, LocalDate stampedDate, User user, List<Vehicles> all_vehicles) {
-        this.id = id;
+    public Ticket(long ticketId, LocalDate purchaseDate, LocalDate stampedDate,  List<Vehicles> all_vehicles) {
+        this.ticketId = ticketId;
         this.purchaseDate = purchaseDate;
         this.stampedDate = stampedDate;
-        this.user = user;
+
         this.all_vehicles = all_vehicles;
     }
 
-    @ManyToOne
-    private User user;
+
 
     @ManyToMany(mappedBy = "associated_ticket")
     private List<Vehicles> all_vehicles;
@@ -56,13 +60,7 @@ private LocalDate stampedDate;
         this.stampedDate = stampedDate;
     }
 
-    public User getUser() {
-        return user;
-    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public List<Vehicles> getAll_vehicles() {
         return all_vehicles;
@@ -72,7 +70,7 @@ private LocalDate stampedDate;
         this.all_vehicles = all_vehicles;
     }
 
-    public long getId() {
-        return id;
+    public long getticketId() {
+        return ticketId;
     }
 }
