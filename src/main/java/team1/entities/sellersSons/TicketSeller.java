@@ -13,16 +13,35 @@ public class TicketSeller extends Sellers {
 
     @Column(name = "name")
     private String name;
+    @Column(name = "surname")
+    private String surname;
 
     //COSTRUTTORI
     public TicketSeller() {
     }
-    public TicketSeller(String name) {
+
+    public TicketSeller(String name, String surname) {
         this.name = name;
+        this.surname = surname;
     }
 
     //GETTER
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getSurname() {
+        return surname;
+
+       //SETTER
+
     }
 }

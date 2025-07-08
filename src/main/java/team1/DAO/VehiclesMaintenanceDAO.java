@@ -13,7 +13,7 @@ public class VehiclesMaintenanceDAO {
         this.entityManager = entityManager;
     }
 
-    public void saveNewVehiclesMaintenance(VehiclesMaintenance newVehiclesMaintenance) {
+    public void save(VehiclesMaintenance newVehiclesMaintenance) {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
         entityManager.persist(newVehiclesMaintenance);
@@ -21,7 +21,7 @@ public class VehiclesMaintenanceDAO {
         System.out.println("The element has been saved");
     }
 
-    public VehiclesMaintenance findVehiclesMaintenanceById(long maintenanceId) {
+    public VehiclesMaintenance findById(long maintenanceId) {
         VehiclesMaintenance found = entityManager.find(VehiclesMaintenance.class, maintenanceId);
         if (found == null) throw new EntityNotFoundException("Element not found");
         return found;

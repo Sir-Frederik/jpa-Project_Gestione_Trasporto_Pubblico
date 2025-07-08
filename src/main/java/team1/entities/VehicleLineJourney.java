@@ -10,7 +10,7 @@ public class VehicleLineJourney {
     @Id
     @GeneratedValue
     private long id;
-    private double actualTime;
+    private int actualTime;
 
     @ManyToOne
     @JoinColumn(name = "vehicles_id")
@@ -20,7 +20,7 @@ public class VehicleLineJourney {
     private Line lineId;
 
     public VehicleLineJourney(){}
-    public VehicleLineJourney( double actualTime, Vehicles vehiclesId, Line lineId) {
+    public VehicleLineJourney( int actualTime, Vehicles vehiclesId, Line lineId) {
         this.actualTime = actualTime;
         this.vehiclesId = vehiclesId;
         this.lineId = lineId;
@@ -30,7 +30,7 @@ public class VehicleLineJourney {
     public long getId() {
         return id;
     }
-    public double getActualTime() {
+    public int getActualTime() {
         return actualTime;
     }
     public Vehicles getVehiclesId() {

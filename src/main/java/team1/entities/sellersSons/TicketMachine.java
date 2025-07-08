@@ -2,7 +2,7 @@ package team1.entities.sellersSons;
 
 import jakarta.persistence.*;
 import team1.entities.Sellers;
-import team1.entities.enums.Active;
+import team1.entities.enums.State;
 
 
 @Entity
@@ -11,25 +11,25 @@ public class TicketMachine extends Sellers {
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    private Active active;
-    @Column(name = "identification_code")
-    private long identificationCode;
+    private State state;
+    @Column(name = "identification_code", unique = true)
+    private int identificationCode;
 
     //COSTRUTTORI
     public TicketMachine(){}
-    public TicketMachine(Active active,long identificationCode) {
-        this.active = active;
+    public TicketMachine(State state, int identificationCode) {
+        this.state = state;
         this.identificationCode = identificationCode;
     }
 
     //GETTER
-    public Active getActive() {
-        return active;
+    public State getActive() {
+        return state;
     }
 
     //SETTER
-    public void setActive(Active active) {
-        this.active = active;
+    public void setActive(State state) {
+        this.state = state;
     }
 
 
