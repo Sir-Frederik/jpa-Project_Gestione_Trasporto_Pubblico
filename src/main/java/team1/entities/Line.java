@@ -15,6 +15,10 @@ public class Line {
     private int line_number;
     private double estimatedTime;
 
+    //
+    @OneToMany(mappedBy = "line")
+    private List<VehicleLineJourney> vehicleLineJourney;
+
     //COSTRUTTORI
     public Line(){};
 
@@ -40,6 +44,9 @@ public class Line {
         }
         public double getEstimatedTime() {
         return estimatedTime;
+        }
+        public List<VehicleLineJourney> getVehicleLineJourney() {
+            return vehicleLineJourney;
         }
 
     //SETTER

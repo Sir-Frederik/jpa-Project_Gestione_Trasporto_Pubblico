@@ -6,8 +6,8 @@ import java.time.LocalDate;
 
 @Entity
 @Table (name = "tickets")
-@Inheritance(strategy = InheritanceType.JOINED)
-public class Ticket {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Ticket {
 
     @Id
     @GeneratedValue
@@ -17,19 +17,20 @@ public class Ticket {
     @Column (name = "validation_date")
     private LocalDate validationDate;
 
+
+    //RELAZIONI
+    @ManyToOne ()
+    private Sellers sellers;
+
+    @ManyToOne
+    private Vehicles vehicles;
+
     //COSTRUTTORI
     public Ticket() {}
     public Ticket( LocalDate purchaseDate, Sellers sellers) {
         this.purchaseDate = purchaseDate;
         this.sellers = sellers;
     }
-
-
-    //RELAZIONI
-    @ManyToOne
-    private Vehicles vehicles;
-    @ManyToOne ()
-    private Sellers sellers;
 
     //GETTER SETTER
     public LocalDate getPurchaseDate() {

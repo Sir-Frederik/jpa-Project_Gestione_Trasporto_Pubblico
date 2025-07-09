@@ -14,9 +14,8 @@ public class Sellers {
     @Column(name = "sellers_id")
     protected long sellersId;
 
-    @OneToMany
-    @JoinColumn(name = "selled_tickets")
-    public List<Ticket> selledTickets;
+    @OneToMany(mappedBy = "sellers")
+    public List<Ticket> tickets;
 
     //COSTRUTTORI
     public Sellers() {}
@@ -25,7 +24,7 @@ public class Sellers {
     public long getSellersId() {
         return sellersId;
     }
-    public List<Ticket> getSelledTickets() {
-        return selledTickets;
+    public List<Ticket> getTickets() {
+        return tickets;
     }
 }

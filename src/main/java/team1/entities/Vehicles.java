@@ -29,10 +29,12 @@ public class Vehicles {
 
 
     //RELAZIONI
-    @OneToMany
+    @OneToMany(mappedBy = "vehicles")
     private List<Ticket> all_tickets;
     @OneToMany(mappedBy = "vehicles")
     private List<VehiclesMaintenance> vehiclesMaintenances;
+    @OneToMany (mappedBy = "vehicle")
+    private List<VehicleLineJourney> vehicleLineJourneys;
 
     //COSTRUTTORI
     public Vehicles(){}
@@ -59,7 +61,15 @@ public class Vehicles {
     public String getPlate() {
         return plate;
     }
-
+    public List<Ticket> getAll_tickets() {
+        return all_tickets;
+    }
+    public List<VehiclesMaintenance> getVehiclesMaintenances() {
+        return vehiclesMaintenances;
+    }
+    public List<VehicleLineJourney> getVehicleLineJourneys() {
+        return vehicleLineJourneys;
+    }
     //SETTER
     public void setAvailability(Availability availability) {
         this.availability = availability;

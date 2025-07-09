@@ -18,9 +18,10 @@ public class TravelCard {
 
         //RELAZIONI
         @ManyToOne
+        @JoinColumn(name = "user_id")
         private User user;
-        @OneToMany
-        @JoinColumn(name = "associated_tickets")
+
+        @OneToMany(mappedBy = "travelCard")
         private List<SubscriptionTicket> subscriptionTickets;
 
         //COSTRUTTORI

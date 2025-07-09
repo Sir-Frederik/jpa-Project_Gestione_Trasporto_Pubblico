@@ -12,18 +12,17 @@ public class VehicleLineJourney {
     private long id;
     private int actualTime;
 
+    @ManyToOne()
+    private Vehicles vehicles;
+
     @ManyToOne
-    @JoinColumn(name = "vehicles_id")
-    private Vehicles vehiclesId;
-    @ManyToOne
-    @JoinColumn(name = "line_id")
-    private Line lineId;
+    private Line line;
 
     public VehicleLineJourney(){}
-    public VehicleLineJourney( int actualTime, Vehicles vehiclesId, Line lineId) {
+    public VehicleLineJourney(int actualTime, Vehicles vehicles, Line line) {
         this.actualTime = actualTime;
-        this.vehiclesId = vehiclesId;
-        this.lineId = lineId;
+        this.vehicles = this.vehicles;
+        this.line = this.line;
     }
 
     //GETTER
@@ -33,10 +32,13 @@ public class VehicleLineJourney {
     public int getActualTime() {
         return actualTime;
     }
-    public Vehicles getVehiclesId() {
-        return vehiclesId;
+    public Vehicles getVehicles() {
+        return vehicles;
     }
-    public Line getLineId() {
-        return lineId;
+    public Line getLine() {
+        return line;
+    }
+    public void setActualTime(int actualTime) {
+        this.actualTime = actualTime;
     }
 }

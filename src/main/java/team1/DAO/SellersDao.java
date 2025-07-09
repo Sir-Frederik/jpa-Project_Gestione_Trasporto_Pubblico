@@ -37,20 +37,5 @@ public class SellersDao {
         }
         return sellerFromId;
     }
-
-
-    public Ticket sellTicket(Sellers seller){
-        if(seller == null){
-            throw new EntityNotFoundException("this seller does not exist");
-        }
-
-        if (seller instanceof TicketMachine){
-            if(((TicketMachine) seller).getActive() == State.INACTIVE){
-                throw new MOSException("this machine is out if service");
-            }
-        }
-        Ticket newTicket = new Ticket(LocalDate.now(), seller);
-        System.out.println("new ticket created");
-        return  newTicket;
-    }
+    
 }

@@ -21,18 +21,16 @@ public class SubscriptionTicket extends Ticket {
     @JoinColumn(name = "travel_card_id")
     private TravelCard travelCard;
 
-
+    //COSTRUTTORI
     public SubscriptionTicket(){}
-
-    public SubscriptionTicket(LocalDate purchaseDate, Sellers sellers,
-                              TicketType type, LocalDate expiration, TravelCard travelCard) {
+    public SubscriptionTicket(LocalDate purchaseDate, Sellers sellers, TicketType type, TravelCard travelCard) {
         super(purchaseDate, sellers);
         this.type = type;
-        this.expiration = expiration;
+        this.expiration = setExpirationDate();
         this.travelCard = travelCard;
     }
 
-
+    //GETTER
     public TicketType getType() {
         return type;
     }
@@ -45,6 +43,7 @@ public class SubscriptionTicket extends Ticket {
         return travelCard;
     }
 
+    //SETTER
     public void setExpiration(LocalDate expiration) {
         this.expiration = expiration;
     }
@@ -55,6 +54,23 @@ public class SubscriptionTicket extends Ticket {
 
     public void setTravelCard(TravelCard travelCard) {
         this.travelCard = travelCard;
+    }
+
+
+    //metodo per scadenza
+    public LocalDate setExpirationDate(){
+
+        LocalDate dateExpiration = null;
+        switch (this.type)
+        {
+            case WEEKLY:
+                dateExpiration = this.getPurchaseDate().plusDays(7);
+            case MONTHLY:
+                dateExpiration = this.getPurchaseDate().plusMonths(1);
+            case YEARLY:
+                dateExpiration = this.getPurchaseDate().plusYears(1);
+        }
+        return dateExpiration;
     }
 
     @Override

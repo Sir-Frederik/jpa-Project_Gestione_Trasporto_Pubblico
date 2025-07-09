@@ -10,6 +10,7 @@ import java.util.List;
 @Entity
 @Table (name = "users")
 public class User {
+
     @Id
     @GeneratedValue
     private long id;
@@ -22,7 +23,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Genre genre;
 
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private List<TravelCard> allTravelCards;
 
     //COSTRUTTORI
@@ -44,42 +45,37 @@ public class User {
     public String getName() {
         return name;
     }
-    public void setName(String name) {
-        this.name = name;
-    }
     public String getSurname() {
         return surname;
-    }
-    public void setSurname(String surname) {
-        this.surname = surname;
     }
     public List<TravelCard> getAllTravelCards() {
         return allTravelCards;
     }
-
     public Genre getGenre() {
         return genre;
     }
-
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
     public void setGenre(Genre genre) {
         this.genre = genre;
     }
-
     public LocalDate getBirthDate() {
         return birthDate;
     }
-
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
-
     public String getResidenceCity() {
         return residenceCity;
     }
-
     public void setResidenceCity(String residenceCity) {
         this.residenceCity = residenceCity;
     }
+
 
     @Override
     public String toString() {
