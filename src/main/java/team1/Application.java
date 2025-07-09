@@ -23,11 +23,11 @@ public class Application {
         LineDAO ld= new LineDAO(em);
         SellersDao sd = new SellersDao(em);
         TicketMachinesDAO tmd = new TicketMachinesDAO(em);
-        TicketSellerDao tsd = new TicketSellerDao(em);
+        TicketSellerDAO tsd = new TicketSellerDAO(em);
         TicketDao td = new TicketDao(em);
         TravelCardDAO tcd = new TravelCardDAO(em);
         UserDAO ud = new UserDAO(em);
-     VehicleLineJourneyDAO jd = new VehicleLineJourneyDAO(em);
+        VehicleLineJourneyDAO jd = new VehicleLineJourneyDAO(em);
         VehiclesDAO vd = new VehiclesDAO(em);
         VehiclesMaintenanceDAO vmd = new VehiclesMaintenanceDAO(em);
 
@@ -48,7 +48,7 @@ public class Application {
         TicketMachine t1 = new TicketMachine(State.ACTIVE,707);
         TicketMachine t2 = new TicketMachine(State.INACTIVE,676);
         TicketMachine t3 = new TicketMachine(State.ACTIVE,101);
-       TicketMachine t4 = new TicketMachine(State.ACTIVE,100);
+        TicketMachine t4 = new TicketMachine(State.ACTIVE,100);
         TicketMachine t5 = new TicketMachine(State.INACTIVE,176);
 
         TicketSeller ts1 = new TicketSeller("Antonio", "Dimagli");
@@ -139,7 +139,7 @@ public class Application {
 
         List<TicketMachine> machines = List.of(t1,t2,t3,t4,t5);
         machines.forEach(tmd::save);
- tsd.save(ts1);
+        tsd.save(ts1);
         tsd.save(ts2);
         tsd.save(ts3);
 
@@ -152,18 +152,12 @@ public class Application {
         List<Vehicles> vehicles = List.of(v1, v2, v3, v4, v5, v6, v7, v8, v9, v10);
         vehicles.forEach(vd::save);
 
-
         vmd.save(vm1);
         vmd.save(vm2);
         vmd.save(vm3);
 
         List<VehicleLineJourney> journeys = List.of(j1, j2, j3, j4, j5, j6, j7, j8, j9, j10);
         journeys.forEach(jd::save);
-
-
-
-
-
 
         em.close();
         emf.close();

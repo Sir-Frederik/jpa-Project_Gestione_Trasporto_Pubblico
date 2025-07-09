@@ -5,10 +5,10 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.EntityTransaction;
 import team1.entities.sellersSons.TicketSeller;
 
-public class TicketSellerDao {
+public class TicketSellerDAO {
     private EntityManager entityManager;
 
-    public TicketSellerDao(EntityManager em) {
+    public TicketSellerDAO(EntityManager em) {
         this.entityManager = em;
     }
 

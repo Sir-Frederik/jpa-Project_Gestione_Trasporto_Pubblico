@@ -40,8 +40,5 @@ public class TicketSeller extends Sellers {
 
     public String getSurname() {
         return surname;
-
-       //SETTER
-
     }
 }
