@@ -1,12 +1,8 @@
 package team1.entities;
 
 import jakarta.persistence.*;
-import team1.entities.enums.TicketType;
-import team1.entities.ticketSons.SubscriptionTicket;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table (name = "tickets")
@@ -18,15 +14,17 @@ public class Ticket {
     private long ticketId;
     @Column (name = "purchase_date")
     private LocalDate purchaseDate;
-    @Column (name = "stamped_date")
-    private LocalDate stampedDate;
+    @Column (name = "validation_date")
+    private LocalDate validationDate;
 
     //COSTRUTTORI
     public Ticket() {}
-    public Ticket( LocalDate purchaseDate, LocalDate stampedDate) {
+    public Ticket( LocalDate purchaseDate, Sellers sellers) {
         this.purchaseDate = purchaseDate;
-        this.stampedDate = stampedDate;
+        this.sellers = sellers;
     }
+
+
     //RELAZIONI
     @ManyToOne
     private Vehicles vehicles;
@@ -42,12 +40,12 @@ public class Ticket {
         this.purchaseDate = purchaseDate;
     }
 
-    public LocalDate getStampedDate() {
-        return stampedDate;
+    public LocalDate getValidationDate() {
+        return validationDate;
     }
 
-    public void setStampedDate(LocalDate stampedDate) {
-        this.stampedDate = stampedDate;
+    public void setValidationDate(LocalDate validationDate) {
+        this.validationDate = validationDate;
     }
 
     public long getTicketId() {

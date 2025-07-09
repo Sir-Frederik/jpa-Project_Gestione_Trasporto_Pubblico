@@ -4,6 +4,13 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.EntityTransaction;
 import team1.entities.Sellers;
+import team1.entities.Ticket;
+import team1.entities.enums.State;
+import team1.entities.sellersSons.TicketMachine;
+import team1.exceptions.MOSException;
+import team1.exceptions.NotFoundException;
+
+import java.time.LocalDate;
 
 
 public class SellersDao {
@@ -29,5 +36,21 @@ public class SellersDao {
             throw new EntityNotFoundException("Element not found");
         }
         return sellerFromId;
+    }
+
+
+    public Ticket sellTicket(Sellers seller){
+        if(seller == null){
+            throw new EntityNotFoundException("this seller does not exist");
+        }
+
+        if (seller instanceof TicketMachine){
+            if(((TicketMachine) seller).getActive() == State.INACTIVE){
+                throw new MOSException("this machine is out if service");
+            }
+        }
+        Ticket newTicket = new Ticket(LocalDate.now(), seller);
+        System.out.println("new ticket created");
+        return  newTicket;
     }
 }

@@ -1,12 +1,10 @@
 package team1.entities.ticketSons;
 
 import jakarta.persistence.*;
+import team1.entities.Sellers;
 import team1.entities.Ticket;
-import team1.entities.User;
-import team1.entities.Vehicles;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Table(name = "disposable_tickets")
@@ -19,8 +17,8 @@ public class DisposableTicket extends Ticket {
     }
 
 
-    public DisposableTicket(LocalDate purchaseDate, LocalDate stampedDate, long ticketId) {
-        super(purchaseDate, stampedDate);
+    public DisposableTicket(LocalDate purchaseDate, Sellers sellers) {
+        super(purchaseDate, sellers);
     }
 
 

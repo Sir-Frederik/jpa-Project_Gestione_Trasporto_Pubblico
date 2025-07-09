@@ -3,7 +3,10 @@ package team1.DAO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.TypedQuery;
 import team1.entities.VehicleLineJourney;
+
+import java.util.List;
 
 public class VehicleLineJourneyDAO {
 
@@ -34,5 +37,17 @@ public class VehicleLineJourneyDAO {
             throw new EntityNotFoundException("VehicleLineJourney with ID " + id + " not found");
         }
         return journey;
+    }
+
+    public long findNumberOfTravelsOfAVehicle(long idVehicle, long idLine) {
+        TypedQuery<VehicleLineJourney> query = entityManager.createQuery(
+                "SELECT v FROM VehicleLineJourney v WHERE v.vehiclesId.vehiclesId = :idVehicle AND v.lineId.id = :idLine",
+                VehicleLineJourney.class
+        );
+        query.setParameter("idVehicle", idVehicle);
+        query.setParameter("idLine", idLine);
+
+        List<VehicleLineJourney> resultList = query.getResultList();
+        return resultList.size();
     }
 }

@@ -11,6 +11,7 @@ import team1.entities.enums.Genre;
 import team1.entities.enums.VehiclesType;
 import team1.entities.sellersSons.TicketMachine;
 import team1.entities.sellersSons.TicketSeller;
+import team1.entities.ticketSons.DisposableTicket;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -189,6 +190,26 @@ public class Application {
 
 
         //-----------------------------------------------------------------------------------------------------------------------------
+
+
+        //tickets creation
+//sellers from db
+        TicketMachine ticketMachineFromDb1 = tmd.findById(1);
+        TicketMachine ticketMachineFromDb2 = tmd.findById(2);
+        TicketMachine ticketMachineFromDb3 = tmd.findById(3);
+        TicketMachine ticketMachineFromDb4 = tmd.findById(4);
+        TicketMachine ticketMachineFromDb5 = tmd.findById(5);
+
+        TicketSeller ticketSellerFromDb1 = tsd.findById(6);
+        TicketSeller ticketSellerFromDb2 = tsd.findById(7);
+        TicketSeller ticketSellerFromDb3 = tsd.findById(8);
+
+        TicketSeller ticketSeller4 = new TicketSeller("test", "test");
+             //   sd.save(ticketSeller4);
+//io rimuoverei i dao per i figli di seller e i figli di ticket
+                //sd.sellTicket(ticketMachineFromDb2);
+
+       // System.out.println( jd.findNumberOfTravelsOfAVehicle(1, 1));
 
         em.close();
         emf.close();

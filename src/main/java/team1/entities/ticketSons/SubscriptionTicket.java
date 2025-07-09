@@ -1,14 +1,12 @@
 package team1.entities.ticketSons;
 
 import jakarta.persistence.*;
+import team1.entities.Sellers;
 import team1.entities.Ticket;
 import team1.entities.TravelCard;
-import team1.entities.User;
-import team1.entities.Vehicles;
 import team1.entities.enums.TicketType;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Table(name = "subscription_tickets")
@@ -26,9 +24,9 @@ public class SubscriptionTicket extends Ticket {
 
     public SubscriptionTicket(){}
 
-    public SubscriptionTicket(LocalDate purchaseDate, LocalDate stampedDate,
+    public SubscriptionTicket(LocalDate purchaseDate, Sellers sellers,
                               TicketType type, LocalDate expiration, TravelCard travelCard) {
-        super(purchaseDate, stampedDate);
+        super(purchaseDate, sellers);
         this.type = type;
         this.expiration = expiration;
         this.travelCard = travelCard;
