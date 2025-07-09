@@ -3,7 +3,11 @@ package team1.DAO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.EntityTransaction;
+import team1.entities.Ticket;
 import team1.entities.Vehicles;
+import team1.exceptions.ReUsableException;
+
+import java.time.LocalDate;
 
 public class VehiclesDAO {
 
@@ -25,5 +29,14 @@ public class VehiclesDAO {
         Vehicles found = entityManager.find(Vehicles.class, vehiclesId);
         if (found == null) throw new EntityNotFoundException("Element not found");
         return found;
+    }
+
+    //validation ticket
+    public void validatioTicket(Ticket t){
+        //da capire come funziona con gli abbonamenti
+        if (t.getValidationDate().isBefore(LocalDate.now())){
+            throw new ReUsableException("this ticket is already used");
+        }
+        t.setValidationDate(LocalDate.now());
     }
 }

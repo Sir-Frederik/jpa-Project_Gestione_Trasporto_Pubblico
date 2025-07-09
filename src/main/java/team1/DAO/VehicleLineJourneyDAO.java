@@ -4,7 +4,9 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.TypedQuery;
+import team1.entities.Line;
 import team1.entities.VehicleLineJourney;
+import team1.entities.Vehicles;
 
 import java.util.List;
 
@@ -50,4 +52,11 @@ public class VehicleLineJourneyDAO {
         List<VehicleLineJourney> resultList = query.getResultList();
         return resultList.size();
     }
+
+
+    //public double averageTime(Vehicles v, Line l){}
+        //serve il mezzo
+    //serve la tratta
+    //prendere il tempo effettivo per ogni percorso
+    //calcolo media
 }
