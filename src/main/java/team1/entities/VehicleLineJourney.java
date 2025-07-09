@@ -21,8 +21,8 @@ public class VehicleLineJourney {
     public VehicleLineJourney(){}
     public VehicleLineJourney(int actualTime, Vehicles vehicles, Line line) {
         this.actualTime = actualTime;
-        this.vehicles = this.vehicles;
-        this.line = this.line;
+        this.vehicles = vehicles;
+        this.line = line;
     }
 
     //GETTER

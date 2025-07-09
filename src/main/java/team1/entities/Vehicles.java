@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import team1.entities.enums.Availability;
 import team1.entities.enums.VehiclesType;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -30,7 +28,7 @@ public class Vehicles {
 
     //RELAZIONI
     @OneToMany(mappedBy = "vehicles")
-    private List<Ticket> all_tickets;
+    private List<Ticket> tickets;
     @OneToMany(mappedBy = "vehicles")
     private List<VehiclesMaintenance> vehiclesMaintenances;
     @OneToMany (mappedBy = "vehicle")
@@ -61,8 +59,8 @@ public class Vehicles {
     public String getPlate() {
         return plate;
     }
-    public List<Ticket> getAll_tickets() {
-        return all_tickets;
+    public List<Ticket> getTickets() {
+        return tickets;
     }
     public List<VehiclesMaintenance> getVehiclesMaintenances() {
         return vehiclesMaintenances;
