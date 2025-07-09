@@ -6,6 +6,8 @@ import jakarta.persistence.EntityTransaction;
 import team1.entities.TravelCard;
 import team1.entities.User;
 
+import java.time.LocalDate;
+
 public class TravelCardDAO {
 
     private final EntityManager em;
@@ -28,6 +30,11 @@ public class TravelCardDAO {
             throw new EntityNotFoundException("Element not found");
         }
         return found;
+    }
+
+    public TravelCard getNewCard(User user){
+        TravelCard newTravelCard = new TravelCard(LocalDate.now(),user);
+        return newTravelCard;
     }
 
 
