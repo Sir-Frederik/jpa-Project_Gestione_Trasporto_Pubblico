@@ -32,7 +32,6 @@ public class SubscriptionTicket extends Ticket {
         this.travelCard = travelCard;
     }
 
-
     public TicketType getType() {
         return type;
     }

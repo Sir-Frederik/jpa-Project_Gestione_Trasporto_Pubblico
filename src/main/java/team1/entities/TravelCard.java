@@ -10,59 +10,68 @@ import java.util.List;
 @Table(name = "travel_cards")
 public class TravelCard {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.SEQUENCE)
-        private long id;
-        private LocalDate expirationDate;
-        private LocalDate startDate;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private long id;
 
-        //RELAZIONI
-        @ManyToOne
-        private User user;
-        @OneToMany
-        @JoinColumn(name = "associated_tickets")
-        private List<SubscriptionTicket> subscriptionTickets;
+    private LocalDate expirationDate;
+    private LocalDate startDate;
 
-        //COSTRUTTORI
-        public TravelCard(){}
-        public TravelCard(LocalDate startDate, User user){
-            this.startDate = startDate;
-            this.expirationDate = startDate.plusYears(1);
-            this.user =user;
-        }
+    // RELAZIONI
+    @OneToOne(mappedBy = "travelCard")
+    private User user;
 
-        //GETTER SETTER
-        public long getId() {
-            return id;
-        }
+    @OneToMany(mappedBy = "associated_tickets")
+    private List<SubscriptionTicket> subscriptionTickets;
 
-        public LocalDate getExpiration_date() {
-            return expirationDate;
-        }
+    // COSTRUTTORI
+    public TravelCard() {}
 
-        public void setExpiration_date(LocalDate expiration_date) {
-            this.expirationDate = expiration_date;
-        }
-
-        public LocalDate getStart_date() {
-            return startDate;
-        }
-
-        public User getUser() {
-            return user;
-        }
-
-
-        @Override
-        public String toString() {
-            return "TravelCard{" +
-                    "id=" + id +
-                    ", expiration_date=" + expirationDate +
-                    ", start_date=" + startDate +
-                    ", user=" + user +
-                    '}';
-        }
+    public TravelCard(LocalDate startDate) {
+        this.startDate = startDate;
+        this.expirationDate = startDate.plusYears(1);
     }
+
+    // GETTER & SETTER
+    public long getId() {
+        return id;
+    }
+
+    public LocalDate getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(LocalDate expirationDate) {
+        this.expirationDate = expirationDate;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public List<SubscriptionTicket> getSubscriptionTickets() {
+        return subscriptionTickets;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "TravelCard{" +
+                "id=" + id +
+                ", expirationDate=" + expirationDate +
+                ", startDate=" + startDate +
+                ", user=" + (user != null ? user.getId() : null) +
+                '}';
+    }
+}
+
 
 
 

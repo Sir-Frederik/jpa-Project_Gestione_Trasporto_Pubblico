@@ -11,10 +11,8 @@ import team1.entities.enums.Genre;
 import team1.entities.enums.VehiclesType;
 import team1.entities.sellersSons.TicketMachine;
 import team1.entities.sellersSons.TicketSeller;
-import team1.entities.ticketSons.DisposableTicket;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class Application {
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("trasporto");
@@ -32,28 +30,64 @@ public class Application {
         VehiclesDAO vd = new VehiclesDAO(em);
         VehiclesMaintenanceDAO vmd = new VehiclesMaintenanceDAO(em);
 
+        // PRIMA: crei le TravelCard SENZA assegnare ancora l'utente
+        TravelCard tc1 = new TravelCard(LocalDate.of(2024, 7, 1));
+        TravelCard tc2 = new TravelCard(LocalDate.of(2024, 6, 15));
+        TravelCard tc3 = new TravelCard(LocalDate.of(2024, 5, 20));
+        TravelCard tc4 = new TravelCard(LocalDate.of(2024, 4, 10));
+        TravelCard tc5 = new TravelCard(LocalDate.of(2024, 3, 5));
+        TravelCard tc6 = new TravelCard(LocalDate.of(2024, 2, 28));
+        TravelCard tc7 = new TravelCard(LocalDate.of(2024, 1, 14));
+        TravelCard tc8 = new TravelCard(LocalDate.of(2023, 12, 1));
+        TravelCard tc9 = new TravelCard(LocalDate.of(2023, 11, 23));
+        TravelCard tc10 = new TravelCard(LocalDate.of(2023, 10, 9));
 
-        User u1 = new User("Oronzo", "Canà", LocalDate.of(1940, 5, 21), "Alberobello", Genre.MALE);
-        User u2 = new User("Paolino", "Paperino", LocalDate.of(1934, 6, 9), "Paperopoli", Genre.MALE);
-        User u3 = new User("Marilyn", "Monroe", LocalDate.of(1926, 6, 1), "Los Angeles", Genre.FEMALE);
-        User u4 = new User("Albert", "Einstein", LocalDate.of(1879, 3, 14), "Princeton", Genre.MALE);
-        User u5 = new User("Daffy", "Duck", LocalDate.of(1937, 4, 17), "Looneyville", Genre.MALE);
-        User u6 = new User("Lady", "Gaga", LocalDate.of(1986, 3, 28), "New York", Genre.FEMALE);
-        User u7 = new User("Freddie", "Mercury", LocalDate.of(1946, 9, 5), "Zanzibar", Genre.MALE);
-        User u8 = new User("Greta", "Thunberg", LocalDate.of(2003, 1, 3), "Stoccolma", Genre.FEMALE);
-        User u9 = new User("Totò", "Principe", LocalDate.of(1898, 2, 15), "Napoli", Genre.MALE);
-        User u10 = new User("Sam", "Genderfluid", LocalDate.of(1990, 8, 8), "Berlino", Genre.OTHER);
+// POI: crei gli User assegnando loro le TravelCard
+        User u1 = new User("Oronzo", "Canà", LocalDate.of(1940, 5, 21), "Alberobello", Genre.MALE, tc1);
+        User u2 = new User("Paolino", "Paperino", LocalDate.of(1934, 6, 9), "Paperopoli", Genre.MALE, tc2);
+        User u3 = new User("Marilyn", "Monroe", LocalDate.of(1926, 6, 1), "Los Angeles", Genre.FEMALE, tc3);
+        User u4 = new User("Albert", "Einstein", LocalDate.of(1879, 3, 14), "Princeton", Genre.MALE, tc4);
+        User u5 = new User("Daffy", "Duck", LocalDate.of(1937, 4, 17), "Looneyville", Genre.MALE, tc5);
+        User u6 = new User("Lady", "Gaga", LocalDate.of(1986, 3, 28), "New York", Genre.FEMALE, tc6);
+        User u7 = new User("Freddie", "Mercury", LocalDate.of(1946, 9, 5), "Zanzibar", Genre.MALE, tc7);
+        User u8 = new User("Greta", "Thunberg", LocalDate.of(2003, 1, 3), "Stoccolma", Genre.FEMALE, tc8);
+        User u9 = new User("Totò", "Principe", LocalDate.of(1898, 2, 15), "Napoli", Genre.MALE, tc9);
+        User u10 = new User("Sam", "Genderfluid", LocalDate.of(1990, 8, 8), "Berlino", Genre.OTHER, tc10);
 
-        User user1fromDb = ud.findById(1);
-        User user2fromDb = ud.findById(2);
-        User user3fromDb = ud.findById(3);
-        User user4fromDb = ud.findById(4);
-        User user5fromDb = ud.findById(5);
-        User user6fromDb = ud.findById(6);
-        User user7fromDb = ud.findById(7);
-        User user8fromDb = ud.findById(8);
-        User user9fromDb = ud.findById(9);
-        User user10fromDb = ud.findById(10);
+// ORA colleghi anche il lato inverso (facoltativo ma consigliato)
+        tc1.setUser(u1);
+        tc2.setUser(u2);
+        tc3.setUser(u3);
+        tc4.setUser(u4);
+        tc5.setUser(u5);
+        tc6.setUser(u6);
+        tc7.setUser(u7);
+        tc8.setUser(u8);
+        tc9.setUser(u9);
+        tc10.setUser(u10);
+
+// INFINE salvi prima le TravelCard e poi gli User (essendo il lato proprietario)
+        tcd.save(tc1);
+        tcd.save(tc2);
+        tcd.save(tc3);
+        tcd.save(tc4);
+        tcd.save(tc5);
+        tcd.save(tc6);
+        tcd.save(tc7);
+        tcd.save(tc8);
+        tcd.save(tc9);
+        tcd.save(tc10);
+
+        ud.save(u1);
+        ud.save(u2);
+        ud.save(u3);
+        ud.save(u4);
+        ud.save(u5);
+        ud.save(u6);
+        ud.save(u7);
+        ud.save(u8);
+        ud.save(u9);
+        ud.save(u10);
 
         TicketMachine t1 = new TicketMachine(State.ACTIVE,707);
         TicketMachine t2 = new TicketMachine(State.INACTIVE,676);
@@ -86,18 +120,6 @@ public class Application {
         Line line8FromDb = ld.findById(8);
         Line line9FromDb = ld.findById(9);
         Line line10FromDb = ld.findById(10);
-
-
-        TravelCard tc1 = new TravelCard(LocalDate.of(2024, 7, 1), user1fromDb);
-        TravelCard tc2 = new TravelCard(LocalDate.of(2024, 6, 15), user2fromDb);
-        TravelCard tc3 = new TravelCard(LocalDate.of(2024, 5, 20), user3fromDb);
-        TravelCard tc4 = new TravelCard(LocalDate.of(2024, 4, 10), user4fromDb);
-        TravelCard tc5 = new TravelCard(LocalDate.of(2024, 3, 5), user5fromDb);
-        TravelCard tc6 = new TravelCard(LocalDate.of(2024, 2, 28), user6fromDb);
-        TravelCard tc7 = new TravelCard(LocalDate.of(2024, 1, 14), user7fromDb);
-        TravelCard tc8 = new TravelCard(LocalDate.of(2023, 12, 1), user8fromDb);
-        TravelCard tc9 = new TravelCard(LocalDate.of(2023, 11, 23), user9fromDb);
-        TravelCard tc10 = new TravelCard(LocalDate.of(2023, 10, 9), user10fromDb);
 
         Vehicles v1 = new Vehicles(VehiclesType.AUTOBUS, Availability.AVAILABLE, 60, "AB123CD");
         Vehicles v2 = new Vehicles(VehiclesType.TRAM, Availability.NOTAVAILABLE, 100, "TR456FG");

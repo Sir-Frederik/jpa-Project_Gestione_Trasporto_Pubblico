@@ -7,19 +7,13 @@ import team1.entities.Ticket;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "disposable_tickets")
+@Table(name = "single_tickets")
+public class SingleTicket extends Ticket {
 
-
-public class DisposableTicket extends Ticket {
-
-
-    public DisposableTicket() {
+    public SingleTicket() {
     }
-
-
-    public DisposableTicket(LocalDate purchaseDate, Sellers sellers) {
+    public SingleTicket(LocalDate purchaseDate, Sellers sellers) {
         super(purchaseDate, sellers);
     }
-
 
 }

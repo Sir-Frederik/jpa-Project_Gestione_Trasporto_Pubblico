@@ -14,7 +14,7 @@
         <class>team1.entities.sellersSons.TicketMachine</class>
         <class>team1.entities.sellersSons.TicketSeller</class>
         <class>team1.entities.ticketSons.SubscriptionTicket</class>
-        <class>team1.entities.ticketSons.DisposableTicket</class>
+        <class>team1.entities.ticketSons.SingleTicket</class>
 
 
         <properties>
