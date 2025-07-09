@@ -26,8 +26,7 @@ public class VehiclesMaintenance {
 
     //COSTRUTTORI
     public VehiclesMaintenance() {}
-    public VehiclesMaintenance(long maintenanceId, LocalDate maintenanceStartDate, LocalDate maintenanceEndDate, LocalDate serviceStartDate, Vehicles vehicles) {
-        this.maintenanceId = maintenanceId;
+    public VehiclesMaintenance(LocalDate maintenanceStartDate, LocalDate maintenanceEndDate, LocalDate serviceStartDate, Vehicles vehicles) {
         this.maintenanceStartDate = maintenanceStartDate;
         this.maintenanceEndDate = maintenanceEndDate;
         this.serviceStartDate = serviceStartDate;

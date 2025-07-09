@@ -19,7 +19,7 @@ public class Application {
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("trasporto");
 
     public static void main(String[] args) {
-        EntityManager em=emf.createEntityManager();
+        EntityManager em = emf.createEntityManager();
         LineDAO ld= new LineDAO(em);
         SellersDao sd = new SellersDao(em);
         TicketMachinesDAO tmd = new TicketMachinesDAO(em);
@@ -42,8 +42,17 @@ public class Application {
         User u8 = new User("Greta", "Thunberg", LocalDate.of(2003, 1, 3), "Stoccolma", Genre.FEMALE);
         User u9 = new User("Totò", "Principe", LocalDate.of(1898, 2, 15), "Napoli", Genre.MALE);
         User u10 = new User("Sam", "Genderfluid", LocalDate.of(1990, 8, 8), "Berlino", Genre.OTHER);
-        User u11 = new User("Ajeje", "Brazorf", LocalDate.of(1975, 11, 22), "Messina", Genre.MALE);
 
+        User user1fromDb = ud.findById(1);
+        User user2fromDb = ud.findById(2);
+        User user3fromDb = ud.findById(3);
+        User user4fromDb = ud.findById(4);
+        User user5fromDb = ud.findById(5);
+        User user6fromDb = ud.findById(6);
+        User user7fromDb = ud.findById(7);
+        User user8fromDb = ud.findById(8);
+        User user9fromDb = ud.findById(9);
+        User user10fromDb = ud.findById(10);
 
         TicketMachine t1 = new TicketMachine(State.ACTIVE,707);
         TicketMachine t2 = new TicketMachine(State.INACTIVE,676);
@@ -66,16 +75,28 @@ public class Application {
         Line l9 = new Line("Palermo", "Mondello", 109, 30.0);
         Line l10 = new Line("Paperino", "Bassano del Grappa", 110, 12.5);
 
-        TravelCard tc1 = new TravelCard(LocalDate.of(2024, 7, 1), u1);
-        TravelCard tc2 = new TravelCard(LocalDate.of(2024, 6, 15), u2);
-        TravelCard tc3 = new TravelCard(LocalDate.of(2024, 5, 20), u3);
-        TravelCard tc4 = new TravelCard(LocalDate.of(2024, 4, 10), u4);
-        TravelCard tc5 = new TravelCard(LocalDate.of(2024, 3, 5), u5);
-        TravelCard tc6 = new TravelCard(LocalDate.of(2024, 2, 28), u6);
-        TravelCard tc7 = new TravelCard(LocalDate.of(2024, 1, 14), u7);
-        TravelCard tc8 = new TravelCard(LocalDate.of(2023, 12, 1), u8);
-        TravelCard tc9 = new TravelCard(LocalDate.of(2023, 11, 23), u9);
-        TravelCard tc10 = new TravelCard(LocalDate.of(2023, 10, 9), u10);
+        Line line1FromDb = ld.findById(1);
+        Line line2FromDb = ld.findById(2);
+        Line line3FromDb = ld.findById(3);
+        Line line4FromDb = ld.findById(4);
+        Line line5FromDb = ld.findById(5);
+        Line line6FromDb = ld.findById(6);
+        Line line7FromDb = ld.findById(7);
+        Line line8FromDb = ld.findById(8);
+        Line line9FromDb = ld.findById(9);
+        Line line10FromDb = ld.findById(10);
+
+
+        TravelCard tc1 = new TravelCard(LocalDate.of(2024, 7, 1), user1fromDb);
+        TravelCard tc2 = new TravelCard(LocalDate.of(2024, 6, 15), user2fromDb);
+        TravelCard tc3 = new TravelCard(LocalDate.of(2024, 5, 20), user3fromDb);
+        TravelCard tc4 = new TravelCard(LocalDate.of(2024, 4, 10), user4fromDb);
+        TravelCard tc5 = new TravelCard(LocalDate.of(2024, 3, 5), user5fromDb);
+        TravelCard tc6 = new TravelCard(LocalDate.of(2024, 2, 28), user6fromDb);
+        TravelCard tc7 = new TravelCard(LocalDate.of(2024, 1, 14), user7fromDb);
+        TravelCard tc8 = new TravelCard(LocalDate.of(2023, 12, 1), user8fromDb);
+        TravelCard tc9 = new TravelCard(LocalDate.of(2023, 11, 23), user9fromDb);
+        TravelCard tc10 = new TravelCard(LocalDate.of(2023, 10, 9), user10fromDb);
 
         Vehicles v1 = new Vehicles(VehiclesType.AUTOBUS, Availability.AVAILABLE, 60, "AB123CD");
         Vehicles v2 = new Vehicles(VehiclesType.TRAM, Availability.NOTAVAILABLE, 100, "TR456FG");
@@ -88,75 +109,85 @@ public class Application {
         Vehicles v9 = new Vehicles(VehiclesType.AUTOBUS, Availability.AVAILABLE, 45, "GH963UV");
         Vehicles v10 = new Vehicles(VehiclesType.TRAM, Availability.AVAILABLE, 130, "TR147WX");
 
+        Vehicles vehicles1Fromdb = vd.findById(1);
+        Vehicles vehicles2Fromdb = vd.findById(2);
+        Vehicles vehicles3Fromdb = vd.findById(3);
+        Vehicles vehicles4Fromdb = vd.findById(4);
+        Vehicles vehicles5Fromdb = vd.findById(5);
+        Vehicles vehicles6Fromdb = vd.findById(6);
+        Vehicles vehicles7Fromdb = vd.findById(7);
+        Vehicles vehicles8Fromdb = vd.findById(8);
+        Vehicles vehicles9Fromdb = vd.findById(9);
+        Vehicles vehicles10Fromdb = vd.findById(10);
+
         VehiclesMaintenance vm1 = new VehiclesMaintenance(
-                1001L,
                 LocalDate.of(2024, 6, 1),
                 LocalDate.of(2024, 6, 10),
                 LocalDate.of(2024, 6, 11),
-                v1
+                vehicles1Fromdb
         );
 
         VehiclesMaintenance vm2 = new VehiclesMaintenance(
-                1002L,
                 LocalDate.of(2024, 5, 5),
                 LocalDate.of(2024, 5, 20),
                 LocalDate.of(2024, 5, 21),
-                v2
+                vehicles2Fromdb
         );
 
         VehiclesMaintenance vm3 = new VehiclesMaintenance(
-                1003L,
                 LocalDate.of(2024, 4, 15),
                 LocalDate.of(2024, 4, 25),
                 LocalDate.of(2024, 4, 26),
-                v3
+                vehicles3Fromdb
         );
 
         VehiclesMaintenance vm4 = new VehiclesMaintenance(
-                1004L,
                 LocalDate.of(2024, 3, 10),
                 LocalDate.of(2024, 3, 18),
                 LocalDate.of(2024, 3, 19),
-                v4
+                vehicles4Fromdb
         );
 
-        VehicleLineJourney j1 = new VehicleLineJourney(49, v1, l1);
-        VehicleLineJourney j2 = new VehicleLineJourney(24, v2, l2);
-        VehicleLineJourney j3 = new VehicleLineJourney(33, v3, l3);
-        VehicleLineJourney j4 = new VehicleLineJourney(21, v4, l4);
-        VehicleLineJourney j5 = new VehicleLineJourney(65, v5, l5);
-        VehicleLineJourney j6 = new VehicleLineJourney(38, v6, l6);
-        VehicleLineJourney j7 = new VehicleLineJourney(34, v7, l7);
-        VehicleLineJourney j8 = new VehicleLineJourney(47, v8, l8);
-        VehicleLineJourney j9 = new VehicleLineJourney(29, v9, l9);
-        VehicleLineJourney j10 = new VehicleLineJourney(13, v10, l10);
+        VehicleLineJourney j1 = new VehicleLineJourney(49, vehicles1Fromdb, line1FromDb);
+        VehicleLineJourney j2 = new VehicleLineJourney(24, vehicles2Fromdb, line2FromDb);
+        VehicleLineJourney j3 = new VehicleLineJourney(33, vehicles3Fromdb, line3FromDb);
+        VehicleLineJourney j4 = new VehicleLineJourney(21, vehicles4Fromdb, line4FromDb);
+        VehicleLineJourney j5 = new VehicleLineJourney(65, vehicles5Fromdb, line5FromDb);
+        VehicleLineJourney j6 = new VehicleLineJourney(38, vehicles6Fromdb, line6FromDb);
+        VehicleLineJourney j7 = new VehicleLineJourney(34, vehicles7Fromdb, line7FromDb);
+        VehicleLineJourney j8 = new VehicleLineJourney(47, vehicles8Fromdb, line8FromDb);
+        VehicleLineJourney j9 = new VehicleLineJourney(29, vehicles9Fromdb, line9FromDb);
+        VehicleLineJourney j10 = new VehicleLineJourney(13, vehicles10Fromdb, line10FromDb);
 
 
-        //invoco i metodi save con le list per evitare codici troppo lunghi
-        List<User> users = List.of(u1, u2, u3, u4, u5, u6, u7, u8, u9, u10, u11);
-        users.forEach(ud::save);
+//        //invoco i metodi save con le list per evitare codici troppo lunghi
+//        List<User> users = List.of(u1, u2, u3, u4, u5, u6, u7, u8, u9, u10, u11);
+//        users.forEach(ud::save);
 
-        List<TicketMachine> machines = List.of(t1,t2,t3,t4,t5);
-        machines.forEach(tmd::save);
-        tsd.save(ts1);
-        tsd.save(ts2);
-        tsd.save(ts3);
+//        List<TicketMachine> machines = List.of(t1,t2,t3,t4,t5);
+//        machines.forEach(tmd::save);
+//        tsd.save(ts1);
+//        tsd.save(ts2);
+//        tsd.save(ts3);
+//
+//        List<Line> lines = List.of(l1, l2, l3, l4, l5, l6, l7, l8, l9, l10);
+//        lines.forEach(ld::save);
+//
+//        List<TravelCard> cards = List.of(tc1, tc2, tc3, tc4, tc5, tc6, tc7, tc8, tc9, tc10);
+//        cards.forEach(tcd::save);
+//
+//        List<Vehicles> vehicles = List.of(v1, v2, v3, v4, v5, v6, v7, v8, v9, v10);
+//        vehicles.forEach(vd::save);
+//
+//        vmd.save(vm1);
+//        vmd.save(vm2);
+//        vmd.save(vm3);
+//        vmd.save(vm4);
+//
+//        List<VehicleLineJourney> journeys = List.of(j1, j2, j3, j4, j5, j6, j7, j8, j9, j10);
+//        journeys.forEach(jd::save);
 
-        List<Line> lines = List.of(l1, l2, l3, l4, l5, l6, l7, l8, l9, l10);
-        lines.forEach(ld::save);
 
-        List<TravelCard> cards = List.of(tc1, tc2, tc3, tc4, tc5, tc6, tc7, tc8, tc9, tc10);
-        cards.forEach(tcd::save);
-
-        List<Vehicles> vehicles = List.of(v1, v2, v3, v4, v5, v6, v7, v8, v9, v10);
-        vehicles.forEach(vd::save);
-
-        vmd.save(vm1);
-        vmd.save(vm2);
-        vmd.save(vm3);
-
-        List<VehicleLineJourney> journeys = List.of(j1, j2, j3, j4, j5, j6, j7, j8, j9, j10);
-        journeys.forEach(jd::save);
         //-----------------------------------------------------------------------------------------------------------------------------
 
         em.close();

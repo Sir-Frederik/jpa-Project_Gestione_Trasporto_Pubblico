@@ -17,7 +17,7 @@ public class LineDAO {
         transaction.begin();
         entityManager.persist(newline);
         transaction.commit();
-        System.out.println("The element has been saved");
+        System.out.println("The line has been saved");
 
     }
     public Line findById(long id) {
