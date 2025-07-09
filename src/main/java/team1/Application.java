@@ -132,7 +132,6 @@ public class Application {
         VehicleLineJourney j10 = new VehicleLineJourney(13, v10, l10);
 
 
-
         //invoco i metodi save con le list per evitare codici troppo lunghi
         List<User> users = List.of(u1, u2, u3, u4, u5, u6, u7, u8, u9, u10, u11);
         users.forEach(ud::save);
@@ -158,6 +157,7 @@ public class Application {
 
         List<VehicleLineJourney> journeys = List.of(j1, j2, j3, j4, j5, j6, j7, j8, j9, j10);
         journeys.forEach(jd::save);
+        //-----------------------------------------------------------------------------------------------------------------------------
 
         em.close();
         emf.close();
