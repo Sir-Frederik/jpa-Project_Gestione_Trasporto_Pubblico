@@ -36,7 +36,7 @@ public class TravelCardDAO {
         transaction.begin();
         Query query = em.createQuery("DELETE FROM TravelCard t WHERE t.id = :id");
         query.setParameter("id", id);
-        int deletedCount = query.executeUpdate(); // Torna il numero di righe cancellate
+        int deletedCount = query.executeUpdate();
         transaction.commit();
         if (deletedCount > 0) {
             System.out.println("Element successfully removed!");
@@ -56,13 +56,15 @@ public class TravelCardDAO {
         return query.getResultList();
     }
 
-    public TravelCard findUserByTravelCardId(long id) {
+    public User findUserByTravelCardId(long id) {
         TypedQuery<TravelCard> query = em.createQuery("SELECT t FROM TravelCard t WHERE t.id = :id", TravelCard.class);
         query.setParameter("id", id);
         try {
-            return query.getSingleResult();
+            TravelCard card = query.getSingleResult();
+            return card.getUser();
         } catch (NoResultException e) {
             throw new ReUsableException("Element not found");
         }
     }
+
 }

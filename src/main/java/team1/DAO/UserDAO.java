@@ -1,10 +1,9 @@
 package team1.DAO;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.TypedQuery;
+import jakarta.persistence.*;
+import team1.entities.Ticket;
 import team1.entities.TravelCard;
 import team1.entities.User;
+import team1.exceptions.ReUsableException;
 
 import java.util.List;
 
@@ -35,6 +34,39 @@ public class UserDAO {
         TypedQuery<User> query = em.createQuery("SELECT d FROM User d", User.class);
         return query.getResultList();
     }
+
+    public void findUserByIdAndDelete(long id) {
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        Query query = em.createQuery("DELETE FROM User u WHERE u.id = :id");
+        query.setParameter("id", id);
+        int deletedCount = query.executeUpdate();
+        transaction.commit();
+        if (deletedCount > 0) {
+            System.out.println("Element successfully removed!");
+        } else {
+            System.out.println("No element found with the given ID.");
+        }
+    }
+    public List<Ticket> getAllTicketByUser(long userId) {
+        TypedQuery<Ticket> query = em.createQuery("SELECT t FROM Ticket t WHERE t.user.id = :userId", Ticket.class);
+        query.setParameter("userId", userId);
+        List<Ticket> tickets = query.getResultList();
+        if (tickets.isEmpty()) {
+            throw new ReUsableException("No tickets found for user with ID: " + userId);
+        }
+        return tickets;
+    }
+    public TravelCard findTravelCardByUserId(long userId) {
+        TypedQuery<TravelCard> query = em.createQuery("SELECT t FROM TravelCard t WHERE t.user.id = :userId", TravelCard.class);
+        query.setParameter("userId", userId);
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            throw new ReUsableException("No TravelCard found for user with ID: " + userId);
+        }
+    }
+
 
         /*
 
