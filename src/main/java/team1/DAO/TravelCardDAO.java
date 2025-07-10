@@ -33,6 +33,7 @@ public class TravelCardDAO {
     }
 
     public TravelCard getNewCard(User user){
+        //da aggiungere controllo per vecchie tessere
         TravelCard newTravelCard = new TravelCard(LocalDate.now(),user);
         return newTravelCard;
     }

@@ -16,7 +16,6 @@ public abstract class Ticket {
     private LocalDate purchaseDate;
     @Column (name = "validation_date")
     private LocalDate validationDate;
-    //io lo sposterei
 
 
     //RELAZIONI
