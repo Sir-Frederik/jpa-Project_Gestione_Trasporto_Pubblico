@@ -2,6 +2,7 @@ package team1.DAO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.NoResultException;
 import team1.entities.User;
 
 
@@ -28,24 +29,22 @@ public class UserDAO {
         return found;
     }
 
-        /*
+    public User findByNameAndSurname (String name, String surname){
+        try {
+            return em.createQuery(
+//                    "SELECT u FROM User u WHERE u.name = :name AND   u.surname = :surname", User.class)
+                    "SELECT u FROM User u WHERE LOWER(u.name) = LOWER(:name) AND   LOWER(u.surname) = LOWER(:surname)", User.class)
+                    .setParameter("name",name)
+               .setParameter("surname",surname)
+                    .getSingleResult();
 
-        0
-        public void save(Sellers seller) {
-        EntityTransaction transaction = entityManager.getTransaction();
-        transaction.begin();
-        entityManager.persist(seller);
-        transaction.commit();
-        System.out.println("The element has been saved");
-    }
 
-    public Sellers getById(long id) {
-        Sellers sellerFromId = entityManager.find(Sellers.class, id);
-        if (sellerFromId == null) {
-            throw new EntityNotFoundException("Element not found");
+
+        } catch (NoResultException e)
+        {
+            throw new EntityNotFoundException("No user has been found with the surname or first name you provided");
         }
-        return sellerFromId;
     }
-         */
+
 
 }

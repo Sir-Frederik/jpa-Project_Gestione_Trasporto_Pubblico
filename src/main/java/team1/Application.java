@@ -193,7 +193,7 @@ public class Application {
 
         //tickets creation
 //sellers from db
-        TicketMachine ticketMachineFromDb1 = tmd.findById(1);
+      /*  TicketMachine ticketMachineFromDb1 = tmd.findById(1);
         TicketMachine ticketMachineFromDb2 = tmd.findById(2);
         TicketMachine ticketMachineFromDb3 = tmd.findById(3);
         TicketMachine ticketMachineFromDb4 = tmd.findById(4);
@@ -208,9 +208,12 @@ public class Application {
 //io rimuoverei i dao per i figli di seller e i figli di ticket
                 //sd.sellTicket(ticketMachineFromDb2);
 
-       // System.out.println( jd.findNumberOfTravelsOfAVehicle(1, 1));
+       // System.out.println( jd.findNumberOfTravelsOfAVehicle(1, 1));*/
+
+
+
         Scanner scanner = new Scanner(System.in);
-        int choice ;
+        int choice;
 
         do {
             System.out.println("Hi, who are you? 0:Admin 1:User 2:Exit");
@@ -220,64 +223,72 @@ public class Application {
                 case 0: // Admin
                     boolean accessControl = false;
                     for (int i = 0; i < 3; i++) {
-                        System.out.println("You have entered the administered section. Enter the password to access the system:");
+                        System.out.println("You have entered the admin section. Enter the password to access the system:");
                         String password = scanner.nextLine();
                         if (password.equals("1234")) {
                             System.out.println("Access granted. Welcome, Admin.");
                             accessControl = true;
                             break;
                         } else {
-                            System.out.println("Incorrect password");
+                            System.out.println("Incorrect password.");
                         }
                     }
                     if (!accessControl) {
                         System.out.println("Too many failed attempts. Returning to main menu...\n");
                     } else {
                         System.out.println("Welcome to the admin section, what do you want to do?");
+
                     }
                     break;
 
-                case 1:
+                case 1: // User
                     System.out.println("Welcome, User!");
-                    System.out.println("Are you a registered user? 1 if yes or 2 if not");
-                    int choice1;
-                    choice1=Integer.parseInt(scanner.nextLine());
+                    System.out.println("Are you a registered user? (1 = Yes, 2 = No)");
+                    int choice1 = Integer.parseInt(scanner.nextLine());
 
                     switch (choice1) {
                         case 1:
-
+                            User user = registeredUser(scanner, em, ud);
+                            System.out.println("Ciao " + user.getName() +"!");
                             break;
-                            case2:
-                            registeredUser();
-
+                        case 2:
+                            System.out.println("You need to register first.");
+                            // registerUser(); // funzione da implementare
                             break;
+                        default:
+                            System.out.println("Invalid option.");
+                            break;
+                    }
+                    break;
 
-
-
-
-
+                case 2:
+                    System.out.println("Exiting the program. Goodbye!");
                     break;
 
                 default:
-                    System.out.println("Invalid choice. Please enter 0 (Admin) or 1 (User).");
+                    System.out.println("Invalid choice. Please enter 0 (Admin), 1 (User), or 2 (Exit).");
             }
 
-        } while (choice!=2);
+        } while (choice != 2);
 
 
-
-
-           void  registeredUser() {
-
-               Syt
-
-            }
-        }
         scanner.close();
         em.close();
         emf.close();
     }
 
+    public static User registeredUser(Scanner scanner, EntityManager em, UserDAO ud){
+        System.out.println("Tell me your First Name so I can identify you");
+        String name = scanner.nextLine();
+        System.out.println("Now your Last Name");
+        String surname = scanner.nextLine();
+        User user = ud.findByNameAndSurname(name, surname);
+        return user;
 
+
+
+
+
+    }
 
 }

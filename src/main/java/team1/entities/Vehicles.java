@@ -31,7 +31,7 @@ public class Vehicles {
     private List<Ticket> tickets;
     @OneToMany(mappedBy = "vehicles")
     private List<VehiclesMaintenance> vehiclesMaintenances;
-    @OneToMany (mappedBy = "vehicle")
+    @OneToMany (mappedBy = "vehicles")
     private List<VehicleLineJourney> vehicleLineJourneys;
 
     //COSTRUTTORI
