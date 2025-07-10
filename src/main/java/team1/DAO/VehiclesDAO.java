@@ -32,7 +32,7 @@ public class VehiclesDAO {
         if (found == null) throw new EntityNotFoundException("Element not found");
         return found;
     }
-    
+
     public void validatioTicket(Ticket t){
         if(t instanceof SingleTicket) {
             if (t.getValidationDate().isBefore(LocalDate.now())) {

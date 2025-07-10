@@ -5,6 +5,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.EntityTransaction;
 import team1.entities.TravelCard;
 import team1.entities.User;
+import team1.exceptions.ReUsableException;
 
 import java.time.LocalDate;
 
@@ -33,9 +34,16 @@ public class TravelCardDAO {
     }
 
     public TravelCard getNewCard(User user){
-        //da aggiungere controllo per vecchie tessere
-        TravelCard newTravelCard = new TravelCard(LocalDate.now(),user);
-        return newTravelCard;
+        boolean travelCardCheck =  user.getAllTravelCards().stream()
+                .allMatch(tc-> tc.getExpiration_date().isBefore(LocalDate.now()));
+
+        if(travelCardCheck){
+            TravelCard newTravelCard = new TravelCard(LocalDate.now(),user);
+            return newTravelCard;
+        }else{
+            //da rivedere
+            throw new ReUsableException("travelcard is ok");
+        }
     }
 
 
