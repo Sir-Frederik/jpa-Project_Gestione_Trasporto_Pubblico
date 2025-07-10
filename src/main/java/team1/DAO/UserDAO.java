@@ -32,7 +32,6 @@ public class UserDAO {
     public User findByNameAndSurname (String name, String surname){
         try {
             return em.createQuery(
-//                    "SELECT u FROM User u WHERE u.name = :name AND   u.surname = :surname", User.class)
                     "SELECT u FROM User u WHERE LOWER(u.name) = LOWER(:name) AND   LOWER(u.surname) = LOWER(:surname)", User.class)
                     .setParameter("name",name)
                .setParameter("surname",surname)

@@ -12,6 +12,7 @@ import team1.entities.enums.VehiclesType;
 import team1.entities.sellersSons.TicketMachine;
 import team1.entities.sellersSons.TicketSeller;
 
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -249,7 +250,10 @@ public class Application {
                     switch (choice1) {
                         case 1:
                             User user = registeredUser(scanner, em, ud);
-                            System.out.println("Ciao " + user.getName() +"!");
+                            System.out.println("Hello " + user.getName() +"!");
+                            UserChoices(scanner,em,ud,user);
+
+
                             break;
                         case 2:
                             System.out.println("You need to register first.");
@@ -284,6 +288,30 @@ public class Application {
         String surname = scanner.nextLine();
         User user = ud.findByNameAndSurname(name, surname);
         return user;
+
+
+
+        }
+    public static void UserChoices(Scanner scanner, EntityManager em, UserDAO ud, User user){
+        System.out.println("What would you do?");
+        int choice;
+
+        do {
+            System.out.println("1 - See your Data");
+            System.out.println("2 - Buy tickets");
+            System.out.println("3 - Get a new travel card");
+            System.out.println("4 - Take a ride");
+            System.out.println("5 - Exit");
+            choice = Integer.parseInt(scanner.nextLine());
+
+            switch ( choice){
+                case 1:
+
+                    System.out.println(user.toString());
+
+                  break;
+            }
+        }while (choice != 5);
 
 
 

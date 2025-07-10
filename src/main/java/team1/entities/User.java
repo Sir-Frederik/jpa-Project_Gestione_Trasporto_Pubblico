@@ -83,9 +83,9 @@ public class User {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", birthDate=" + birthDate +
-                ", residenceCity='" + residenceCity + '\'' +
-                ", genre=" + genre +
+                ", Birth Date=" + birthDate +
+                ", Residence at='" + residenceCity + '\'' +
+                ", Genre=" + genre +
                 ", allTravelCards=" + allTravelCards +
                 '}';
     }
