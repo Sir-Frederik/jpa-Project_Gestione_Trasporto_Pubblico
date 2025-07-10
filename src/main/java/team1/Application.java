@@ -31,7 +31,7 @@ public class Application {
         VehiclesDAO vd = new VehiclesDAO(em);
         VehiclesMaintenanceDAO vmd = new VehiclesMaintenanceDAO(em);
 
-
+/*
         User u1 = new User("Oronzo", "Canà", LocalDate.of(1940, 5, 21), "Alberobello", Genre.MALE);
         User u2 = new User("Paolino", "Paperino", LocalDate.of(1934, 6, 9), "Paperopoli", Genre.MALE);
         User u3 = new User("Marilyn", "Monroe", LocalDate.of(1926, 6, 1), "Los Angeles", Genre.FEMALE);
@@ -157,7 +157,7 @@ public class Application {
         VehicleLineJourney j7 = new VehicleLineJourney(34, vehicles7Fromdb, line7FromDb);
         VehicleLineJourney j8 = new VehicleLineJourney(47, vehicles8Fromdb, line8FromDb);
         VehicleLineJourney j9 = new VehicleLineJourney(29, vehicles9Fromdb, line9FromDb);
-        VehicleLineJourney j10 = new VehicleLineJourney(13, vehicles10Fromdb, line10FromDb);
+        VehicleLineJourney j10 = new VehicleLineJourney(13, vehicles10Fromdb, line10FromDb);*/
 
 
 //        //invoco i metodi save con le list per evitare codici troppo lunghi
@@ -239,10 +239,19 @@ public class Application {
 
                 case 1:
                     System.out.println("Welcome, User!");
-                    System.out.println("Are you a registered user?1 if yes or 2 if not");
+                    System.out.println("Are you a registered user? 1 if yes or 2 if not");
                     int choice1;
                     choice1=Integer.parseInt(scanner.nextLine());
-                    if ()
+
+                    switch (choice1) {
+                        case 1:
+
+                            break;
+                            case2:
+                            registeredUser();
+
+                            break;
+
 
 
 
@@ -255,6 +264,15 @@ public class Application {
 
         } while (choice!=2);
 
+
+
+
+           void  registeredUser() {
+
+               Syt
+
+            }
+        }
         scanner.close();
         em.close();
         emf.close();
