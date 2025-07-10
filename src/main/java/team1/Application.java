@@ -11,6 +11,7 @@ import team1.entities.enums.Genre;
 import team1.entities.enums.VehiclesType;
 import team1.entities.sellersSons.TicketMachine;
 import team1.entities.sellersSons.TicketSeller;
+import team1.exceptions.ReUsableException;
 
 
 import java.text.ParseException;
@@ -37,7 +38,7 @@ public class Application {
         VehiclesDAO vd = new VehiclesDAO(em);
         VehiclesMaintenanceDAO vmd = new VehiclesMaintenanceDAO(em);
 
-/*
+
         User u1 = new User("Oronzo", "Canà", LocalDate.of(1940, 5, 21), "Alberobello", Genre.MALE);
         User u2 = new User("Paolino", "Paperino", LocalDate.of(1934, 6, 9), "Paperopoli", Genre.MALE);
         User u3 = new User("Marilyn", "Monroe", LocalDate.of(1926, 6, 1), "Los Angeles", Genre.FEMALE);
@@ -49,7 +50,7 @@ public class Application {
         User u9 = new User("Totò", "Principe", LocalDate.of(1898, 2, 15), "Napoli", Genre.MALE);
         User u10 = new User("Sam", "Genderfluid", LocalDate.of(1990, 8, 8), "Berlino", Genre.OTHER);
 
-        User user1fromDb = ud.findById(1);
+        /*User user1fromDb = ud.findById(1);
         User user2fromDb = ud.findById(2);
         User user3fromDb = ud.findById(3);
         User user4fromDb = ud.findById(4);
@@ -58,7 +59,7 @@ public class Application {
         User user7fromDb = ud.findById(7);
         User user8fromDb = ud.findById(8);
         User user9fromDb = ud.findById(9);
-        User user10fromDb = ud.findById(10);
+        User user10fromDb = ud.findById(10);*/
 
         TicketMachine t1 = new TicketMachine(State.ACTIVE,707);
         TicketMachine t2 = new TicketMachine(State.INACTIVE,676);
@@ -81,7 +82,7 @@ public class Application {
         Line l9 = new Line("Palermo", "Mondello", 109, 30.0);
         Line l10 = new Line("Paperino", "Bassano del Grappa", 110, 12.5);
 
-        Line line1FromDb = ld.findById(1);
+        /*Line line1FromDb = ld.findById(1);
         Line line2FromDb = ld.findById(2);
         Line line3FromDb = ld.findById(3);
         Line line4FromDb = ld.findById(4);
@@ -90,10 +91,10 @@ public class Application {
         Line line7FromDb = ld.findById(7);
         Line line8FromDb = ld.findById(8);
         Line line9FromDb = ld.findById(9);
-        Line line10FromDb = ld.findById(10);
+        Line line10FromDb = ld.findById(10);*/
 
 
-        TravelCard tc1 = new TravelCard(LocalDate.of(2024, 7, 1), user1fromDb);
+        /*TravelCard tc1 = new TravelCard(LocalDate.of(2024, 7, 1), user1fromDb);
         TravelCard tc2 = new TravelCard(LocalDate.of(2024, 6, 15), user2fromDb);
         TravelCard tc3 = new TravelCard(LocalDate.of(2024, 5, 20), user3fromDb);
         TravelCard tc4 = new TravelCard(LocalDate.of(2024, 4, 10), user4fromDb);
@@ -102,7 +103,7 @@ public class Application {
         TravelCard tc7 = new TravelCard(LocalDate.of(2024, 1, 14), user7fromDb);
         TravelCard tc8 = new TravelCard(LocalDate.of(2023, 12, 1), user8fromDb);
         TravelCard tc9 = new TravelCard(LocalDate.of(2023, 11, 23), user9fromDb);
-        TravelCard tc10 = new TravelCard(LocalDate.of(2023, 10, 9), user10fromDb);
+        TravelCard tc10 = new TravelCard(LocalDate.of(2023, 10, 9), user10fromDb);*/
 
         Vehicles v1 = new Vehicles(VehiclesType.AUTOBUS, Availability.AVAILABLE, 60, "AB123CD");
         Vehicles v2 = new Vehicles(VehiclesType.TRAM, Availability.NOTAVAILABLE, 100, "TR456FG");
@@ -115,7 +116,7 @@ public class Application {
         Vehicles v9 = new Vehicles(VehiclesType.AUTOBUS, Availability.AVAILABLE, 45, "GH963UV");
         Vehicles v10 = new Vehicles(VehiclesType.TRAM, Availability.AVAILABLE, 130, "TR147WX");
 
-        Vehicles vehicles1Fromdb = vd.findById(1);
+        /*Vehicles vehicles1Fromdb = vd.findById(1);
         Vehicles vehicles2Fromdb = vd.findById(2);
         Vehicles vehicles3Fromdb = vd.findById(3);
         Vehicles vehicles4Fromdb = vd.findById(4);
@@ -124,9 +125,9 @@ public class Application {
         Vehicles vehicles7Fromdb = vd.findById(7);
         Vehicles vehicles8Fromdb = vd.findById(8);
         Vehicles vehicles9Fromdb = vd.findById(9);
-        Vehicles vehicles10Fromdb = vd.findById(10);
+        Vehicles vehicles10Fromdb = vd.findById(10);*/
 
-        VehiclesMaintenance vm1 = new VehiclesMaintenance(
+        /*VehiclesMaintenance vm1 = new VehiclesMaintenance(
                 LocalDate.of(2024, 6, 1),
                 LocalDate.of(2024, 6, 10),
                 LocalDate.of(2024, 6, 11),
@@ -145,16 +146,16 @@ public class Application {
                 LocalDate.of(2024, 4, 25),
                 LocalDate.of(2024, 4, 26),
                 vehicles3Fromdb
-        );
+        );*/
 
-        VehiclesMaintenance vm4 = new VehiclesMaintenance(
+       /* VehiclesMaintenance vm4 = new VehiclesMaintenance(
                 LocalDate.of(2024, 3, 10),
                 LocalDate.of(2024, 3, 18),
                 LocalDate.of(2024, 3, 19),
                 vehicles4Fromdb
-        );
+        );*/
 
-        VehicleLineJourney j1 = new VehicleLineJourney(49, vehicles1Fromdb, line1FromDb);
+        /*VehicleLineJourney j1 = new VehicleLineJourney(49, vehicles1Fromdb, line1FromDb);
         VehicleLineJourney j2 = new VehicleLineJourney(24, vehicles2Fromdb, line2FromDb);
         VehicleLineJourney j3 = new VehicleLineJourney(33, vehicles3Fromdb, line3FromDb);
         VehicleLineJourney j4 = new VehicleLineJourney(21, vehicles4Fromdb, line4FromDb);
@@ -199,7 +200,7 @@ public class Application {
 
         //tickets creation
 //sellers from db
-        TicketMachine ticketMachineFromDb1 = tmd.findById(1);
+        /*TicketMachine ticketMachineFromDb1 = tmd.findById(1);
         TicketMachine ticketMachineFromDb2 = tmd.findById(2);
         TicketMachine ticketMachineFromDb3 = tmd.findById(3);
         TicketMachine ticketMachineFromDb4 = tmd.findById(4);
@@ -207,7 +208,7 @@ public class Application {
 
         TicketSeller ticketSellerFromDb1 = tsd.findById(6);
         TicketSeller ticketSellerFromDb2 = tsd.findById(7);
-        TicketSeller ticketSellerFromDb3 = tsd.findById(8);
+        TicketSeller ticketSellerFromDb3 = tsd.findById(8);*/
 
         TicketSeller ticketSeller4 = new TicketSeller("test", "test");
              //   sd.save(ticketSeller4);
@@ -254,7 +255,7 @@ public class Application {
                             break;
                         case 2:
                             System.out.println("You need to register first.");
-                            // registerUser(); // funzione da implementare
+                             registerUser(scanner,em,ud); // funzione da implementare
                             break;
                         default:
                             System.out.println("Invalid option.");
@@ -275,7 +276,7 @@ public class Application {
         em.close();
         emf.close();
     }
-    public User registerUser(Scanner scanner, EntityManager em, UserDAO ud) {
+    public static void registerUser(Scanner scanner, EntityManager em, UserDAO ud) {
 
 
         System.out.print("Insert name: ");
@@ -297,10 +298,14 @@ public class Application {
         System.out.print("Insert your residence city : ");
         String residenceCity = scanner.nextLine();
 
-        System.out.println("Insert your genre:M,F");
+        System.out.println("Insert your genre:MALE,FEMALE,OTHER, no other values are accepted");
 
         String genre = scanner.nextLine().toUpperCase();
-        
+        if (!genre.equalsIgnoreCase("MALE") &&
+                !genre.equalsIgnoreCase("FEMALE") &&
+                !genre.equalsIgnoreCase("OTHER")) {
+            System.out.println("The value inserted is incorrect");
+        }
 
         // Crea un nuovo oggetto User
         User newUser = new User();
@@ -312,17 +317,12 @@ public class Application {
 
 
         // Salva l'utente nel database
-        try {
-            em.getTransaction().begin();
-            ud.save(newUser); // supponendo che UserDAO abbia un metodo save(User user)
-            em.getTransaction().commit();
-            System.out.println("Added user");
-            return newUser;
-        } catch (Exception e) {
-            em.getTransaction().rollback();
-            System.out.println("Errore durante la registrazione: " + e.getMessage());
-            return null;
-        }
+
+            //em.getTransaction().begin();
+        ud.save(newUser); // supponendo che UserDAO abbia un metodo save(User user)
+
+
+
     }
 
 
