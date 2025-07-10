@@ -239,6 +239,13 @@ public class Application {
 
                 case 1:
                     System.out.println("Welcome, User!");
+                    System.out.println("Are you a registered user?1 if yes or 2 if not");
+                    int choice1;
+                    choice1=Integer.parseInt(scanner.nextLine());
+                    if ()
+
+
+
 
                     break;
 
@@ -252,4 +259,7 @@ public class Application {
         em.close();
         emf.close();
     }
+
+
+
 }
