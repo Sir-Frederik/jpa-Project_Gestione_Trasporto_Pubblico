@@ -363,7 +363,7 @@ public class Application {
                                             break;
 
                                         case 2:
-                                            System.out.println("Enter the ID of the user to view their tickets:");
+                                            System.out.println("Enter the id of the user to view their tickets:");
                                             try {
                                                 long id = Long.parseLong(scanner.nextLine());
                                                 ud.getAllTicketByUser(id).forEach(System.out::println);
@@ -375,7 +375,7 @@ public class Application {
                                             break;
 
                                         case 3:
-                                            System.out.println("Enter the ID of the user to view their TravelCard:");
+                                            System.out.println("Enter the id of the user to view their TravelCard:");
                                             try {
                                                 long id = Long.parseLong(scanner.nextLine());
                                                 System.out.println(ud.findTravelCardByUserId(id));
@@ -398,11 +398,97 @@ public class Application {
                                 break;
 
                             case 3:
-                                System.out.println("Line section - To be implemented.");
-                                break;
+                                int selection3;
+                                do {
+                                    System.out.println("\nYou have entered the Line section");
+                                    ld.getAllLine().forEach(System.out::println);
+                                    System.out.println("This is the list of all Line");
 
+                                    System.out.println(
+                                            "\nWhat do you want to do?\n" +
+                                                    "1: Show vehiclesLineJourney list\n" +
+                                                    "2: Show estimated time for this route\n" +
+                                                    "0: Back to Admin Menu"
+                                    );
+
+                                    try {
+                                        selection3 = Integer.parseInt(scanner.nextLine());
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("Invalid input. Please enter a valid number.");
+                                        selection3 = -1;
+                                        continue;
+                                    }
+
+                                    switch (selection3) {
+                                        case 1:
+                                            System.out.println("Enter the id of the Line to view their VehiclesLineJourney:");
+                                            try {
+                                                long id = Long.parseLong(scanner.nextLine());
+                                                ld.getVehicleLineJourneysByLineId(id).forEach(System.out::println);
+                                            } catch (NumberFormatException e) {
+                                                System.out.println("Invalid id format");
+                                            } catch (ReUsableException e) {
+                                                System.out.println(e.getMessage());
+                                            }
+                                            break;
+                                        case 2:
+                                            System.out.println("Enter the id of the Line to view their VehiclesLineJourney:");
+                                            try {
+                                                long id = Long.parseLong(scanner.nextLine());
+                                                System.out.println(ld.getEstimatedTimeByLineId(id));
+                                            } catch (NumberFormatException e) {
+                                                System.out.println("Invalid id format");
+                                            } catch (ReUsableException e) {
+                                                System.out.println(e.getMessage());
+                                            }
+                                            break;
+                                        case 0:
+                                            System.out.println("Returning to Admin Menu");
+                                            break;
+
+                                        default:
+                                            System.out.println("Invalid choice. Try again.");
+                                    }
+
+                                } while (selection3 != 0);
+                                break;
                             case 4:
-                                System.out.println("Sellers section - To be implemented.");
+                                int selection4;
+                                do {
+                                    System.out.println("\nYou have entered the Seller section");
+                                    ld.getAllLine().forEach(System.out::println);
+                                    System.out.println("This is the list of all Line");
+
+                                    System.out.println(
+                                            "\nWhat do you want to do?\n" +
+                                                    "1: Show vehiclesLineJourney list\n" +
+                                                    "2: Show estimated time for this route\n" +
+                                                    "0: Back to Admin Menu"
+                                    );
+
+                                    try {
+                                        selection4 = Integer.parseInt(scanner.nextLine());
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("Invalid input. Please enter a valid number.");
+                                        selection4 = -1;
+                                        continue;
+                                    }
+
+                                    switch (selection4) {
+                                        case 1:
+                                            break;
+                                        case 2:
+                                           
+                                            break;
+                                        case 0:
+                                            System.out.println("Returning to Admin Menu");
+                                            break;
+
+                                        default:
+                                            System.out.println("Invalid choice. Try again.");
+                                    }
+
+                                } while (selection4 != 0);
                                 break;
 
                             case 5:
