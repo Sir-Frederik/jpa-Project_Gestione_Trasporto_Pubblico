@@ -350,7 +350,6 @@ public class Application {
 
                                 } while (selection2 != 0);
                                 break;
-                                break;
 
                             case 3:
                                 System.out.println("Line section - To be implemented.");
@@ -361,8 +360,145 @@ public class Application {
                                 break;
 
                             case 5:
-                                System.out.println("Vehicles section - To be implemented.");
+                                int selection5 =-1;
+                                do {
+                                    System.out.println("You have entered in the Vehicles section");
+                                    vd.getAllVehicles().forEach(System.out::println);
+                                    System.out.println("This is the list of all Vehicles");
+
+                                    System.out.println(
+                                            "What do you want to do? Choose the action to do:" +
+                                                    "1: Bus Menu\n" +
+                                                    "2: Tram Menu\n" +
+                                                    "3: Maintenance Menu\n" +
+                                                    "0: Back to Admin Menu"
+                                    );
+
+                                    try {
+                                        selection5 = Integer.parseInt(scanner.nextLine());
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("Invalid input. Please enter a valid number.\n");
+                                        selection5 = -1;
+                                        continue;
+                                    }
+
+
+                                    switch (selection5) {
+                                        case 1:
+                                            int busSection = -1;
+                                            do{
+                                                System.out.println("You have entered in the Bus Menu");
+                                                vd.getAllBus().forEach(System.out::println);
+                                                System.out.println("This is the list of all Bus");
+
+                                                System.out.println(
+                                                        "What do you want to do? Choose the action to do:\n" +
+                                                                "1: Add Bus\n" +
+                                                                "2: Remove Bus\n" +
+                                                                "0: Back"
+                                                );
+
+                                                try {
+                                                    busSection = Integer.parseInt(scanner.nextLine());
+                                                } catch (NumberFormatException e) {
+                                                    System.out.println("Invalid input. Please enter a valid number.\n");
+                                                    selection5 = -1;
+                                                    continue;
+                                                }
+
+
+                                                switch (busSection){
+                                                    case 1:
+                                                        System.out.println("Create new bus:");
+                                                        vd.addNewBus();
+                                                        break;
+                                                    case 2:
+                                                        System.out.println("Enter the Bus id to remove:");
+                                                        long userInputId = Long.parseLong(scanner.nextLine());
+                                                        vd.deleteVehicle(userInputId);
+
+                                                }
+
+                                            }while(busSection !=0);
+                                            break;
+                                        case 2:
+                                            int tramSection = -1;
+                                            do {
+                                                System.out.println("You have entered the Tram Menu");
+                                                vd.getAllTram().forEach(System.out::println);
+                                                System.out.println("This is the list of all Trams");
+
+                                                System.out.println(
+                                                        "What do you want to do? Choose the action to do:\n" +
+                                                                "1: Add Tram\n" +
+                                                                "2: Remove Tram\n" +
+                                                                "0: Back"
+                                                );
+
+                                                try {
+                                                    tramSection = Integer.parseInt(scanner.nextLine());
+                                                } catch (NumberFormatException e) {
+                                                    System.out.println("Invalid input. Please enter a valid number.\n");
+                                                    tramSection = -1;
+                                                    continue;
+                                                }
+
+                                                switch (tramSection) {
+                                                    case 1:
+                                                        System.out.println("Create new tram:");
+                                                        vd.addNewTram();
+                                                        break;
+                                                    case 2:
+                                                        System.out.println("Enter the Tram ID to remove:");
+                                                        try {
+                                                            long tramId = Long.parseLong(scanner.nextLine());
+                                                            vd.deleteVehicle(tramId);
+                                                        } catch (NumberFormatException e) {
+                                                            System.out.println("Invalid ID format. Please enter a numeric value.");
+                                                        }
+                                                        break;
+                                                    case 0:
+                                                        System.out.println("Returning to Vehicles Menu...");
+                                                        break;
+                                                    default:
+                                                        System.out.println("Invalid option.");
+                                                        break;
+                                                }
+
+                                            } while (tramSection != 0);
+                                        break;
+                                        case 3:
+                                            int maintenanceSection = -1;
+                                            do {
+                                                System.out.println("You have entered the Maintenance Menu");
+                                                System.out.println(
+                                                        "What do you want to do? Choose the action to do:\n" +
+                                                                "1: See log of maintenance for a vehicle id\n" +
+                                                                "2: R\n" +
+                                                                "0: Back"
+                                                );
+                                                try {
+                                                    maintenanceSection = Integer.parseInt(scanner.nextLine());
+                                                } catch (NumberFormatException e) {
+                                                    System.out.println("Invalid input. Please enter a valid number.\n");
+                                                    maintenanceSection = -1;
+                                                    continue;
+                                                }
+
+                                            }while(maintenanceSection!=0);
+                                            break;
+                                        case 0:
+                                            System.out.println("Back");
+                                            break;
+                                        default:
+                                            System.out.println("Invalid option.");
+                                            break;
+                                    }
+
+
+                                }while(selection5 != 0);
                                 break;
+
 
                             case 0:
                                 System.out.println("Exiting admin menu...");
@@ -391,8 +527,5 @@ public class Application {
         scanner.close();
         em.close();
         emf.close();
-
-
-        public
     }
 }
