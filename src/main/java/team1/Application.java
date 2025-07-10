@@ -13,6 +13,7 @@ import team1.entities.sellersSons.TicketMachine;
 import team1.entities.sellersSons.TicketSeller;
 import team1.exceptions.ReUsableException;
 
+import javax.sound.midi.Soundbank;
 import java.time.LocalDate;
 import java.util.Scanner;
 
@@ -519,6 +520,8 @@ public class Application {
                                                         "What do you want to do? Choose the action to do:\n" +
                                                                 "1: See full log of maintenance \n" +
                                                                 "2: See maintenance for a Vehicle with id\n" +
+                                                                "3: Set a maintenance for a Vehicle\n" +
+                                                                "4: Set a Vehicle to be ready\n" +
                                                                 "0: Back"
                                                 );
                                                 try {
@@ -537,8 +540,29 @@ public class Application {
                                                         System.out.println("Enter the ID to search:");
                                                         try {
                                                             long maintenanceLogId = Long.parseLong(scanner.nextLine());
-                                                            System.out.println(vmd.findById(maintenanceLogId))0;
+                                                            System.out.println(vmd.findById(maintenanceLogId));
                                                         } catch (NumberFormatException e) {
+                                                            System.out.println("Invalid ID format. Please enter a numeric value.");
+                                                        }
+                                                    case 3:
+                                                        System.out.println("Enter ID of the Vehicle to set maintenance");
+                                                        try{
+                                                            long inputId = Long.parseLong(scanner.nextLine());
+                                                            System.out.println(vmd.findById(inputId));
+                                                            System.out.println("What date should this vehicle enter manintenance? " +
+                                                                    "(use format yyyy-mm-dd)");
+                                                            String inputStartDate = scanner.nextLine();
+                                                            LocalDate inputDateParsed = LocalDate.parse(inputStartDate);
+                                                            if (inputDateParsed== null){
+                                                                System.out.println("Invalid input. Please enter date " +
+                                                                        "(use format yyyy-mm-dd);\n");
+                                                                maintenanceSection = -1;
+                                                                continue;
+                                                            }
+
+
+
+                                                        }catch (NumberFormatException e){
                                                             System.out.println("Invalid ID format. Please enter a numeric value.");
                                                         }
                                                 }
