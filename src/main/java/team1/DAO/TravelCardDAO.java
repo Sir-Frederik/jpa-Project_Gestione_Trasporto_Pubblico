@@ -1,12 +1,12 @@
 package team1.DAO;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.*;
 import team1.entities.TravelCard;
 import team1.entities.User;
+import team1.exceptions.ReUsableException;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class TravelCardDAO {
 
@@ -31,6 +31,19 @@ public class TravelCardDAO {
         }
         return found;
     }
+    public void findTravelCardByIdAndDelete(long id) {
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        Query query = em.createQuery("DELETE FROM TravelCard t WHERE t.id = :id");
+        query.setParameter("id", id);
+        int deletedCount = query.executeUpdate(); // Torna il numero di righe cancellate
+        transaction.commit();
+        if (deletedCount > 0) {
+            System.out.println("Element successfully removed!");
+        } else {
+            System.out.println("No element found with the given ID.");
+        }
+    }
 
     public TravelCard getNewCard(User user){
         //da aggiungere controllo per vecchie tessere
@@ -38,5 +51,18 @@ public class TravelCardDAO {
         return newTravelCard;
     }
 
+    public List<TravelCard> getAllCard(){
+        TypedQuery<TravelCard> query = em.createQuery("SELECT d FROM TravelCard d", TravelCard.class);
+        return query.getResultList();
+    }
 
+    public TravelCard findUserByTravelCardId(long id) {
+        TypedQuery<TravelCard> query = em.createQuery("SELECT t FROM TravelCard t WHERE t.id = :id", TravelCard.class);
+        query.setParameter("id", id);
+        try {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            throw new ReUsableException("Element not found");
+        }
+    }
 }

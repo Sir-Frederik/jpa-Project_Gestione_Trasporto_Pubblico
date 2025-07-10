@@ -11,6 +11,7 @@ import team1.entities.enums.Genre;
 import team1.entities.enums.VehiclesType;
 import team1.entities.sellersSons.TicketMachine;
 import team1.entities.sellersSons.TicketSeller;
+import team1.exceptions.ReUsableException;
 
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -210,11 +211,15 @@ public class Application {
 
        // System.out.println( jd.findNumberOfTravelsOfAVehicle(1, 1));
         Scanner scanner = new Scanner(System.in);
-        int choice ;
+        int choice;
 
         do {
             System.out.println("Hi, who are you? 0:Admin 1:User 2:Exit");
-            choice = Integer.parseInt(scanner.nextLine());
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+            } catch (NumberFormatException e) {
+                choice = -1;
+            }
 
             switch (choice) {
                 case 0: // Admin
@@ -230,23 +235,133 @@ public class Application {
                             System.out.println("Incorrect password");
                         }
                     }
+
                     if (!accessControl) {
                         System.out.println("Too many failed attempts. Returning to main menu...\n");
-                    } else {
-                        System.out.println("Welcome to the admin section, what do you want to do?");
+                        break;
                     }
+
+                    // Admin main menu
+                    int adminSelection;
+                    do {
+                        System.out.println("Welcome to the admin section");
+                        System.out.println(
+                                "What do you want to do?\n" +
+                                        "Choose the section to view:\n" +
+                                        "1: TravelCard\n" +
+                                        "2: User\n" +
+                                        "3: Line\n" +
+                                        "4: Sellers\n" +
+                                        "5: Vehicles\n" +
+                                        "0: Exit"
+                        );
+
+                        try {
+                            adminSelection = Integer.parseInt(scanner.nextLine());
+                            if (adminSelection < 0 || adminSelection > 5) {
+                                System.out.println("Invalid choice. Please enter a number from 0 to 5.\n");
+                                continue;
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("Invalid input. Please enter a valid number.\n");
+                            adminSelection = -1;
+                            continue;
+                        }
+
+                        switch (adminSelection) {
+                            case 1: // TravelCard section
+                                int selection;
+                                do {
+                                    System.out.println("You have entered the TravelCard section");
+                                    tcd.getAllCard().forEach(System.out::println);
+                                    System.out.println("This is the list of all cards");
+
+                                    System.out.println(
+                                            "What do you want to do?\n" +
+                                                    "Choose the section to view:\n" +
+                                                    "1: Remove\n" +
+                                                    "2: User Details\n" +
+                                                    "0: Back to Admin Menu"
+                                    );
+
+                                    try {
+                                        selection = Integer.parseInt(scanner.nextLine());
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("Invalid input. Please enter a valid number.\n");
+                                        selection = -1;
+                                        continue;
+                                    }
+
+                                    switch (selection) {
+                                        case 1:
+                                            System.out.println("Enter the id of the TravelCard you want to remove:");
+                                            try {
+                                                long id = Long.parseLong(scanner.nextLine());
+                                                tcd.findTravelCardByIdAndDelete(id);
+                                            } catch (NumberFormatException e) {
+                                                System.out.println("Invalid ID format.");
+                                            }
+                                            break;
+
+                                        case 2:
+                                            System.out.println("Enter the TravelCard ID to find the user:");
+                                            try {
+                                                long id1 = Long.parseLong(scanner.nextLine());
+                                                System.out.println(tcd.findUserByTravelCardId(id1));
+                                            } catch (NumberFormatException e) {
+                                                System.out.println("Invalid ID format.");
+                                            } catch (ReUsableException e) {
+                                                System.out.println(e.getMessage());
+                                            }
+                                            break;
+
+                                        case 0:
+                                            System.out.println("Returning to Admin Menu...\n");
+                                            break;
+                                    }
+
+                                } while (selection != 0);
+                                break;
+
+                            case 2:
+                                System.out.println("User section - To be implemented.");
+                                break;
+
+                            case 3:
+                                System.out.println("Line section - To be implemented.");
+                                break;
+
+                            case 4:
+                                System.out.println("Sellers section - To be implemented.");
+                                break;
+
+                            case 5:
+                                System.out.println("Vehicles section - To be implemented.");
+                                break;
+
+                            case 0:
+                                System.out.println("Exiting admin menu...");
+                                break;
+                        }
+
+                    } while (adminSelection != 0);
                     break;
 
                 case 1:
                     System.out.println("Welcome, User!");
+                    // User logic to be implemented
+                    break;
 
+                case 2:
+                    System.out.println("Exiting application. Goodbye!");
                     break;
 
                 default:
-                    System.out.println("Invalid choice. Please enter 0 (Admin) or 1 (User).");
+                    System.out.println("Invalid choice. Please enter 0 (Admin), 1 (User), or 2 (Exit).");
             }
 
-        } while (choice!=2);
+        } while (choice != 2);
+
 
         scanner.close();
         em.close();
