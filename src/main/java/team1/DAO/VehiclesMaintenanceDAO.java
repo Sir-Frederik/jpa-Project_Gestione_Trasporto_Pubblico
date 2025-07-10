@@ -6,6 +6,8 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 import team1.entities.Vehicles;
 import team1.entities.VehiclesMaintenance;
+import team1.entities.enums.Availability;
+import team1.entities.enums.VehiclesType;
 
 import java.util.List;
 
@@ -34,6 +36,14 @@ public class VehiclesMaintenanceDAO {
             TypedQuery<VehiclesMaintenance> query =entityManager.createQuery("SELECT vm FROM VehiclesMaintenance vm", VehiclesMaintenance.class);
             return query.getResultList();
     }
+
+//    public VehiclesMaintenance createNewMaintenance(){
+////        public void addNewBus() {
+////            Vehicles newbus = new Vehicles(VehiclesType.AUTOBUS, Availability.AVAILABLE, 30, "xxxx");
+////            save(newbus);
+////            System.out.println("new bus added");
+////        }
+//    }
 
 
 }

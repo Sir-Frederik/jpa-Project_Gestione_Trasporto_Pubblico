@@ -15,6 +15,7 @@ import team1.exceptions.ReUsableException;
 
 import javax.sound.midi.Soundbank;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Application {
@@ -552,10 +553,13 @@ public class Application {
                                                             System.out.println("What date should this vehicle enter manintenance? " +
                                                                     "(use format yyyy-mm-dd)");
                                                             String inputStartDate = scanner.nextLine();
-                                                            LocalDate inputDateParsed = LocalDate.parse(inputStartDate);
-                                                            if (inputDateParsed== null){
-                                                                System.out.println("Invalid input. Please enter date " +
-                                                                        "(use format yyyy-mm-dd);\n");
+                                                            LocalDate inputDateParsed;
+                                                            try {
+                                                                inputDateParsed = LocalDate.parse(inputStartDate);
+                                                                vd.findById(inputId).setAvailability(Availability.NOTAVAILABLE);
+                                                                //da finire sto punto
+                                                            } catch (DateTimeParseException e) {
+                                                                System.out.println("Invalid input. Please enter date (use format yyyy-MM-dd);\n");
                                                                 maintenanceSection = -1;
                                                                 continue;
                                                             }
