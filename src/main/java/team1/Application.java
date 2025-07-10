@@ -13,6 +13,7 @@ import team1.entities.sellersSons.TicketMachine;
 import team1.entities.sellersSons.TicketSeller;
 
 import java.time.LocalDate;
+import java.util.Scanner;
 
 public class Application {
     private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("trasporto");
@@ -208,7 +209,46 @@ public class Application {
                 //sd.sellTicket(ticketMachineFromDb2);
 
        // System.out.println( jd.findNumberOfTravelsOfAVehicle(1, 1));
+        Scanner scanner = new Scanner(System.in);
+        int choice ;
 
+        do {
+            System.out.println("Hi, who are you? 0:Admin 1:User 2:Exit");
+            choice = Integer.parseInt(scanner.nextLine());
+
+            switch (choice) {
+                case 0: // Admin
+                    boolean accessControl = false;
+                    for (int i = 0; i < 3; i++) {
+                        System.out.println("You have entered the administered section. Enter the password to access the system:");
+                        String password = scanner.nextLine();
+                        if (password.equals("1234")) {
+                            System.out.println("Access granted. Welcome, Admin.");
+                            accessControl = true;
+                            break;
+                        } else {
+                            System.out.println("Incorrect password");
+                        }
+                    }
+                    if (!accessControl) {
+                        System.out.println("Too many failed attempts. Returning to main menu...\n");
+                    } else {
+                        System.out.println("Welcome to the admin section, what do you want to do?");
+                    }
+                    break;
+
+                case 1:
+                    System.out.println("Welcome, User!");
+
+                    break;
+
+                default:
+                    System.out.println("Invalid choice. Please enter 0 (Admin) or 1 (User).");
+            }
+
+        } while (choice==2);
+
+        scanner.close();
         em.close();
         emf.close();
     }
