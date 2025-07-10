@@ -246,7 +246,7 @@ public class Application {
                     System.out.println("Invalid choice. Please enter 0 (Admin) or 1 (User).");
             }
 
-        } while (choice==2);
+        } while (choice!=2);
 
         scanner.close();
         em.close();
