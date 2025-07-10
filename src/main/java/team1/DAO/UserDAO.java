@@ -2,8 +2,11 @@ package team1.DAO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
+import team1.entities.TravelCard;
 import team1.entities.User;
 
+import java.util.List;
 
 
 public class UserDAO {
@@ -26,6 +29,11 @@ public class UserDAO {
             throw new EntityNotFoundException("Element not found");
         }
         return found;
+    }
+
+    public List<User> getAllUser(){
+        TypedQuery<User> query = em.createQuery("SELECT d FROM User d", User.class);
+        return query.getResultList();
     }
 
         /*
