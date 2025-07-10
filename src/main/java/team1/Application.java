@@ -517,8 +517,8 @@ public class Application {
                                                 System.out.println("You have entered the Maintenance Menu");
                                                 System.out.println(
                                                         "What do you want to do? Choose the action to do:\n" +
-                                                                "1: See log of maintenance for a vehicle id\n" +
-                                                                "2: R\n" +
+                                                                "1: See full log of maintenance \n" +
+                                                                "2: See maintenance for a Vehicle with id\n" +
                                                                 "0: Back"
                                                 );
                                                 try {
@@ -527,6 +527,20 @@ public class Application {
                                                     System.out.println("Invalid input. Please enter a valid number.\n");
                                                     maintenanceSection = -1;
                                                     continue;
+                                                }
+
+                                                switch (maintenanceSection){
+                                                    case 1:
+                                                        vmd.getLogForAll();
+                                                        break;
+                                                    case 2:
+                                                        System.out.println("Enter the Tram ID to search:");
+                                                        try {
+                                                            long maintenanceLogId = Long.parseLong(scanner.nextLine());
+                                                            vmd.findById(maintenanceLogId);
+                                                        } catch (NumberFormatException e) {
+                                                            System.out.println("Invalid ID format. Please enter a numeric value.");
+                                                        }
                                                 }
 
                                             }while(maintenanceSection!=0);
