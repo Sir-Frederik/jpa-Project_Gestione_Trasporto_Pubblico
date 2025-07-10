@@ -5,6 +5,8 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.EntityTransaction;
 import team1.entities.Ticket;
 import team1.entities.Vehicles;
+import team1.entities.ticketSons.SingleTicket;
+import team1.entities.ticketSons.SubscriptionTicket;
 import team1.exceptions.ReUsableException;
 
 import java.time.LocalDate;
@@ -30,13 +32,23 @@ public class VehiclesDAO {
         if (found == null) throw new EntityNotFoundException("Element not found");
         return found;
     }
-
-    //validation ticket
+    
     public void validatioTicket(Ticket t){
-        //da capire come funziona con gli abbonamenti
-        if (t.getValidationDate().isBefore(LocalDate.now())){
-            throw new ReUsableException("this ticket is already used");
+        if(t instanceof SingleTicket) {
+            if (t.getValidationDate().isBefore(LocalDate.now())) {
+                throw new ReUsableException("this ticket is already used");
+            }
+            t.setValidationDate(LocalDate.now());
+        }else if (t instanceof SubscriptionTicket){
+
+           if( ((SubscriptionTicket) t).getExpiration().isAfter(LocalDate.now())){
+               if(t.getValidationDate() != null){
+                   System.out.println("ticket ok");
+               }
+               t.setValidationDate(LocalDate.now());
+           }else{
+               throw new ReUsableException("your subscription is expired");
+           }
         }
-        t.setValidationDate(LocalDate.now());
     }
 }
