@@ -244,7 +244,7 @@ public class Application {
                     // Admin main menu
                     int adminSelection;
                     do {
-                        System.out.println("Welcome to the admin section");
+                        System.out.println("\nWelcome to the admin section");
                         System.out.println(
                                 "What do you want to do?\n" +
                                         "Choose the section to view:\n" +
@@ -269,16 +269,17 @@ public class Application {
                         }
 
                         switch (adminSelection) {
-                            case 1:
+
+                            case 1: // TravelCard
                                 int selection1;
                                 do {
-                                    System.out.println("You have entered the TravelCard section");
+                                    System.out.println("\nYou have entered the TravelCard section");
                                     tcd.getAllCard().forEach(System.out::println);
                                     System.out.println("This is the list of all cards");
 
                                     System.out.println(
-                                            "What do you want to do? Choose the action to do: " +
-                                                    "1: Remove" +
+                                            "\nWhat do you want to do?\n" +
+                                                    "1: Remove\n" +
                                                     "2: User Details\n" +
                                                     "0: Back to Admin Menu"
                                     );
@@ -305,8 +306,8 @@ public class Application {
                                         case 2:
                                             System.out.println("Enter the TravelCard id to find the user:");
                                             try {
-                                                long id1 = Long.parseLong(scanner.nextLine());
-                                                System.out.println(tcd.findUserByTravelCardId(id1));
+                                                long id = Long.parseLong(scanner.nextLine());
+                                                System.out.println(tcd.findUserByTravelCardId(id));
                                             } catch (NumberFormatException e) {
                                                 System.out.println("Invalid id format");
                                             } catch (ReUsableException e) {
@@ -315,41 +316,83 @@ public class Application {
                                             break;
 
                                         case 0:
-                                            System.out.println("Returning to Admin Menu\n");
+                                            System.out.println("Returning to Admin Menu");
                                             break;
+
+                                        default:
+                                            System.out.println("Invalid choice. Try again.");
                                     }
 
                                 } while (selection1 != 0);
                                 break;
 
-                            case 2:
+                            case 2: // User
                                 int selection2;
                                 do {
-                                    System.out.println("You have entered in the User section");
+                                    System.out.println("\nYou have entered the User section");
                                     ud.getAllUser().forEach(System.out::println);
                                     System.out.println("This is the list of all Users");
 
                                     System.out.println(
-                                            "What do you want to do? Choose the action to do:" +
-                                                    "1: Remove" +
-                                                    "2: User Details\n" +
+                                            "\nWhat do you want to do?\n" +
+                                                    "1: Remove User\n" +
+                                                    "2: Tickets List\n" +
+                                                    "3: TravelCard\n" +
                                                     "0: Back to Admin Menu"
                                     );
 
                                     try {
                                         selection2 = Integer.parseInt(scanner.nextLine());
                                     } catch (NumberFormatException e) {
-                                        System.out.println("Invalid input. Please enter a valid number.\n");
+                                        System.out.println("Invalid input. Please enter a valid number.");
                                         selection2 = -1;
                                         continue;
                                     }
 
                                     switch (selection2) {
+                                        case 1:
+                                            System.out.println("Enter the id of the User you want to remove:");
+                                            try {
+                                                long id = Long.parseLong(scanner.nextLine());
+                                                ud.findUserByIdAndDelete(id);
+                                            } catch (NumberFormatException e) {
+                                                System.out.println("Invalid id format");
+                                            }
+                                            break;
 
+                                        case 2:
+                                            System.out.println("Enter the ID of the user to view their tickets:");
+                                            try {
+                                                long id = Long.parseLong(scanner.nextLine());
+                                                ud.getAllTicketByUser(id).forEach(System.out::println);
+                                            } catch (NumberFormatException e) {
+                                                System.out.println("Invalid id format");
+                                            } catch (ReUsableException e) {
+                                                System.out.println(e.getMessage());
+                                            }
+                                            break;
+
+                                        case 3:
+                                            System.out.println("Enter the ID of the user to view their TravelCard:");
+                                            try {
+                                                long id = Long.parseLong(scanner.nextLine());
+                                                System.out.println(ud.findTravelCardByUserId(id));
+                                            } catch (NumberFormatException e) {
+                                                System.out.println("Invalid id format");
+                                            } catch (ReUsableException e) {
+                                                System.out.println(e.getMessage());
+                                            }
+                                            break;
+
+                                        case 0:
+                                            System.out.println("Returning to Admin Menu");
+                                            break;
+
+                                        default:
+                                            System.out.println("Invalid choice. Try again.");
                                     }
 
                                 } while (selection2 != 0);
-                                break;
                                 break;
 
                             case 3:
@@ -370,7 +413,6 @@ public class Application {
                         }
 
                     } while (adminSelection != 0);
-                    break;
 
                 case 1:
                     System.out.println("Welcome, User!");
@@ -391,8 +433,5 @@ public class Application {
         scanner.close();
         em.close();
         emf.close();
-
-
-        public
     }
 }
