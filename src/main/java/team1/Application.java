@@ -411,7 +411,7 @@ public class Application {
                                     System.out.println("This is the list of all Vehicles");
 
                                     System.out.println(
-                                            "What do you want to do? Choose the action to do:" +
+                                            "What do you want to do? Choose the action to do:\n" +
                                                     "1: Bus Menu\n" +
                                                     "2: Tram Menu\n" +
                                                     "3: Maintenance Menu\n" +
@@ -531,13 +531,13 @@ public class Application {
 
                                                 switch (maintenanceSection){
                                                     case 1:
-                                                        vmd.getLogForAll();
+                                                        vmd.getLogForAll().forEach(System.out::println);
                                                         break;
                                                     case 2:
-                                                        System.out.println("Enter the Tram ID to search:");
+                                                        System.out.println("Enter the ID to search:");
                                                         try {
                                                             long maintenanceLogId = Long.parseLong(scanner.nextLine());
-                                                            vmd.findById(maintenanceLogId);
+                                                            System.out.println(vmd.findById(maintenanceLogId))0;
                                                         } catch (NumberFormatException e) {
                                                             System.out.println("Invalid ID format. Please enter a numeric value.");
                                                         }
