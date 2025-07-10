@@ -12,7 +12,13 @@ import team1.entities.enums.VehiclesType;
 import team1.entities.sellersSons.TicketMachine;
 import team1.entities.sellersSons.TicketSeller;
 
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Application {
@@ -240,26 +246,21 @@ public class Application {
                 case 1:
                     System.out.println("Welcome, User!");
                     System.out.println("Are you a registered user? 1 if yes or 2 if not");
-                    int choice1;
-                    choice1=Integer.parseInt(scanner.nextLine());
+                    int choice1 = Integer.parseInt(scanner.nextLine());
 
                     switch (choice1) {
                         case 1:
-
+                            // registeredUser(); // funzione da implementare
                             break;
-                            case2:
-                            registeredUser();
-
+                        case 2:
+                            System.out.println("You need to register first.");
+                            // registerUser(); // funzione da implementare
                             break;
-
-
-
-
-
+                        default:
+                            System.out.println("Invalid option.");
+                            break;
+                    }
                     break;
-
-                default:
-                    System.out.println("Invalid choice. Please enter 0 (Admin) or 1 (User).");
             }
 
         } while (choice!=2);
@@ -267,17 +268,66 @@ public class Application {
 
 
 
-           void  registeredUser() {
 
-               Syt
 
-            }
-        }
+
         scanner.close();
         em.close();
         emf.close();
     }
+    public User registerUser(Scanner scanner, EntityManager em, UserDAO ud) {
 
+
+        System.out.print("Insert name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Insert surname: ");
+        String surname = scanner.nextLine();
+
+        LocalDate birthDate = null;
+        while (birthDate == null) {
+            System.out.print("Insert your birth date (dd/mm/yyyy): ");
+            try {
+                birthDate = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid format");
+            }
+        }
+
+        System.out.print("Insert your residence city : ");
+        String residenceCity = scanner.nextLine();
+
+        System.out.println("Insert your genre:M,F");
+
+        String genre = scanner.nextLine().toUpperCase();
+        
+
+        // Crea un nuovo oggetto User
+        User newUser = new User();
+        newUser.setName(name);
+        newUser.setSurname(surname);
+        newUser.setBirthDate(birthDate);
+        newUser.setResidenceCity(residenceCity);
+        newUser.setGenre(Genre.valueOf(genre));
+
+
+        // Salva l'utente nel database
+        try {
+            em.getTransaction().begin();
+            ud.save(newUser); // supponendo che UserDAO abbia un metodo save(User user)
+            em.getTransaction().commit();
+            System.out.println("Added user");
+            return newUser;
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            System.out.println("Errore durante la registrazione: " + e.getMessage());
+            return null;
+        }
+    }
 
 
 }
+
+
+
+
