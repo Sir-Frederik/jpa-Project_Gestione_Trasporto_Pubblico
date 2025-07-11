@@ -405,7 +405,7 @@ public class Application {
                                 int selection3;
                                 do {
                                     System.out.println("\nYou have entered the Line section");
-                                    ld.getAllLine().forEach(System.out::println);
+                                    ld.getAllLines().forEach(System.out::println);
                                     System.out.println("This is the list of all Line");
 
                                     System.out.println(
@@ -832,7 +832,7 @@ public class Application {
                         case 1:
                             User user = registeredUser(scanner, em, ud);
                             System.out.println("Hello " + user.getName() + "!");
-                            userChoices(scanner, em, ud, user, sd);
+                            userChoices(scanner, em, ud, user, sd, ld, td);
                             break;
 
                         case 2:
@@ -869,7 +869,7 @@ public class Application {
         return ud.findByNameAndSurname(name, surname);
     }
 
-    public static void userChoices(Scanner scanner, EntityManager em, UserDAO ud, User user, SellersDao sd) {
+    public static void userChoices(Scanner scanner, EntityManager em, UserDAO ud, User user, SellersDao sd, LineDAO ld, TicketDao td) {
         int choice;
         do {
             System.out.println("What would you do?");
