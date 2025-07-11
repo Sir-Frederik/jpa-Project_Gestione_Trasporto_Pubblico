@@ -7,7 +7,7 @@ import java.time.LocalDate;
 @Entity
 @Table (name = "tickets")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class Ticket {
+public class Ticket {
 
     @Id
     @GeneratedValue
