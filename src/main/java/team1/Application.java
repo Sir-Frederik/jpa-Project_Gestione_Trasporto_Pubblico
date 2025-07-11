@@ -694,6 +694,7 @@ public class Application {
                                                                 "4: Set a Vehicle to be ready\n" +
                                                                 "5: View how many tickets have been validated oon a vehicle\n"+
                                                                 "6: View all tickets sold in a given time\n"+
+                                                                "7: View the total tickets sold by a seller\n"+
                                                                 "0: Back"
                                                 );
                                                 try {
@@ -716,6 +717,7 @@ public class Application {
                                                         } catch (NumberFormatException e) {
                                                             System.out.println("Invalid ID format. Please enter a numeric value.");
                                                         }
+                                                        break;
                                                     case 3:
                                                         System.out.println("Enter ID of the Vehicle to set maintenance");
                                                         try{
@@ -739,6 +741,7 @@ public class Application {
                                                         }catch (NumberFormatException e){
                                                             System.out.println("Invalid ID format. Please enter a numeric value.");
                                                         }
+                                                        break;
 
                                                     case 4:
                                                         System.out.println("Enter ID of the maintenance to set ready");
@@ -763,12 +766,14 @@ public class Application {
                                                         }catch (NumberFormatException e){
                                                             System.out.println("Invalid ID format. Please enter a numeric value.");
                                                         }
+                                                        break;
                                                     case 5:
                                                         System.out.println("set id vehicle");
                                                         int idInput = Integer.parseInt(scanner.nextLine());
                                                         long toChech = vmd.viewAllValidatedTickets(idInput);
                                                         System.out.println("this is the number of tickets in the bus selected");
                                                         System.out.println(toChech);
+                                                        break;
                                                     case 6:
                                                         System.out.println("Start date(format yyyy-mm-ddd):");
                                                         LocalDate starDateInput = LocalDate.parse(scanner.nextLine());
@@ -777,6 +782,20 @@ public class Application {
                                                         long toDisplay = vmd.getTotalTicketsSoldInPeriod(starDateInput,endDateInput);
                                                         System.out.println("Total sold: ");
                                                         System.out.println(toDisplay);
+                                                        break;
+                                                    case 7:
+                                                        System.out.println("Start date(format yyyy-mm-ddd):");
+                                                        LocalDate starDateInput2 = LocalDate.parse(scanner.nextLine());
+                                                        System.out.println("End date (format yyyy-mm-dd):");
+                                                        LocalDate endDateInput2 = LocalDate.parse(scanner.nextLine());
+                                                        System.out.println("list of sellers");
+                                                        sd.getAllSeller().forEach(System.out::println);
+                                                        System.out.println("enter id of seller");
+                                                        long inputSellerId = Long.parseLong(scanner.nextLine());
+                                                        long toDisplay2 = vmd.getTicketsSoldBySeller( inputSellerId, starDateInput2,endDateInput2);
+                                                        System.out.println("Total sold: ");
+                                                        System.out.println(toDisplay2);
+                                                        break;
                                                 }
 
                                             }while(maintenanceSection!=0);

@@ -74,7 +74,7 @@ public class VehiclesMaintenanceDAO {
     public Long getTicketsSoldBySeller(Long sellerId, LocalDate startDate, LocalDate endDate) {
         TypedQuery<Long> query = entityManager.createQuery(
                 "SELECT COUNT(t) FROM Ticket t " +
-                        "WHERE t.sellers = :sellerId " +
+                        "WHERE t.sellers.id = :sellerId " +
                         "AND t.purchaseDate >= :startDate AND t.purchaseDate <= :endDate",
                 Long.class
         );
