@@ -6,8 +6,6 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 import team1.entities.Vehicles;
 import team1.entities.VehiclesMaintenance;
-import team1.entities.enums.Availability;
-import team1.entities.enums.VehiclesType;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -34,21 +32,21 @@ public class VehiclesMaintenanceDAO {
     }
 
     public List<VehiclesMaintenance> getLogForAll(){
-            TypedQuery<VehiclesMaintenance> query =entityManager.createQuery("SELECT vm FROM VehiclesMaintenance vm", VehiclesMaintenance.class);
-            return query.getResultList();
+        TypedQuery<VehiclesMaintenance> query = entityManager.createQuery("SELECT vm FROM VehiclesMaintenance vm", VehiclesMaintenance.class);
+        return query.getResultList();
     }
 
     public void createNewMaintenance(LocalDate dateStart, Vehicles vehicleToSet){
-       VehiclesMaintenance newMaintenance = new VehiclesMaintenance(dateStart,vehicleToSet);
-            save(newMaintenance);
-            System.out.println("new maintenance added");
+        VehiclesMaintenance newMaintenance = new VehiclesMaintenance();
+        newMaintenance.setMaintenanceStartDate(dateStart);
+        newMaintenance.setVehicles(vehicleToSet);
+        save(newMaintenance);
+        System.out.println("new maintenance added");
     }
 
     public void endMaintenanceAndSetReady(LocalDate date, VehiclesMaintenance maintenance){
-            maintenance.setMaintenanceEndDate(date);
-            maintenance.setServiceStartDate(date);
+        maintenance.setMaintenanceEndDate(date);
+        maintenance.setServiceStartDate(date);
         System.out.println("you are all set");
     }
-
-
 }

@@ -22,7 +22,7 @@
             <property name="jakarta.persistence.jdbc.user" value="postgres"/>
             <property name="jakarta.persistence.jdbc.password" value="1234"/>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
             <!-- Quest'ultima impostazione serve per chiedere a Hibernate di crearci le tabelle se non esistono ancora
             oppure se esistono aggiornarle se necessario -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>

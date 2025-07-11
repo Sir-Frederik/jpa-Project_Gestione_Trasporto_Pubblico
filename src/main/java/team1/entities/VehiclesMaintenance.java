@@ -26,8 +26,11 @@ public class VehiclesMaintenance {
 
     //COSTRUTTORI
     public VehiclesMaintenance() {}
-    public VehiclesMaintenance(LocalDate maintenanceStartDate,Vehicles vehicles) {
+
+    public VehiclesMaintenance(LocalDate maintenanceStartDate, LocalDate maintenanceEndDate, LocalDate serviceStartDate, Vehicles vehicles) {
         this.maintenanceStartDate = maintenanceStartDate;
+        this.maintenanceEndDate = maintenanceEndDate;
+        this.serviceStartDate = serviceStartDate;
         this.vehicles = vehicles;
     }
 
@@ -57,6 +60,9 @@ public class VehiclesMaintenance {
     }
     public void setServiceStartDate(LocalDate serviceStartDate) {
         this.serviceStartDate = serviceStartDate;
+    }
+    public void setVehicles(Vehicles vehicles) {
+        this.vehicles = vehicles;
     }
 
     @Override
