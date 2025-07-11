@@ -52,4 +52,14 @@ public abstract class Ticket {
     public long getTicketId() {
         return ticketId;
     }
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "ticketId=" + ticketId +
+                ", purchaseDate=" + purchaseDate +
+                ", validationDate=" + validationDate +
+                '}';
+    }
 }
+

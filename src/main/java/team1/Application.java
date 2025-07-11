@@ -13,6 +13,7 @@ import team1.entities.sellersSons.TicketMachine;
 import team1.entities.sellersSons.TicketSeller;
 import team1.exceptions.ReUsableException;
 
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -854,7 +855,7 @@ public class Application {
                     int choice2 =  Integer.parseInt(scanner.nextLine());
                   switch (choice2){
                       case 1:
-                          ticketFromSeller(scanner, em, ud, sd);
+                          ticketFromSeller(scanner, em, ud, sd, user);
                           break;
                       case 2:
                           ticketFromDistributor();
@@ -924,7 +925,7 @@ public class Application {
         ud.save(newUser);
     }
 
-    public static void  ticketFromSeller(Scanner scanner, EntityManager em, UserDAO ud, SellersDao sd){
+    public static void  ticketFromSeller(Scanner scanner, EntityManager em, UserDAO ud, SellersDao sd, User user){
 
         System.out.println("Ok,  select the seller");
         List<Sellers> allSellers = sd.getAllSeller();
@@ -942,8 +943,33 @@ public class Application {
             TicketSeller ts = ticketSellers.get(i);
             System.out.println((i+1) + ". " + ts.getName() + " " +ts.getSurname() + " - Location: " +ts.getCity() + ", " + ts.getAddress());
         }
-        System.out.println("Selet a seller by number. Press 0 to go back. ");
+        System.out.println("Select a seller by number. Press 0 to go back. ");
         int choice = Integer.parseInt(scanner.nextLine());
+        if (choice ==0) {
+            return;
+        }
+        if (  choice > ticketSellers.size()){
+            System.out.println("Invalid Selection, try again");
+            return;
+
+        }
+
+        TicketSeller selectedSeller = ticketSellers.get(choice-1);
+        System.out.println( "You've select the Seller " + selectedSeller.getSurname() + " at " + selectedSeller.getAddress() + ", " + selectedSeller.getCity());
+        System.out.println("Can you confirm? (1) Yes, 2 (No)");
+        choice = Integer.parseInt(scanner.nextLine());
+        if (choice ==2) {
+            return;
+        } else if (choice == 1) {
+         Ticket newTicket =  sd.sellTicket(selectedSeller, user);
+            System.out.println(newTicket.toString());
+
+
+        }else {
+            System.out.println("Invalid Selection, try again");
+            return;
+        }
+
 
     }
 
