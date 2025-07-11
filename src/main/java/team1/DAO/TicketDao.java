@@ -49,4 +49,12 @@ public class TicketDao {
         }
         return false ;
     }
+
+    public void updateTicket(Ticket ticket) {
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.merge(ticket);
+        transaction.commit();
+        System.out.println("Ticket updated successfully");
+    }
 }

@@ -2,6 +2,7 @@ package team1;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.Persistence;
 import team1.DAO.*;
 import team1.entities.*;
@@ -11,6 +12,8 @@ import team1.entities.enums.State;
 import team1.entities.enums.VehiclesType;
 import team1.entities.sellersSons.TicketMachine;
 import team1.entities.sellersSons.TicketSeller;
+import team1.entities.ticketSons.SingleTicket;
+import team1.entities.ticketSons.SubscriptionTicket;
 import team1.exceptions.ReUsableException;
 
 import java.sql.SQLOutput;
@@ -18,6 +21,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Application {
@@ -832,7 +836,7 @@ public class Application {
                         case 1:
                             User user = registeredUser(scanner, em, ud);
                             System.out.println("Hello " + user.getName() + "!");
-                            userChoices(scanner, em, ud, user, sd, ld, td,tcd);
+                            userChoices(scanner, em, ud, user, sd, ld, td, tcd, vd, jd);
                             break;
 
                         case 2:
@@ -869,7 +873,7 @@ public class Application {
         return ud.findByNameAndSurname(name, surname);
     }
 
-    public static void userChoices(Scanner scanner, EntityManager em, UserDAO ud, User user, SellersDao sd, LineDAO ld, TicketDao td, TravelCardDAO tcd) {
+    public static void userChoices(Scanner scanner, EntityManager em, UserDAO ud, User user, SellersDao sd, LineDAO ld, TicketDao td, TravelCardDAO tcd, VehiclesDAO vd, VehicleLineJourneyDAO jd) {
         int choice;
         do {
             System.out.println("What would you do?");
@@ -908,15 +912,49 @@ public class Application {
                     System.out.println("New card issued");
                     System.out.println(toDisplay);
                     break;
+
+               
                 case 4:
-                    takeARide(scanner,em,ld);
-                    System.out.print("Insert the id of your ticket for the validation check");
-                    long id = Long.parseLong(scanner.nextLine());
-                    if (td.isTicketValid(id))
-                    {
-                        System.out.println("Welcome on board");
-                    } else {
-                        System.out.println("The ticket or the Subscription is not valid GET OUT!!");
+                    takeARide(scanner, em, ld, vd, jd);
+
+                    // Validation check
+                    System.out.print("\nInsert the id of your ticket for the validation check: ");
+                    try {
+                        long ticketId = Long.parseLong(scanner.nextLine());
+
+                        // Trova il ticket
+                        Ticket ticket = td.findById(ticketId);
+
+                        if (ticket == null) {
+                            System.out.println("❌ Ticket not found!");
+                            break;
+                        }
+
+                        // Prova a validare il ticket
+                        try {
+                            vd.validatioTicket(ticket);
+                            System.out.println("✅ Welcome on board!");
+
+                            // Mostra info aggiuntive in base al tipo di ticket
+                            if (ticket instanceof SingleTicket) {
+                                System.out.println("Single ticket validated for today: " + LocalDate.now());
+                            } else if (ticket instanceof SubscriptionTicket) {
+                                SubscriptionTicket subTicket = (SubscriptionTicket) ticket;
+                                System.out.println("Subscription valid until: " + subTicket.getExpiration());
+                            }
+
+                            // Salva le modifiche al ticket (la data di validazione è stata aggiornata)
+                            td.updateTicket(ticket);
+
+                        } catch (ReUsableException e) {
+                            System.out.println("❌ " + e.getMessage());
+                            System.out.println("The ticket or the Subscription is not valid GET OUT!!");
+                        }
+
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid ticket ID format!");
+                    } catch (EntityNotFoundException e) {
+                        System.out.println("❌ Ticket not found in the system!");
                     }
                     break;
                 case 5:
@@ -971,14 +1009,131 @@ public class Application {
 
     }
 
-    public static Line takeARide(Scanner scanner,EntityManager em,LineDAO ld){
-        System.out.println("Which line do you want to take?");
-        ld.getAllLines().forEach(System.out::println);
-        System.out.println("Tell me the departure point");
-        String departure= scanner.nextLine();
-        System.out.println("Tell me the final stop");
-        String final_stop= scanner.nextLine();
-        return ld.findByDepartureAndFinalStop(departure,final_stop);
+    public static void takeARide(Scanner scanner, EntityManager em, LineDAO ld, VehiclesDAO vd, VehicleLineJourneyDAO jd) {
+        try {
+            System.out.println("\n=== TAKE A RIDE ===");
+
+            // Mostra tutte le linee disponibili
+            System.out.println("Available lines:");
+            List<Line> allLines = ld.getAllLines();
+
+            if (allLines.isEmpty()) {
+                System.out.println("No lines available at the moment!");
+                return;
+            }
+
+            // Mostra le linee con tutti i dettagli
+            for (int i = 0; i < allLines.size(); i++) {
+                Line line = allLines.get(i);
+                System.out.println((i + 1) + ". Line " + line.getLine_number() +
+                        ": " + line.getDeparture() + " → " + line.getFinal_stop() +
+                        " (Estimated time: " + line.getEstimatedTime() + " minutes)");
+            }
+
+            // Selezione della linea
+            System.out.print("\nSelect a line by number (0 to cancel): ");
+            int lineChoice = Integer.parseInt(scanner.nextLine());
+
+            if (lineChoice == 0) {
+                System.out.println("Operation cancelled.");
+                return;
+            }
+
+            if (lineChoice < 1 || lineChoice > allLines.size()) {
+                System.out.println("Invalid selection!");
+                return;
+            }
+
+            Line selectedLine = allLines.get(lineChoice - 1);
+            System.out.println("\nYou selected Line " + selectedLine.getLine_number() +
+                    ": " + selectedLine.getDeparture() + " → " + selectedLine.getFinal_stop());
+
+            // Mostra i veicoli disponibili
+            System.out.println("\nAvailable vehicles for this ride:");
+            List<Vehicles> availableVehicles = vd.getAllVehicles().stream()
+                    .filter(v -> v.getAvailability() == Availability.AVAILABLE)
+                    .toList();
+
+            if (availableVehicles.isEmpty()) {
+                System.out.println("No vehicles available at the moment! Please try again later.");
+                return;
+            }
+
+            // Mostra i veicoli con indice
+            for (int i = 0; i < availableVehicles.size(); i++) {
+                Vehicles v = availableVehicles.get(i);
+                String vehicleType = v.getClass().getSimpleName();
+                System.out.println((i + 1) + ". " + vehicleType + " - Plate: " + v.getPlate() +
+                        " - Capacity: " + v.getCapacity() + " passengers");
+            }
+
+            // Selezione del veicolo
+            System.out.print("\nSelect a vehicle by number (0 to cancel): ");
+            int vehicleChoice = Integer.parseInt(scanner.nextLine());
+
+            if (vehicleChoice == 0) {
+                System.out.println("Operation cancelled.");
+                return;
+            }
+
+            if (vehicleChoice < 1 || vehicleChoice > availableVehicles.size()) {
+                System.out.println("Invalid selection!");
+                return;
+            }
+
+            Vehicles selectedVehicle = availableVehicles.get(vehicleChoice - 1);
+
+            // Calcola il tempo effettivo in modo randomico (±20% del tempo stimato)
+            double estimatedTime = selectedLine.getEstimatedTime();
+            double variation = estimatedTime * 0.2; // 20% di variazione
+            double minTime = estimatedTime - variation;
+            double maxTime = estimatedTime + variation;
+
+            // Genera un tempo random tra minTime e maxTime
+            Random random = new Random();
+            double randomTime = minTime + (maxTime - minTime) * random.nextDouble();
+            int actualTime = (int) Math.round(randomTime);
+
+            // Simula il viaggio
+            System.out.println("\n🚌 Starting journey...");
+            System.out.println("Estimated time: " + (int)estimatedTime + " minutes");
+
+            // Pausa drammatica
+            Thread.sleep(1000);
+
+            // Determina se il viaggio è in orario, in anticipo o in ritardo
+            String status;
+            if (actualTime < estimatedTime - 2) {
+                status = "✓ Arrived early!";
+            } else if (actualTime > estimatedTime + 2) {
+                status = "⚠ Arrived late due to traffic";
+            } else {
+                status = "✓ Arrived on time!";
+            }
+
+            // Crea il nuovo VehicleLineJourney
+            VehicleLineJourney newJourney = new VehicleLineJourney(actualTime, selectedVehicle, selectedLine);
+
+            // Salva nel database usando il DAO
+            jd.save(newJourney);
+
+            // Conferma successo
+            System.out.println("\n✓ Journey completed successfully!");
+            System.out.println("Line " + selectedLine.getLine_number() + ": " +
+                    selectedLine.getDeparture() + " → " + selectedLine.getFinal_stop());
+            System.out.println("Vehicle: " + selectedVehicle.getClass().getSimpleName() +
+                    " - Plate: " + selectedVehicle.getPlate());
+            System.out.println("Actual journey time: " + actualTime + " minutes");
+            System.out.println(status);
+            System.out.println("\nThank you for traveling with us!");
+
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input! Please enter a valid number.");
+        } catch (InterruptedException e) {
+            System.out.println("Journey interrupted.");
+        } catch (Exception e) {
+            System.out.println("An error occurred: " + e.getMessage());
+        }
     }
 
     public static void  ticketFromSeller(Scanner scanner, EntityManager em, UserDAO ud, SellersDao sd, User user){
