@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Application {
@@ -36,19 +37,19 @@ public class Application {
         VehiclesDAO vd = new VehiclesDAO(em);
         VehiclesMaintenanceDAO vmd = new VehiclesMaintenanceDAO(em);
 
-/*
-        User u1 = new User("Oronzo", "Canà", LocalDate.of(1940, 5, 21), "Alberobello", Genre.MALE);
-        User u2 = new User("Paolino", "Paperino", LocalDate.of(1934, 6, 9), "Paperopoli", Genre.MALE);
-        User u3 = new User("Marilyn", "Monroe", LocalDate.of(1926, 6, 1), "Los Angeles", Genre.FEMALE);
-        User u4 = new User("Albert", "Einstein", LocalDate.of(1879, 3, 14), "Princeton", Genre.MALE);
-        User u5 = new User("Daffy", "Duck", LocalDate.of(1937, 4, 17), "Looneyville", Genre.MALE);
-        User u6 = new User("Lady", "Gaga", LocalDate.of(1986, 3, 28), "New York", Genre.FEMALE);
-        User u7 = new User("Freddie", "Mercury", LocalDate.of(1946, 9, 5), "Zanzibar", Genre.MALE);
-        User u8 = new User("Greta", "Thunberg", LocalDate.of(2003, 1, 3), "Stoccolma", Genre.FEMALE);
-        User u9 = new User("Totò", "Principe", LocalDate.of(1898, 2, 15), "Napoli", Genre.MALE);
-        User u10 = new User("Sam", "Genderfluid", LocalDate.of(1990, 8, 8), "Berlino", Genre.OTHER);
 
-        User user1fromDb = ud.findById(1);
+//        User u1 = new User("Oronzo", "Canà", LocalDate.of(1940, 5, 21), "Alberobello", Genre.MALE);
+//        User u2 = new User("Paolino", "Paperino", LocalDate.of(1934, 6, 9), "Paperopoli", Genre.MALE);
+//        User u3 = new User("Marilyn", "Monroe", LocalDate.of(1926, 6, 1), "Los Angeles", Genre.FEMALE);
+//        User u4 = new User("Albert", "Einstein", LocalDate.of(1879, 3, 14), "Princeton", Genre.MALE);
+//        User u5 = new User("Daffy", "Duck", LocalDate.of(1937, 4, 17), "Looneyville", Genre.MALE);
+//        User u6 = new User("Lady", "Gaga", LocalDate.of(1986, 3, 28), "New York", Genre.FEMALE);
+//        User u7 = new User("Freddie", "Mercury", LocalDate.of(1946, 9, 5), "Zanzibar", Genre.MALE);
+//        User u8 = new User("Greta", "Thunberg", LocalDate.of(2003, 1, 3), "Stoccolma", Genre.FEMALE);
+//        User u9 = new User("Totò", "Principe", LocalDate.of(1898, 2, 15), "Napoli", Genre.MALE);
+//        User u10 = new User("Sam", "Genderfluid", LocalDate.of(1990, 8, 8), "Berlino", Genre.OTHER);
+
+       /* User user1fromDb = ud.findById(1);
         User user2fromDb = ud.findById(2);
         User user3fromDb = ud.findById(3);
         User user4fromDb = ud.findById(4);
@@ -59,26 +60,26 @@ public class Application {
         User user9fromDb = ud.findById(9);
         User user10fromDb = ud.findById(10);
 
-        TicketMachine t1 = new TicketMachine(State.ACTIVE,707);
-        TicketMachine t2 = new TicketMachine(State.INACTIVE,676);
-        TicketMachine t3 = new TicketMachine(State.ACTIVE,101);
-        TicketMachine t4 = new TicketMachine(State.ACTIVE,100);
-        TicketMachine t5 = new TicketMachine(State.INACTIVE,176);
-
-        TicketSeller ts1 = new TicketSeller("Antonio", "Dimagli");
-        TicketSeller ts2 = new TicketSeller("Umberto", "Smaila");
-        TicketSeller ts3 = new TicketSeller("Umperio", "Bogarto");
-
-        Line l1 = new Line("Napoli", "Salerno", 101, 50.0);
-        Line l2 = new Line("Milano", "Monza", 102, 25.5);
-        Line l3 = new Line("Roma", "Fiumicino Aeroporto", 103, 32.0);
-        Line l4 = new Line("Torino", "Venaria Reale", 104, 20.0);
-        Line l5 = new Line("Firenze", "Pisa", 105, 60.0);
-        Line l6 = new Line("Bologna", "Modena", 106, 40.5);
-        Line l7 = new Line("Bari", "Polignano a Mare", 107, 35.0);
-        Line l8 = new Line("Cagliari", "Pula", 108, 45.0);
-        Line l9 = new Line("Palermo", "Mondello", 109, 30.0);
-        Line l10 = new Line("Paperino", "Bassano del Grappa", 110, 12.5);
+//        TicketMachine t1 = new TicketMachine(State.ACTIVE,707);
+//        TicketMachine t2 = new TicketMachine(State.INACTIVE,676);
+//        TicketMachine t3 = new TicketMachine(State.ACTIVE,101);
+//        TicketMachine t4 = new TicketMachine(State.ACTIVE,100);
+//        TicketMachine t5 = new TicketMachine(State.INACTIVE,176);
+//
+//        TicketSeller ts1 = new TicketSeller("Antonio", "Dimagli");
+//        TicketSeller ts2 = new TicketSeller("Umberto", "Smaila");
+//        TicketSeller ts3 = new TicketSeller("Umperio", "Bogarto");
+//
+//        Line l1 = new Line("Napoli", "Salerno", 101, 50.0);
+//        Line l2 = new Line("Milano", "Monza", 102, 25.5);
+//        Line l3 = new Line("Roma", "Fiumicino Aeroporto", 103, 32.0);
+//        Line l4 = new Line("Torino", "Venaria Reale", 104, 20.0);
+//        Line l5 = new Line("Firenze", "Pisa", 105, 60.0);
+//        Line l6 = new Line("Bologna", "Modena", 106, 40.5);
+//        Line l7 = new Line("Bari", "Polignano a Mare", 107, 35.0);
+//        Line l8 = new Line("Cagliari", "Pula", 108, 45.0);
+//        Line l9 = new Line("Palermo", "Mondello", 109, 30.0);
+//        Line l10 = new Line("Paperino", "Bassano del Grappa", 110, 12.5);
 
         Line line1FromDb = ld.findById(1);
         Line line2FromDb = ld.findById(2);
@@ -103,16 +104,16 @@ public class Application {
         TravelCard tc9 = new TravelCard(LocalDate.of(2023, 11, 23), user9fromDb);
         TravelCard tc10 = new TravelCard(LocalDate.of(2023, 10, 9), user10fromDb);
 
-        Vehicles v1 = new Vehicles(VehiclesType.AUTOBUS, Availability.AVAILABLE, 60, "AB123CD");
-        Vehicles v2 = new Vehicles(VehiclesType.TRAM, Availability.NOTAVAILABLE, 100, "TR456FG");
-        Vehicles v3 = new Vehicles(VehiclesType.AUTOBUS, Availability.AVAILABLE, 55, "BC789HJ");
-        Vehicles v4 = new Vehicles(VehiclesType.TRAM, Availability.AVAILABLE, 120, "TM321KL");
-        Vehicles v5 = new Vehicles(VehiclesType.AUTOBUS, Availability.NOTAVAILABLE, 70, "CD654MN");
-        Vehicles v6 = new Vehicles(VehiclesType.TRAM, Availability.AVAILABLE, 95, "TR963OP");
-        Vehicles v7 = new Vehicles(VehiclesType.AUTOBUS, Availability.AVAILABLE, 50, "EF741QR");
-        Vehicles v8 = new Vehicles(VehiclesType.TRAM, Availability.NOTAVAILABLE, 110, "TM852ST");
-        Vehicles v9 = new Vehicles(VehiclesType.AUTOBUS, Availability.AVAILABLE, 45, "GH963UV");
-        Vehicles v10 = new Vehicles(VehiclesType.TRAM, Availability.AVAILABLE, 130, "TR147WX");
+//        Vehicles v1 = new Vehicles(VehiclesType.AUTOBUS, Availability.AVAILABLE, 60, "AB123CD");
+//        Vehicles v2 = new Vehicles(VehiclesType.TRAM, Availability.NOTAVAILABLE, 100, "TR456FG");
+//        Vehicles v3 = new Vehicles(VehiclesType.AUTOBUS, Availability.AVAILABLE, 55, "BC789HJ");
+//        Vehicles v4 = new Vehicles(VehiclesType.TRAM, Availability.AVAILABLE, 120, "TM321KL");
+//        Vehicles v5 = new Vehicles(VehiclesType.AUTOBUS, Availability.NOTAVAILABLE, 70, "CD654MN");
+//        Vehicles v6 = new Vehicles(VehiclesType.TRAM, Availability.AVAILABLE, 95, "TR963OP");
+//        Vehicles v7 = new Vehicles(VehiclesType.AUTOBUS, Availability.AVAILABLE, 50, "EF741QR");
+//        Vehicles v8 = new Vehicles(VehiclesType.TRAM, Availability.NOTAVAILABLE, 110, "TM852ST");
+//        Vehicles v9 = new Vehicles(VehiclesType.AUTOBUS, Availability.AVAILABLE, 45, "GH963UV");
+//        Vehicles v10 = new Vehicles(VehiclesType.TRAM, Availability.AVAILABLE, 130, "TR147WX");
 
         Vehicles vehicles1Fromdb = vd.findById(1);
         Vehicles vehicles2Fromdb = vd.findById(2);
@@ -152,7 +153,7 @@ public class Application {
                 LocalDate.of(2024, 3, 19),
                 vehicles4Fromdb
         );
-
+//
         VehicleLineJourney j1 = new VehicleLineJourney(49, vehicles1Fromdb, line1FromDb);
         VehicleLineJourney j2 = new VehicleLineJourney(24, vehicles2Fromdb, line2FromDb);
         VehicleLineJourney j3 = new VehicleLineJourney(33, vehicles3Fromdb, line3FromDb);
@@ -162,13 +163,13 @@ public class Application {
         VehicleLineJourney j7 = new VehicleLineJourney(34, vehicles7Fromdb, line7FromDb);
         VehicleLineJourney j8 = new VehicleLineJourney(47, vehicles8Fromdb, line8FromDb);
         VehicleLineJourney j9 = new VehicleLineJourney(29, vehicles9Fromdb, line9FromDb);
-        VehicleLineJourney j10 = new VehicleLineJourney(13, vehicles10Fromdb, line10FromDb);*/
+        VehicleLineJourney j10 = new VehicleLineJourney(13, vehicles10Fromdb, line10FromDb);
 
 
-//        //invoco i metodi save con le list per evitare codici troppo lunghi
-//        List<User> users = List.of(u1, u2, u3, u4, u5, u6, u7, u8, u9, u10, u11);
+        //invoco i metodi save con le list per evitare codici troppo lunghi
+//        List<User> users = List.of(u1, u2, u3, u4, u5, u6, u7, u8, u9, u10);
 //        users.forEach(ud::save);
-
+//
 //        List<TicketMachine> machines = List.of(t1,t2,t3,t4,t5);
 //        machines.forEach(tmd::save);
 //        tsd.save(ts1);
@@ -177,20 +178,20 @@ public class Application {
 //
 //        List<Line> lines = List.of(l1, l2, l3, l4, l5, l6, l7, l8, l9, l10);
 //        lines.forEach(ld::save);
-//
-//        List<TravelCard> cards = List.of(tc1, tc2, tc3, tc4, tc5, tc6, tc7, tc8, tc9, tc10);
-//        cards.forEach(tcd::save);
-//
+
+        List<TravelCard> cards = List.of(tc1, tc2, tc3, tc4, tc5, tc6, tc7, tc8, tc9, tc10);
+        cards.forEach(tcd::save);
+
 //        List<Vehicles> vehicles = List.of(v1, v2, v3, v4, v5, v6, v7, v8, v9, v10);
 //        vehicles.forEach(vd::save);
+
+        vmd.save(vm1);
+        vmd.save(vm2);
+        vmd.save(vm3);
+        vmd.save(vm4);
 //
-//        vmd.save(vm1);
-//        vmd.save(vm2);
-//        vmd.save(vm3);
-//        vmd.save(vm4);
-//
-//        List<VehicleLineJourney> journeys = List.of(j1, j2, j3, j4, j5, j6, j7, j8, j9, j10);
-//        journeys.forEach(jd::save);
+        List<VehicleLineJourney> journeys = List.of(j1, j2, j3, j4, j5, j6, j7, j8, j9, j10);
+        journeys.forEach(jd::save);*/
 
 
         //-----------------------------------------------------------------------------------------------------------------------------
@@ -198,23 +199,23 @@ public class Application {
 
         //tickets creation
 //sellers from db
-        /*
-        TicketMachine ticketMachineFromDb1 = tmd.findById(1);
-        TicketMachine ticketMachineFromDb2 = tmd.findById(2);
-        TicketMachine ticketMachineFromDb3 = tmd.findById(3);
-        TicketMachine ticketMachineFromDb4 = tmd.findById(4);
-        TicketMachine ticketMachineFromDb5 = tmd.findById(5);
 
-        TicketSeller ticketSellerFromDb1 = tsd.findById(6);
-        TicketSeller ticketSellerFromDb2 = tsd.findById(7);
-        TicketSeller ticketSellerFromDb3 = tsd.findById(8);
+//        TicketMachine ticketMachineFromDb1 = tmd.findById(1);
+//        TicketMachine ticketMachineFromDb2 = tmd.findById(2);
+//        TicketMachine ticketMachineFromDb3 = tmd.findById(3);
+//        TicketMachine ticketMachineFromDb4 = tmd.findById(4);
+//        TicketMachine ticketMachineFromDb5 = tmd.findById(5);
+//
+//        TicketSeller ticketSellerFromDb1 = tsd.findById(6);
+//        TicketSeller ticketSellerFromDb2 = tsd.findById(7);
+//        TicketSeller ticketSellerFromDb3 = tsd.findById(8);
 
         TicketSeller ticketSeller4 = new TicketSeller("test", "test");
              //   sd.save(ticketSeller4);
 //io rimuoverei i dao per i figli di seller e i figli di ticket
                 //sd.sellTicket(ticketMachineFromDb2);
 
-       // System.out.println( jd.findNumberOfTravelsOfAVehicle(1, 1));*/
+       // System.out.println( jd.findNumberOfTravelsOfAVehicle(1, 1));
 
         Scanner scanner = new Scanner(System.in);
         int choice;
@@ -606,7 +607,7 @@ public class Application {
                         case 1:
                             User user = registeredUser(scanner, em, ud);
                             System.out.println("Hello " + user.getName() + "!");
-                            userChoices(scanner, em, ud, user);
+                            userChoices(scanner, em, ud, user,ld);
                             break;
 
                         case 2:
@@ -643,7 +644,7 @@ public class Application {
         return ud.findByNameAndSurname(name, surname);
     }
 
-    public static void userChoices(Scanner scanner, EntityManager em, UserDAO ud, User user) {
+    public static void userChoices(Scanner scanner, EntityManager em, UserDAO ud, User user,LineDAO ld) {
         int choice;
         do {
             System.out.println("What would you do?");
@@ -666,6 +667,7 @@ public class Application {
                     break;
                 case 4:
                     System.out.println("Ride functionality not yet implemented.");
+                    takeARide(scanner,em,ld);
                     break;
                 case 5:
                     System.out.println("Exiting user menu.");
@@ -716,5 +718,18 @@ public class Application {
         newUser.setGenre(genre);
 
         ud.save(newUser);
+
+    }
+
+    public static Line takeARide(Scanner scanner,EntityManager em,LineDAO ld){
+        System.out.println("Which line do you want to take?");
+        ld.getAllLines().forEach(System.out::println);
+        System.out.println("Tell me the departure point");
+        String departure= scanner.nextLine();
+        System.out.println("Tell me the final stop");
+        String final_stop= scanner.nextLine();
+        return ld.findByDepartureAndFinalStop(departure,final_stop);
+
+
     }
 }
