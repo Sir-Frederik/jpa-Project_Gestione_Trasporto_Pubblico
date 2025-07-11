@@ -23,12 +23,12 @@ public class TicketMachine extends Sellers {
     }
 
     //GETTER
-    public State getActive() {
+    public State getState() {
         return state;
     }
 
     //SETTER
-    public void setActive(State state) {
+    public void setState(State state) {
         this.state = state;
     }
 

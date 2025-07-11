@@ -29,7 +29,7 @@ public class TravelCard {
         public TravelCard(LocalDate startDate, User user){
             this.startDate = startDate;
             this.expirationDate = startDate.plusYears(1);
-            this.user =user;
+            this.user = user;
         }
 
         //GETTER SETTER
