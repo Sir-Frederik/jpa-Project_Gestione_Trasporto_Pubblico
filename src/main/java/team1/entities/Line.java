@@ -62,16 +62,17 @@ public class Line {
             this.line_number = line_number;
         }
 
-
-        @Override
-        public String toString() {
-            return "Line{" +
-                    "id=" + id +
-                    ", departure='" + departure + '\'' +
-                    ", final_stop='" + final_stop + '\'' +
-                    ", line_number=" + line_number +
-                    '}';
-        }
+    @Override
+    public String toString() {
+        return "Line{" +
+                "id=" + id +
+                ", departure='" + departure + '\'' +
+                ", final_stop='" + final_stop + '\'' +
+                ", line_number=" + line_number +
+                ", estimatedTime=" + estimatedTime +
+                ", vehicleLineJourney=" + vehicleLineJourney +
+                '}';
     }
+}
 
 

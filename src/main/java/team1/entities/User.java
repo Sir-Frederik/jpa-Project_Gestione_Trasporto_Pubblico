@@ -76,18 +76,16 @@ public class User {
         this.residenceCity = residenceCity;
     }
 
-
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", Birth Date=" + birthDate +
-                ", Residence at='" + residenceCity + '\'' +
-                ", Genre=" + genre +
+                ", birthDate=" + birthDate +
+                ", residenceCity='" + residenceCity + '\'' +
+                ", genre=" + genre +
                 ", allTravelCards=" + allTravelCards +
                 '}';
     }
-
 }

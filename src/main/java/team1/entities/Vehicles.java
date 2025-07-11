@@ -87,6 +87,9 @@ public class Vehicles {
                 ", availability=" + availability +
                 ", capacity=" + capacity +
                 ", plate='" + plate + '\'' +
+                ", tickets=" + tickets +
+                ", vehiclesMaintenances=" + vehiclesMaintenances +
+                ", vehicleLineJourneys=" + vehicleLineJourneys +
                 '}';
     }
 }

@@ -219,7 +219,7 @@ public class Application {
         int choice;
 
         do {
-            System.out.println("Hi, who are you? 0:Admin 1:User 2:Exit");
+            System.out.println("Hi, who are you? 0:Admin 1:User 2:Exit: ");
             try {
                 choice = Integer.parseInt(scanner.nextLine());
             } catch (NumberFormatException e) {
@@ -424,7 +424,7 @@ public class Application {
 
                                     switch (selection3) {
                                         case 1:
-                                            System.out.println("Enter the id of the Line to view their VehiclesLineJourney:");
+                                            System.out.println("Enter the id of the Line to view their VehiclesLineJourney: ");
                                             try {
                                                 long id = Long.parseLong(scanner.nextLine());
                                                 ld.getVehicleLineJourneysByLineId(id).forEach(System.out::println);
@@ -435,10 +435,10 @@ public class Application {
                                             }
                                             break;
                                         case 2:
-                                            System.out.println("Enter the id of the Line to view their VehiclesLineJourney:");
+                                            System.out.println("enter the id of the route for which you want to know the estimated time: ");
                                             try {
                                                 long id = Long.parseLong(scanner.nextLine());
-                                                System.out.println(ld.getEstimatedTimeByLineId(id));
+                                                ld.getEstimatedTimeByLineId(id);
                                             } catch (NumberFormatException e) {
                                                 System.out.println("Invalid id format");
                                             } catch (ReUsableException e) {
@@ -458,15 +458,17 @@ public class Application {
                             case 4:
                                 int selection4;
                                 do {
-                                    System.out.println("\nYou have entered the Seller section");
-                                    ld.getAllLine().forEach(System.out::println);
-                                    System.out.println("This is the list of all Line");
+                                    System.out.println("You have entered the Seller section");
+                                    sd.getAllSeller().forEach(System.out::println);
+                                    System.out.println("This is the list of all Sellers");
 
                                     System.out.println(
-                                            "\nWhat do you want to do?\n" +
-                                                    "1: Show vehiclesLineJourney list\n" +
-                                                    "2: Show estimated time for this route\n" +
-                                                    "0: Back to Admin Menu"
+                                            "What do you want to do?\n" +
+                                                    "1: Delete a seller\n" +
+                                                    "2: Change the status of a ticket machine\n" +
+                                                    "3: Create a new ticket machine" +
+                                                    "\n4: Create a new ticket seller" +
+                                                    "\n0: Back to Admin Menu"
                                     );
 
                                     try {
@@ -479,10 +481,63 @@ public class Application {
 
                                     switch (selection4) {
                                         case 1:
+                                            System.out.println("Enter the id of the seller that you want remove: ");
+                                            try {
+                                                long id = Long.parseLong(scanner.nextLine());
+                                                sd.findSellerByIdAndDelete(id);
+                                            } catch (NumberFormatException e) {
+                                                System.out.println("Invalid id format");
+                                            } catch (ReUsableException e) {
+                                                System.out.println(e.getMessage());
+                                            }
                                             break;
                                         case 2:
-                                           
+                                            System.out.println("Enter the id of the Ticket machine of which you want to change the status: ");
+                                            try {
+                                                long id = Long.parseLong(scanner.nextLine());
+                                                tmd.setTicketMachineState(id);
+                                            } catch (NumberFormatException e) {
+                                                System.out.println("Invalid id format");
+                                            } catch (ReUsableException e) {
+                                                System.out.println(e.getMessage());
+                                            }
                                             break;
+                                        case 3:
+                                            System.out.println("Enter the values to create the Ticket Machine");
+                                            System.out.println("Enter the identification code of the Ticket Machine ");
+                                            int identificationCd = Integer.parseInt(scanner.nextLine());
+                                            System.out.println("Enter the city of the Ticket Machine");
+                                            String city = scanner.nextLine();
+                                            System.out.println("Enter the address of the Ticket Machine");
+                                            String address = scanner.nextLine();
+                                            int state = -1;
+                                            while (state != 0 && state != 1) {
+                                                System.out.println("Enter the status of the Ticket Machine 1:ACTIVE or 0:INACTIVE");
+                                                try {
+                                                    state = Integer.parseInt(scanner.nextLine());
+                                                    if (state != 0 && state != 1) {
+                                                        System.out.println("Invalid number enter 1 for set status on ACTIVE or 0 for set status on INACTIVE.");
+                                                    }
+                                                } catch (NumberFormatException e) {
+                                                    System.out.println("Invalid input. Please enter a numeric value (0 or 1).");
+                                                }
+                                            }
+                                            if (state == 1){
+                                                TicketMachine tKm = new TicketMachine(city,address,State.ACTIVE,identificationCd);
+                                            }else{
+                                                TicketMachine tKm = new TicketMachine(city,address,State.INACTIVE,identificationCd);
+                                            }
+                                        case 4:
+                                            System.out.println("Enter the values to create the Ticket Seller");
+                                            System.out.println("Enter the name of the seller");
+                                            String name = scanner.nextLine();
+                                            System.out.println("Enter the surname of the seller");
+                                            String surname = scanner.nextLine();
+                                            System.out.println("Enter the city of the Ticket Machine");
+                                            String city1 = scanner.nextLine();
+                                            System.out.println("Enter the address of the Ticket Machine");
+                                            String address1 = scanner.nextLine();
+                                            TicketSeller tKs = new TicketSeller(city1,address1,name,surname);
                                         case 0:
                                             System.out.println("Returning to Admin Menu");
                                             break;

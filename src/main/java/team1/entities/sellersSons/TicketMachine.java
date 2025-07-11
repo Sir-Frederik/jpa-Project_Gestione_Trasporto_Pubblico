@@ -17,18 +17,19 @@ public class TicketMachine extends Sellers {
 
     //COSTRUTTORI
     public TicketMachine(){}
-    public TicketMachine(State state, int identificationCode) {
+    public TicketMachine(String city, String address, State state, int identificationCode) {
+        super(city, address);
         this.state = state;
         this.identificationCode = identificationCode;
     }
 
     //GETTER
-    public State getActive() {
+    public State getState() {
         return state;
     }
 
     //SETTER
-    public void setActive(State state) {
+    public void setState(State state) {
         this.state = state;
     }
 
