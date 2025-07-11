@@ -832,7 +832,7 @@ public class Application {
                         case 1:
                             User user = registeredUser(scanner, em, ud);
                             System.out.println("Hello " + user.getName() + "!");
-                            userChoices(scanner, em, ud, user, sd, ld, td);
+                            userChoices(scanner, em, ud, user, sd, ld, td,tcd);
                             break;
 
                         case 2:
@@ -869,7 +869,7 @@ public class Application {
         return ud.findByNameAndSurname(name, surname);
     }
 
-    public static void userChoices(Scanner scanner, EntityManager em, UserDAO ud, User user, SellersDao sd, LineDAO ld, TicketDao td) {
+    public static void userChoices(Scanner scanner, EntityManager em, UserDAO ud, User user, SellersDao sd, LineDAO ld, TicketDao td, TravelCardDAO tcd) {
         int choice;
         do {
             System.out.println("What would you do?");
@@ -903,7 +903,10 @@ public class Application {
                   }
                     break;
                 case 3:
-                    System.out.println("Travel card functionality not yet implemented.");
+                    System.out.println("Get new card");
+                    TravelCard toDisplay =tcd.getNewCard(user);
+                    System.out.println("New card issued");
+                    System.out.println(toDisplay);
                     break;
                 case 4:
                     takeARide(scanner,em,ld);
