@@ -743,7 +743,7 @@ public class Application {
                         case 1:
                             User user = registeredUser(scanner, em, ud);
                             System.out.println("Hello " + user.getName() + "!");
-                            userChoices(scanner, em, ud, user);
+                            userChoices(scanner, em, ud, user,tcd);
                             break;
 
                         case 2:
@@ -780,7 +780,7 @@ public class Application {
         return ud.findByNameAndSurname(name, surname);
     }
 
-    public static void userChoices(Scanner scanner, EntityManager em, UserDAO ud, User user) {
+    public static void userChoices(Scanner scanner, EntityManager em, UserDAO ud, User user, TravelCardDAO tcd) {
         int choice;
         do {
             System.out.println("What would you do?");
@@ -799,7 +799,9 @@ public class Application {
                     System.out.println("Ticket purchase not yet implemented.");
                     break;
                 case 3:
-                    System.out.println("Travel card functionality not yet implemented.");
+                    System.out.println("We are going to print a new travel card for you");
+                    tcd.getNewCard(user);
+
                     break;
                 case 4:
                     System.out.println("Ride functionality not yet implemented.");

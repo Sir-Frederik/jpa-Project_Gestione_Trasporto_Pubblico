@@ -46,15 +46,21 @@ public class TravelCardDAO {
     }
 
     public TravelCard getNewCard(User user){
+        if(user.getAllTravelCards().isEmpty()){
+            TravelCard newTravelCard = new TravelCard(LocalDate.now(),user);
+            System.out.println("All set!");
+            return newTravelCard;
+        }else{
         boolean travelCardCheck =  user.getAllTravelCards().stream()
                 .allMatch(tc-> tc.getExpiration_date().isBefore(LocalDate.now()));
 
         if(travelCardCheck){
             TravelCard newTravelCard = new TravelCard(LocalDate.now(),user);
+            System.out.println("All set!");
             return newTravelCard;
         }else{
-            //da rivedere
             throw new ReUsableException("travelcard is ok");
+        }
         }
     }
 
