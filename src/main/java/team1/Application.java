@@ -6,18 +6,14 @@ import jakarta.persistence.Persistence;
 import team1.DAO.*;
 import team1.entities.*;
 import team1.entities.enums.Availability;
-import team1.entities.enums.State;
 import team1.entities.enums.Genre;
-import team1.entities.enums.VehiclesType;
+import team1.entities.enums.State;
 import team1.entities.sellersSons.TicketMachine;
 import team1.entities.sellersSons.TicketSeller;
 import team1.exceptions.ReUsableException;
 
-import javax.sound.midi.Soundbank;
-import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
@@ -36,12 +32,12 @@ public class Application {
         VehicleLineJourneyDAO jd = new VehicleLineJourneyDAO(em);
         VehiclesDAO vd = new VehiclesDAO(em);
         VehiclesMaintenanceDAO vmd = new VehiclesMaintenanceDAO(em);
-
 /*
+
         User u1 = new User("Oronzo", "Canà", LocalDate.of(1940, 5, 21), "Alberobello", Genre.MALE);
         User u2 = new User("Paolino", "Paperino", LocalDate.of(1934, 6, 9), "Paperopoli", Genre.MALE);
         User u3 = new User("Marilyn", "Monroe", LocalDate.of(1926, 6, 1), "Los Angeles", Genre.FEMALE);
-        User u4 = new User("Albert", "Einstein", LocalDate.of(1879, 3, 14), "Princeton", Genre.MALE);
+        User u4 = new User("Ajeje", "Brazorf", LocalDate.of(1967, 3, 14), "Messina", Genre.MALE);
         User u5 = new User("Daffy", "Duck", LocalDate.of(1937, 4, 17), "Looneyville", Genre.MALE);
         User u6 = new User("Lady", "Gaga", LocalDate.of(1986, 3, 28), "New York", Genre.FEMALE);
         User u7 = new User("Freddie", "Mercury", LocalDate.of(1946, 9, 5), "Zanzibar", Genre.MALE);
@@ -60,15 +56,17 @@ public class Application {
         User user9fromDb = ud.findById(9);
         User user10fromDb = ud.findById(10);
 
-        TicketMachine t1 = new TicketMachine(State.ACTIVE,707);
-        TicketMachine t2 = new TicketMachine(State.INACTIVE,676);
-        TicketMachine t3 = new TicketMachine(State.ACTIVE,101);
-        TicketMachine t4 = new TicketMachine(State.ACTIVE,100);
-        TicketMachine t5 = new TicketMachine(State.INACTIVE,176);
+        TicketMachine t1 = new TicketMachine(State.ACTIVE,707,"Milano");
+        TicketMachine t2 = new TicketMachine(State.INACTIVE,676, "Roma");
+        TicketMachine t3 = new TicketMachine(State.ACTIVE,101, "Torino");
+        TicketMachine t4 = new TicketMachine(State.ACTIVE,100, "Napoli");
+        TicketMachine t5 = new TicketMachine(State.INACTIVE,176, "Udine");
 
-        TicketSeller ts1 = new TicketSeller("Antonio", "Dimagli");
-        TicketSeller ts2 = new TicketSeller("Umberto", "Smaila");
-        TicketSeller ts3 = new TicketSeller("Umperio", "Bogarto");
+        TicketSeller ts1 = new TicketSeller("Antonio", "Dimagli", "Bari", " Via ciance 45");
+        TicketSeller ts2 = new TicketSeller("Umberto", "Smaila", "Torino", "Piazza Duomo 13");
+        TicketSeller ts3 = new TicketSeller("Umperio", "Bogarto", "London", "Baker Street 42");
+        TicketSeller ts4 = new TicketSeller("Adrian", "Celentan", "Milano", "Via Gluck");
+
 
         Line l1 = new Line("Napoli", "Salerno", 101, 50.0);
         Line l2 = new Line("Milano", "Monza", 102, 25.5);
@@ -743,12 +741,12 @@ public class Application {
                         case 1:
                             User user = registeredUser(scanner, em, ud);
                             System.out.println("Hello " + user.getName() + "!");
-                            userChoices(scanner, em, ud, user);
+                            userChoices(scanner, em, ud, user, sd);
                             break;
 
                         case 2:
                             System.out.println("You need to register first.");
-                            registerUser(scanner, em, ud);
+                            registerUser(scanner, em, ud, sd);
                             break;
 
                         default:
@@ -780,7 +778,7 @@ public class Application {
         return ud.findByNameAndSurname(name, surname);
     }
 
-    public static void userChoices(Scanner scanner, EntityManager em, UserDAO ud, User user) {
+    public static void userChoices(Scanner scanner, EntityManager em, UserDAO ud, User user, SellersDao sd) {
         int choice;
         do {
             System.out.println("What would you do?");
@@ -793,10 +791,25 @@ public class Application {
 
             switch (choice) {
                 case 1:
-                    System.out.println(user);
+                    System.out.println(user.toString());
                     break;
                 case 2:
-                    System.out.println("Ticket purchase not yet implemented.");
+                    System.out.println("Great, do you want to buy it from a physical retailer (1) or  an automatic distributor (2)? Press 0 to go back");
+                    int choice2 =  Integer.parseInt(scanner.nextLine());
+                  switch (choice2){
+                      case 1:
+                          ticketFromSeller(scanner, em, ud, sd);
+                          break;
+                      case 2:
+                          ticketFromDistributor();
+                          break;
+                      case 0:
+                          break;
+                      default:
+                          System.out.println("Invalid. Choice again. 1 for Physical reatailer, 2 for distributor or 0 to go back");
+
+
+                  }
                     break;
                 case 3:
                     System.out.println("Travel card functionality not yet implemented.");
@@ -814,7 +827,7 @@ public class Application {
         } while (choice != 5);
     }
 
-    public static void registerUser(Scanner scanner, EntityManager em, UserDAO ud) {
+    public static void registerUser(Scanner scanner, EntityManager em, UserDAO ud, SellersDao sd) {
         System.out.print("Insert name: ");
         String name = scanner.nextLine();
 
@@ -854,4 +867,16 @@ public class Application {
 
         ud.save(newUser);
     }
+
+    public static void  ticketFromSeller(Scanner scanner, EntityManager em, UserDAO ud, SellersDao sd){
+
+        System.out.println("Ok,  select the seller");
+
+    }
+
+    public static void  ticketFromDistributor(){
+
+    }
 }
+
+
