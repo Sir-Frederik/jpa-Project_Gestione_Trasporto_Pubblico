@@ -11,6 +11,7 @@ import team1.entities.enums.Genre;
 import team1.entities.enums.VehiclesType;
 import team1.entities.sellersSons.TicketMachine;
 import team1.entities.sellersSons.TicketSeller;
+import team1.entities.ticketSons.SingleTicket;
 import team1.exceptions.ReUsableException;
 
 import javax.sound.midi.Soundbank;
@@ -644,7 +645,7 @@ public class Application {
         return ud.findByNameAndSurname(name, surname);
     }
 
-    public static void userChoices(Scanner scanner, EntityManager em, UserDAO ud, User user,LineDAO ld) {
+    public static void userChoices(Scanner scanner, EntityManager em, UserDAO ud, User user,LineDAO ld,TicketDao td) {
         int choice;
         do {
             System.out.println("What would you do?");
@@ -668,6 +669,7 @@ public class Application {
                 case 4:
                     System.out.println("Ride functionality not yet implemented.");
                     takeARide(scanner,em,ld);
+                    controlTickets(ud,td, user.getId());
                     break;
                 case 5:
                     System.out.println("Exiting user menu.");
@@ -729,6 +731,13 @@ public class Application {
         System.out.println("Tell me the final stop");
         String final_stop= scanner.nextLine();
         return ld.findByDepartureAndFinalStop(departure,final_stop);
+
+
+    }
+
+    public static void controlTickets(UserDAO ud,TicketDao td){
+        ud.getAllTicketByUser(User.getId());
+
 
 
     }
