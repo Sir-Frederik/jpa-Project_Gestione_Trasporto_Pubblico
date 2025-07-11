@@ -50,5 +50,16 @@ public class VehiclesMaintenanceDAO {
         System.out.println("you are all set");
     }
 
+    public Long viewAllValidatedTickets(long vehicleId) {
+
+        //get the vehicle
+
+            TypedQuery<Long> query = entityManager.createQuery(
+                    "SELECT COUNT(t) FROM Ticket t WHERE t.vehicles.id = :vehicleId AND t.validationDate IS NOT NULL",
+                    Long.class
+            );
+            query.setParameter("vehicleId", vehicleId);
+            return query.getSingleResult();
+        }
 
 }

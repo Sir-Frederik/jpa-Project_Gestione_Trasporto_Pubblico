@@ -11,6 +11,7 @@ import team1.entities.enums.Genre;
 import team1.entities.enums.VehiclesType;
 import team1.entities.sellersSons.TicketMachine;
 import team1.entities.sellersSons.TicketSeller;
+import team1.entities.ticketSons.SingleTicket;
 import team1.exceptions.ReUsableException;
 
 import javax.sound.midi.Soundbank;
@@ -216,6 +217,7 @@ public class Application {
                 //sd.sellTicket(ticketMachineFromDb2);
 
        // System.out.println( jd.findNumberOfTravelsOfAVehicle(1, 1));*/
+
 
         Scanner scanner = new Scanner(System.in);
         int choice;
@@ -696,6 +698,7 @@ public class Application {
                                                                 "2: See specific maintenance with id\n" +
                                                                 "3: Set a maintenance for a Vehicle\n" +
                                                                 "4: Set a Vehicle to be ready\n" +
+                                                                "5: View how many tickets have been validated oon a vehicle\n"+
                                                                 "0: Back"
                                                 );
                                                 try {
@@ -765,6 +768,11 @@ public class Application {
                                                         }catch (NumberFormatException e){
                                                             System.out.println("Invalid ID format. Please enter a numeric value.");
                                                         }
+                                                    case 5:
+                                                        System.out.println("set id vehicle");
+                                                        int idInput = Integer.parseInt(scanner.nextLine());
+                                                        long toChech = vmd.viewAllValidatedTickets(idInput);
+                                                        System.out.println(toChech);
                                                 }
 
                                             }while(maintenanceSection!=0);
