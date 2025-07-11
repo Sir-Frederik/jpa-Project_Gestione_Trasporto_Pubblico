@@ -221,7 +221,7 @@ public class Application {
         int choice;
 
         do {
-            System.out.println("Hi, who are you? 0:Admin 1:User 2:Exit");
+            System.out.println("Hi, who are you? 0:Admin 1:User 2:Exit: ");
             try {
                 choice = Integer.parseInt(scanner.nextLine());
             } catch (NumberFormatException e) {
@@ -460,17 +460,17 @@ public class Application {
                             case 4:
                                 int selection4;
                                 do {
-                                    System.out.println("\nYou have entered the Seller section");
+                                    System.out.println("You have entered the Seller section");
                                     sd.getAllSeller().forEach(System.out::println);
                                     System.out.println("This is the list of all Sellers");
 
                                     System.out.println(
-                                            "\nWhat do you want to do?\n" +
+                                            "What do you want to do?\n" +
                                                     "1: Delete a seller\n" +
                                                     "2: Change the status of a ticket machine\n" +
                                                     "3: Create a new ticket machine" +
-                                                    "4: Create a new ticket seller" +
-                                                    "0: Back to Admin Menu"
+                                                    "\n4: Create a new ticket seller" +
+                                                    "\n0: Back to Admin Menu"
                                     );
 
                                     try {
@@ -508,6 +508,10 @@ public class Application {
                                             System.out.println("Enter the values to create the Ticket Machine");
                                             System.out.println("Enter the identification code of the Ticket Machine ");
                                             int identificationCd = Integer.parseInt(scanner.nextLine());
+                                            System.out.println("Enter the city of the Ticket Machine");
+                                            String city = scanner.nextLine();
+                                            System.out.println("Enter the address of the Ticket Machine");
+                                            String address = scanner.nextLine();
                                             int state = -1;
                                             while (state != 0 && state != 1) {
                                                 System.out.println("Enter the status of the Ticket Machine 1:ACTIVE or 0:INACTIVE");
@@ -521,9 +525,9 @@ public class Application {
                                                 }
                                             }
                                             if (state == 1){
-                                            TicketMachine tKm = new TicketMachine(State.ACTIVE,identificationCd);
+                                                TicketMachine tKm = new TicketMachine(city,address,State.ACTIVE,identificationCd);
                                             }else{
-                                                TicketMachine tKm = new TicketMachine(State.INACTIVE,identificationCd);
+                                                TicketMachine tKm = new TicketMachine(city,address,State.INACTIVE,identificationCd);
                                             }
                                         case 4:
                                             System.out.println("Enter the values to create the Ticket Seller");
@@ -531,7 +535,11 @@ public class Application {
                                             String name = scanner.nextLine();
                                             System.out.println("Enter the surname of the seller");
                                             String surname = scanner.nextLine();
-                                            TicketSeller tKs = new TicketSeller(name,surname);
+                                            System.out.println("Enter the city of the Ticket Machine");
+                                            String city1 = scanner.nextLine();
+                                            System.out.println("Enter the address of the Ticket Machine");
+                                            String address1 = scanner.nextLine();
+                                            TicketSeller tKs = new TicketSeller(city1,address1,name,surname);
                                         case 0:
                                             System.out.println("Returning to Admin Menu");
                                             break;

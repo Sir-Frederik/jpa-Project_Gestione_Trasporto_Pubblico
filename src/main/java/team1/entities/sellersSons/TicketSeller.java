@@ -19,8 +19,8 @@ public class TicketSeller extends Sellers {
     //COSTRUTTORI
     public TicketSeller() {
     }
-
-    public TicketSeller(String name, String surname) {
+    public TicketSeller(String city, String address, String name, String surname) {
+        super(city, address);
         this.name = name;
         this.surname = surname;
     }

@@ -53,19 +53,17 @@ public class TravelCard {
             return user;
         }
 
-
-
-
-        @Override
-        public String toString() {
-            return "TravelCard{" +
-                    "id=" + id +
-                    ", expiration_date=" + expirationDate +
-                    ", start_date=" + startDate +
-                    ", user=" + user +
-                    '}';
-        }
+    @Override
+    public String toString() {
+        return "TravelCard{" +
+                "id=" + id +
+                ", expirationDate=" + expirationDate +
+                ", startDate=" + startDate +
+                ", user=" + user +
+                ", subscriptionTickets=" + subscriptionTickets +
+                '}';
     }
+}
 
 
 

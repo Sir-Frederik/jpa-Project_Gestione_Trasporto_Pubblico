@@ -17,7 +17,8 @@ public class TicketMachine extends Sellers {
 
     //COSTRUTTORI
     public TicketMachine(){}
-    public TicketMachine(State state, int identificationCode) {
+    public TicketMachine(String city, String address, State state, int identificationCode) {
+        super(city, address);
         this.state = state;
         this.identificationCode = identificationCode;
     }
