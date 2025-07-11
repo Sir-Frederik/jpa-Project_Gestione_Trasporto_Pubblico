@@ -86,4 +86,11 @@ public class VehiclesMaintenanceDAO {
         return query.getSingleResult();
     }
 
+    public Double getAverageTime() {
+        TypedQuery<Double> query = entityManager.createQuery("SELECT AVG(vlj.actualTime) FROM VehicleLineJourney vlj", Double.class);
+        return query.getSingleResult();
+    }
+
+
+
 }
