@@ -858,7 +858,7 @@ public class Application {
                           ticketFromSeller(scanner, em, ud, sd, user);
                           break;
                       case 2:
-                          ticketFromDistributor();
+                          ticketFromDistributor(scanner, em, ud, sd, user);
                           break;
                       case 0:
                           break;
@@ -972,10 +972,57 @@ public class Application {
 
 
     }
+    public static void  ticketFromDistributor(Scanner scanner, EntityManager em, UserDAO ud, SellersDao sd, User user){
 
-    public static void  ticketFromDistributor(){
+        System.out.println("Ok,  select the Distributor");
+        List<Sellers> allSellers = sd.getAllSeller();
+        List<TicketMachine> Machine = allSellers.stream()
+                .filter(seller -> seller instanceof TicketMachine)
+                .map(seller -> (TicketMachine) seller)
+                .toList();
+
+        if (Machine.isEmpty()){
+            System.out.println(("No ticket Machine avaiable at the moment"));
+            return;
+        }
+        System.out.println("Avaiable Ticket Machine:");
+        for (int i=0; i< Machine.size(); i++){
+            TicketMachine tm = Machine.get(i);
+            System.out.println((i+1) + ". " + tm.getSellersId()  + " - Location: " +tm.getCity() + ", " + tm.getAddress() + ", AVAIABILITY: " + tm.getState());
+        }
+        System.out.println("Select a machine by number. Press 0 to go back. ");
+        int choice = Integer.parseInt(scanner.nextLine());
+        if (choice ==0) {
+            return;
+        }
+        if (  choice > Machine.size()){
+            System.out.println("Invalid Selection, try again");
+            return;
+
+        }
+
+        TicketMachine selectedSeller = Machine.get(choice-1);
+        System.out.println( "You've select the Seller " + selectedSeller.getSellersId() + " at " + selectedSeller.getAddress() + ", " + selectedSeller.getCity());
+        System.out.println("Can you confirm? (1) Yes, 2 (No)");
+        choice = Integer.parseInt(scanner.nextLine());
+        if (choice ==2) {
+            return;
+        } else if (choice == 1) {
+            Ticket newTicket =  sd.sellTicket(selectedSeller, user);
+            System.out.println("Ticket " + newTicket.getPurchaseDate() + ", " + newTicket.getTicketId() + ", Type: " + newTicket.getClass());
+
+
+
+        }else {
+            System.out.println("Invalid Selection, try again");
+            return;
+        }
+
 
     }
+
+
+
 }
 
 
