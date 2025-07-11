@@ -693,6 +693,7 @@ public class Application {
                                                                 "3: Set a maintenance for a Vehicle\n" +
                                                                 "4: Set a Vehicle to be ready\n" +
                                                                 "5: View how many tickets have been validated oon a vehicle\n"+
+                                                                "6: View all tickets sold in a given time\n"+
                                                                 "0: Back"
                                                 );
                                                 try {
@@ -768,6 +769,14 @@ public class Application {
                                                         long toChech = vmd.viewAllValidatedTickets(idInput);
                                                         System.out.println("this is the number of tickets in the bus selected");
                                                         System.out.println(toChech);
+                                                    case 6:
+                                                        System.out.println("Start date(format yyyy-mm-ddd):");
+                                                        LocalDate starDateInput = LocalDate.parse(scanner.nextLine());
+                                                        System.out.println("End date (format yyyy-mm-dd):");
+                                                        LocalDate endDateInput = LocalDate.parse(scanner.nextLine());
+                                                        long toDisplay = vmd.getTotalTicketsSoldInPeriod(starDateInput,endDateInput);
+                                                        System.out.println("Total sold: ");
+                                                        System.out.println(toDisplay);
                                                 }
 
                                             }while(maintenanceSection!=0);

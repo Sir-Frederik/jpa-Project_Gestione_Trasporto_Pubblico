@@ -59,4 +59,31 @@ public class VehiclesMaintenanceDAO {
             return query.getSingleResult();
         }
 
+    public Long getTotalTicketsSoldInPeriod(LocalDate startDate, LocalDate endDate) {
+        TypedQuery<Long> query = entityManager.createQuery(
+                "SELECT COUNT(t) FROM Ticket t WHERE t.purchaseDate >= :startDate AND t.purchaseDate <= :endDate",
+                Long.class
+        );
+
+        query.setParameter("startDate", startDate);
+        query.setParameter("endDate", endDate);
+
+        return query.getSingleResult();
+    }
+
+    public Long getTicketsSoldBySeller(Long sellerId, LocalDate startDate, LocalDate endDate) {
+        TypedQuery<Long> query = entityManager.createQuery(
+                "SELECT COUNT(t) FROM Ticket t " +
+                        "WHERE t.sellers = :sellerId " +
+                        "AND t.purchaseDate >= :startDate AND t.purchaseDate <= :endDate",
+                Long.class
+        );
+
+        query.setParameter("sellerId", sellerId);
+        query.setParameter("startDate", startDate);
+        query.setParameter("endDate", endDate);
+
+        return query.getSingleResult();
+    }
+
 }
