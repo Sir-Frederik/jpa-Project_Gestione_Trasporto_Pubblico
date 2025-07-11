@@ -64,13 +64,11 @@ public class Line {
 
     @Override
     public String toString() {
-        return "Line{" +
-                "id=" + id +
-                ", departure='" + departure + '\'' +
-                ", final_stop='" + final_stop + '\'' +
-                ", line_number=" + line_number +
-                ", estimatedTime=" + estimatedTime +
-                ", vehicleLineJourney=" + vehicleLineJourney +
+        return "Line {\n" +
+                "  id=" + id + ",\n" +
+                "  departure='" + departure + "',\n" +
+                "  final_stop='" + final_stop + "',\n" +
+                "  line_number=" + line_number + "\n" +
                 '}';
     }
 }
