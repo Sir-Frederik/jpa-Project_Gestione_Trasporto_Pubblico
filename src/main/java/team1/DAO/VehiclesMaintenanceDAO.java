@@ -51,9 +51,6 @@ public class VehiclesMaintenanceDAO {
     }
 
     public Long viewAllValidatedTickets(long vehicleId) {
-
-        //get the vehicle
-
             TypedQuery<Long> query = entityManager.createQuery(
                     "SELECT COUNT(t) FROM Ticket t WHERE t.vehicles.id = :vehicleId AND t.validationDate IS NOT NULL",
                     Long.class

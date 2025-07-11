@@ -8,17 +8,11 @@ import team1.entities.*;
 import team1.entities.enums.Availability;
 import team1.entities.enums.State;
 import team1.entities.enums.Genre;
-import team1.entities.enums.VehiclesType;
 import team1.entities.sellersSons.TicketMachine;
 import team1.entities.sellersSons.TicketSeller;
-import team1.entities.ticketSons.SingleTicket;
 import team1.exceptions.ReUsableException;
-
-import javax.sound.midi.Soundbank;
-import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
@@ -772,6 +766,7 @@ public class Application {
                                                         System.out.println("set id vehicle");
                                                         int idInput = Integer.parseInt(scanner.nextLine());
                                                         long toChech = vmd.viewAllValidatedTickets(idInput);
+                                                        System.out.println("this is the number of tickets in the bus selected");
                                                         System.out.println(toChech);
                                                 }
 
