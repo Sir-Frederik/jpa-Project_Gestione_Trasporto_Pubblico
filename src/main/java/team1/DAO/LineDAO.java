@@ -29,7 +29,6 @@ public class LineDAO {
         return found;
     }
 
-
     public List<Line> getAllLines(){
         TypedQuery<Line> query =entityManager.createQuery("SELECT l FROM Line l", Line.class);
         return query.getResultList();
@@ -43,11 +42,8 @@ public class LineDAO {
                     .setParameter("final_stop", final_stop)
                     .getSingleResult();
 
-
         } catch (NoResultException e) {
             throw new EntityNotFoundException("No line has been found with the departure or final stop you provided");
-
-
         }
     }
 }

@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table (name = "tickets")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Ticket {
 
     @Id

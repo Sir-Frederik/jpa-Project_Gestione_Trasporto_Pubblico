@@ -6,20 +6,13 @@ import jakarta.persistence.Persistence;
 import team1.DAO.*;
 import team1.entities.*;
 import team1.entities.enums.Availability;
-import team1.entities.enums.State;
 import team1.entities.enums.Genre;
-import team1.entities.enums.VehiclesType;
-import team1.entities.sellersSons.TicketMachine;
 import team1.entities.sellersSons.TicketSeller;
-import team1.entities.ticketSons.SingleTicket;
 import team1.exceptions.ReUsableException;
 
-import javax.sound.midi.Soundbank;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.format.DateTimeParseException;
-import java.util.List;
 import java.util.Scanner;
 
 public class Application {
@@ -608,7 +601,7 @@ public class Application {
                         case 1:
                             User user = registeredUser(scanner, em, ud);
                             System.out.println("Hello " + user.getName() + "!");
-                            userChoices(scanner, em, ud, user,ld);
+                            userChoices(scanner,em,ud,user,ld,td);
                             break;
 
                         case 2:
@@ -645,7 +638,7 @@ public class Application {
         return ud.findByNameAndSurname(name, surname);
     }
 
-    public static void userChoices(Scanner scanner, EntityManager em, UserDAO ud, User user,LineDAO ld,TicketDao td) {
+    public static void userChoices(Scanner scanner, EntityManager em, UserDAO ud, User user,LineDAO ld, TicketDao td) {
         int choice;
         do {
             System.out.println("What would you do?");
@@ -667,9 +660,15 @@ public class Application {
                     System.out.println("Travel card functionality not yet implemented.");
                     break;
                 case 4:
-                    System.out.println("Ride functionality not yet implemented.");
                     takeARide(scanner,em,ld);
-                    controlTickets(ud,td, user.getId());
+                    System.out.print("Insert the id of your ticket for the validation check");
+                    long id = Long.parseLong(scanner.nextLine());
+                    if (td.isTicketValid(id))
+                    {
+                        System.out.println("Welcome on board");
+                    } else {
+                        System.out.println("The ticket or the Subscription is not valid GET OUT!!");
+                    }
                     break;
                 case 5:
                     System.out.println("Exiting user menu.");
@@ -731,14 +730,5 @@ public class Application {
         System.out.println("Tell me the final stop");
         String final_stop= scanner.nextLine();
         return ld.findByDepartureAndFinalStop(departure,final_stop);
-
-
-    }
-
-    public static void controlTickets(UserDAO ud,TicketDao td){
-        ud.getAllTicketByUser(User.getId());
-
-
-
     }
 }
