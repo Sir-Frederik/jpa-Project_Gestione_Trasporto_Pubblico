@@ -17,7 +17,6 @@ import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -368,7 +367,7 @@ public class Application {
                                             break;
 
                                         case 2:
-                                            System.out.println("Enter the id of the user to view their tickets:");
+                                            System.out.println("Enter the ID of the user to view their tickets:");
                                             try {
                                                 long id = Long.parseLong(scanner.nextLine());
                                                 ud.getAllTicketByUser(id).forEach(System.out::println);
@@ -380,7 +379,7 @@ public class Application {
                                             break;
 
                                         case 3:
-                                            System.out.println("Enter the id of the user to view their TravelCard:");
+                                            System.out.println("Enter the ID of the user to view their TravelCard:");
                                             try {
                                                 long id = Long.parseLong(scanner.nextLine());
                                                 System.out.println(ud.findTravelCardByUserId(id));
@@ -907,7 +906,15 @@ public class Application {
                     System.out.println("Travel card functionality not yet implemented.");
                     break;
                 case 4:
-                    System.out.println("Ride functionality not yet implemented.");
+                    takeARide(scanner,em,ld);
+                    System.out.print("Insert the id of your ticket for the validation check");
+                    long id = Long.parseLong(scanner.nextLine());
+                    if (td.isTicketValid(id))
+                    {
+                        System.out.println("Welcome on board");
+                    } else {
+                        System.out.println("The ticket or the Subscription is not valid GET OUT!!");
+                    }
                     break;
                 case 5:
                     System.out.println("Exiting user menu.");
@@ -958,6 +965,17 @@ public class Application {
         newUser.setGenre(genre);
 
         ud.save(newUser);
+
+    }
+
+    public static Line takeARide(Scanner scanner,EntityManager em,LineDAO ld){
+        System.out.println("Which line do you want to take?");
+        ld.getAllLines().forEach(System.out::println);
+        System.out.println("Tell me the departure point");
+        String departure= scanner.nextLine();
+        System.out.println("Tell me the final stop");
+        String final_stop= scanner.nextLine();
+        return ld.findByDepartureAndFinalStop(departure,final_stop);
     }
 
     public static void  ticketFromSeller(Scanner scanner, EntityManager em, UserDAO ud, SellersDao sd, User user){
