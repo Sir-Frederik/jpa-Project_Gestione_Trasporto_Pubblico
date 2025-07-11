@@ -1,18 +1,12 @@
 package team1.DAO;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.persistence.EntityTransaction;
-import team1.entities.Sellers;
-import team1.entities.Ticket;
-import team1.entities.TravelCard;
-import team1.entities.User;
+import jakarta.persistence.*;
+import team1.entities.*;
 import team1.entities.enums.State;
 import team1.entities.enums.TicketType;
 import team1.entities.sellersSons.TicketMachine;
 import team1.entities.ticketSons.SingleTicket;
 import team1.entities.ticketSons.SubscriptionTicket;
-import team1.exceptions.NotFoundException;
 import team1.exceptions.ReUsableException;
 
 import java.time.LocalDate;
@@ -50,7 +44,7 @@ public class SellersDao {
         }
 
         if (seller instanceof TicketMachine) {
-            if (((TicketMachine) seller).getActive() == State.INACTIVE) {
+            if (((TicketMachine) seller).getState() == State.INACTIVE) {
                 throw new ReUsableException("this machine is out of service");
             }
         }
@@ -98,5 +92,22 @@ public class SellersDao {
                 throw new ReUsableException("value selected is not ok");
         }
     }
-    
+    public List<Sellers> getAllSeller(){
+        TypedQuery<Sellers> query = entityManager.createQuery("SELECT v FROM Sellers v", Sellers.class);
+        return query.getResultList();
+    }
+    public void findSellerByIdAndDelete(long id) {
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        Query query = entityManager.createQuery("DELETE FROM Seller u WHERE u.id = :id");
+        query.setParameter("id", id);
+        int deletedCount = query.executeUpdate();
+        transaction.commit();
+        if (deletedCount > 0) {
+            System.out.println("Element successfully removed!");
+        } else {
+            System.out.println("No element found with the given ID.");
+        }
+    }
+
 }
