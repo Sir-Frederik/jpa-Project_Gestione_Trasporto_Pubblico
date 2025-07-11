@@ -702,6 +702,7 @@ public class Application {
                                                                 "5: View how many tickets have been validated on a vehicle\n"+
                                                                 "6: View all tickets sold in a given time\n"+
                                                                 "7: View the total tickets sold by a seller\n"+
+                                                                "8: Get average time for journeys\n"+
                                                                 "0: Back"
                                                 );
                                                 try {
@@ -802,6 +803,11 @@ public class Application {
                                                         long toDisplay2 = vmd.getTicketsSoldBySeller( inputSellerId, starDateInput2,endDateInput2);
                                                         System.out.println("Total sold: ");
                                                         System.out.println(toDisplay2);
+                                                        break;
+                                                    case 8 :
+                                                        double timetodisplay = vmd.getAverageTime();
+                                                        System.out.println("this is the average time");
+                                                        System.out.println(timetodisplay);
                                                         break;
                                                 }
 
