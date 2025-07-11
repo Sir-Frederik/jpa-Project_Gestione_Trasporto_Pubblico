@@ -692,7 +692,7 @@ public class Application {
                                                                 "2: See specific maintenance with id\n" +
                                                                 "3: Set a maintenance for a Vehicle\n" +
                                                                 "4: Set a Vehicle to be ready\n" +
-                                                                "5: View how many tickets have been validated oon a vehicle\n"+
+                                                                "5: View how many tickets have been validated on a vehicle\n"+
                                                                 "6: View all tickets sold in a given time\n"+
                                                                 "7: View the total tickets sold by a seller\n"+
                                                                 "0: Back"
