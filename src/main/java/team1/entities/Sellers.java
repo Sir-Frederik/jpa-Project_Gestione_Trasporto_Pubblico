@@ -34,6 +34,26 @@ public class Sellers {
     public List<Ticket> getTickets() {
         return tickets;
     }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    //SETTER
+
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
     @Override
     public String toString() {
         return "Sellers{" +
@@ -43,4 +63,6 @@ public class Sellers {
                 ", tickets=" + tickets +
                 '}';
     }
+
+
 }

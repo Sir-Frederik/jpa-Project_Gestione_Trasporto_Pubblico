@@ -35,6 +35,7 @@ public class Application {
         VehiclesDAO vd = new VehiclesDAO(em);
         VehiclesMaintenanceDAO vmd = new VehiclesMaintenanceDAO(em);
 
+/*
 
         User u1 = new User("Oronzo", "Canà", LocalDate.of(1940, 5, 21), "Alberobello", Genre.MALE);
         User u2 = new User("Paolino", "Paperino", LocalDate.of(1934, 6, 9), "Paperopoli", Genre.MALE);
@@ -47,7 +48,8 @@ public class Application {
         User u9 = new User("Totò", "Principe", LocalDate.of(1898, 2, 15), "Napoli", Genre.MALE);
         User u10 = new User("Sam", "Genderfluid", LocalDate.of(1990, 8, 8), "Berlino", Genre.OTHER);
 
-    /*    User user1fromDb = ud.findById(1);
+    */
+/*    User user1fromDb = ud.findById(1);
         User user2fromDb = ud.findById(2);
         User user3fromDb = ud.findById(3);
         User user4fromDb = ud.findById(4);
@@ -56,7 +58,8 @@ public class Application {
         User user7fromDb = ud.findById(7);
         User user8fromDb = ud.findById(8);
         User user9fromDb = ud.findById(9);
-        User user10fromDb = ud.findById(10);*/
+        User user10fromDb = ud.findById(10);*//*
+
 
         TicketMachine t1 = new TicketMachine("Milano", "Via Madonnina", State.ACTIVE,101);
         TicketMachine t2 = new TicketMachine("Napoli", "Via Toledo ", State.INACTIVE,111);
@@ -81,7 +84,8 @@ public class Application {
         Line l9 = new Line("Palermo", "Mondello", 109, 30.0);
         Line l10 = new Line("Paperino", "Bassano del Grappa", 110, 12.5);
 
-        /*Line line1FromDb = ld.findById(1);
+        */
+/*Line line1FromDb = ld.findById(1);
         Line line2FromDb = ld.findById(2);
         Line line3FromDb = ld.findById(3);
         Line line4FromDb = ld.findById(4);
@@ -90,7 +94,8 @@ public class Application {
         Line line7FromDb = ld.findById(7);
         Line line8FromDb = ld.findById(8);
         Line line9FromDb = ld.findById(9);
-        Line line10FromDb = ld.findById(10);*/
+        Line line10FromDb = ld.findById(10);*//*
+
 
 
         TravelCard tc1 = new TravelCard(LocalDate.of(2024, 7, 1), u1);
@@ -112,7 +117,8 @@ public class Application {
         Vehicles v9 = new Vehicles(VehiclesType.AUTOBUS, Availability.AVAILABLE, 45, "GH963UV");
         Vehicles v10 = new Vehicles(VehiclesType.TRAM, Availability.AVAILABLE, 130, "TR147WX");
 
-       /* Vehicles vehicles1Fromdb = vd.findById(1);
+       */
+/* Vehicles vehicles1Fromdb = vd.findById(1);
         Vehicles vehicles2Fromdb = vd.findById(2);
         Vehicles vehicles3Fromdb = vd.findById(3);
         Vehicles vehicles4Fromdb = vd.findById(4);
@@ -121,7 +127,8 @@ public class Application {
         Vehicles vehicles7Fromdb = vd.findById(7);
         Vehicles vehicles8Fromdb = vd.findById(8);
         Vehicles vehicles9Fromdb = vd.findById(9);
-        Vehicles vehicles10Fromdb = vd.findById(10);*/
+        Vehicles vehicles10Fromdb = vd.findById(10);*//*
+
 
 
 
@@ -184,6 +191,7 @@ public class Application {
 
         List<VehicleLineJourney> journeys = List.of(j1, j2, j3, j4, j5, j6, j7, j8, j9, j10);
         journeys.forEach(jd::save);
+*/
 
 
         //-----------------------------------------------------------------------------------------------------------------------------
@@ -919,6 +927,23 @@ public class Application {
     public static void  ticketFromSeller(Scanner scanner, EntityManager em, UserDAO ud, SellersDao sd){
 
         System.out.println("Ok,  select the seller");
+        List<Sellers> allSellers = sd.getAllSeller();
+        List<TicketSeller> ticketSellers = allSellers.stream()
+                .filter(seller -> seller instanceof TicketSeller)
+                .map(seller -> (TicketSeller) seller)
+                .toList();
+
+        if (ticketSellers.isEmpty()){
+            System.out.println(("No ticket sellers avaiable at the moment"));
+            return;
+        }
+        System.out.println("Avaiable Ticket Sellers:");
+        for (int i=0; i< ticketSellers.size(); i++){
+            TicketSeller ts = ticketSellers.get(i);
+            System.out.println((i+1) + ". " + ts.getName() + " " +ts.getSurname() + " - Location: " +ts.getCity() + ", " + ts.getAddress());
+        }
+        System.out.println("Selet a seller by number. Press 0 to go back. ");
+        int choice = Integer.parseInt(scanner.nextLine());
 
     }
 
