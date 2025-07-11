@@ -9,6 +9,7 @@ import team1.entities.VehiclesMaintenance;
 import team1.entities.enums.Availability;
 import team1.entities.enums.VehiclesType;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class VehiclesMaintenanceDAO {
@@ -37,13 +38,17 @@ public class VehiclesMaintenanceDAO {
             return query.getResultList();
     }
 
-//    public VehiclesMaintenance createNewMaintenance(){
-////        public void addNewBus() {
-////            Vehicles newbus = new Vehicles(VehiclesType.AUTOBUS, Availability.AVAILABLE, 30, "xxxx");
-////            save(newbus);
-////            System.out.println("new bus added");
-////        }
-//    }
+    public void createNewMaintenance(LocalDate dateStart, Vehicles vehicleToSet){
+       VehiclesMaintenance newMaintenance = new VehiclesMaintenance(dateStart,vehicleToSet);
+            save(newMaintenance);
+            System.out.println("new maintenance added");
+    }
+
+    public void endMaintenanceAndSetReady(LocalDate date, VehiclesMaintenance maintenance){
+            maintenance.setMaintenanceEndDate(date);
+            maintenance.setServiceStartDate(date);
+        System.out.println("you are all set");
+    }
 
 
 }

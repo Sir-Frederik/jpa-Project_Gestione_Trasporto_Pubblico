@@ -14,6 +14,7 @@ import team1.entities.sellersSons.TicketSeller;
 import team1.exceptions.ReUsableException;
 
 import javax.sound.midi.Soundbank;
+import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -531,6 +532,7 @@ public class Application {
                                                         "What do you want to do? Choose the action to do:\n" +
                                                                 "1: Add Bus\n" +
                                                                 "2: Remove Bus\n" +
+                                                                "3: Find Bus with id\n"+
                                                                 "0: Back"
                                                 );
 
@@ -546,13 +548,29 @@ public class Application {
                                                 switch (busSection){
                                                     case 1:
                                                         System.out.println("Create new bus:");
-                                                        vd.addNewBus();
+                                                        System.out.println("set a capacity");
+                                                        int capacityInput = Integer.parseInt(scanner.nextLine());
+                                                        System.out.println("set a plate");
+                                                        String plateInput = scanner.nextLine();
+                                                        vd.addNewBus(capacityInput, plateInput);
                                                         break;
                                                     case 2:
                                                         System.out.println("Enter the Bus id to remove:");
-                                                        long userInputId = Long.parseLong(scanner.nextLine());
-                                                        vd.deleteVehicle(userInputId);
-
+                                                        try{
+                                                            long userInputId = Long.parseLong(scanner.nextLine());
+                                                            vd.deleteVehicle(userInputId);
+                                                        }catch(NumberFormatException e){
+                                                            System.out.println("Invalid ID format. Please enter a numeric value.");
+                                                        }
+                                                        break;
+                                                    case 3:
+                                                            System.out.println("Enter the id for search:");
+                                                            long userInputFind = Long.parseLong(scanner.nextLine());
+                                                            vd.findById(userInputFind);
+                                                            break;
+                                                    case 0:
+                                                        System.out.println("Returning to Vehicles Menu...");
+                                                        break;
                                                 }
 
                                             }while(busSection !=0);
@@ -568,6 +586,7 @@ public class Application {
                                                         "What do you want to do? Choose the action to do:\n" +
                                                                 "1: Add Tram\n" +
                                                                 "2: Remove Tram\n" +
+                                                                "3: Find Tram with id\n"+
                                                                 "0: Back"
                                                 );
 
@@ -582,7 +601,11 @@ public class Application {
                                                 switch (tramSection) {
                                                     case 1:
                                                         System.out.println("Create new tram:");
-                                                        vd.addNewTram();
+                                                        System.out.println("set a capacity");
+                                                        int capacityInput = Integer.parseInt(scanner.nextLine());
+                                                        System.out.println("set a plate");
+                                                        String plateInput = scanner.nextLine();
+                                                        vd.addNewTram(capacityInput, plateInput);
                                                         break;
                                                     case 2:
                                                         System.out.println("Enter the Tram ID to remove:");
@@ -592,6 +615,11 @@ public class Application {
                                                         } catch (NumberFormatException e) {
                                                             System.out.println("Invalid ID format. Please enter a numeric value.");
                                                         }
+                                                        break;
+                                                    case 3:
+                                                        System.out.println("Enter the id for search:");
+                                                        long userInputFind = Long.parseLong(scanner.nextLine());
+                                                        vd.findById(userInputFind);
                                                         break;
                                                     case 0:
                                                         System.out.println("Returning to Vehicles Menu...");
@@ -610,7 +638,7 @@ public class Application {
                                                 System.out.println(
                                                         "What do you want to do? Choose the action to do:\n" +
                                                                 "1: See full log of maintenance \n" +
-                                                                "2: See maintenance for a Vehicle with id\n" +
+                                                                "2: See specific maintenance with id\n" +
                                                                 "3: Set a maintenance for a Vehicle\n" +
                                                                 "4: Set a Vehicle to be ready\n" +
                                                                 "0: Back"
@@ -639,7 +667,9 @@ public class Application {
                                                         System.out.println("Enter ID of the Vehicle to set maintenance");
                                                         try{
                                                             long inputId = Long.parseLong(scanner.nextLine());
-                                                            System.out.println(vmd.findById(inputId));
+                                                            System.out.println(vd.findById(inputId));
+                                                            Vehicles vehicleToSet = vd.findById((inputId));
+
                                                             System.out.println("What date should this vehicle enter manintenance? " +
                                                                     "(use format yyyy-mm-dd)");
                                                             String inputStartDate = scanner.nextLine();
@@ -647,15 +677,36 @@ public class Application {
                                                             try {
                                                                 inputDateParsed = LocalDate.parse(inputStartDate);
                                                                 vd.findById(inputId).setAvailability(Availability.NOTAVAILABLE);
-                                                                //da finire sto punto
+                                                                vmd.createNewMaintenance(inputDateParsed, vehicleToSet);
                                                             } catch (DateTimeParseException e) {
                                                                 System.out.println("Invalid input. Please enter date (use format yyyy-MM-dd);\n");
                                                                 maintenanceSection = -1;
                                                                 continue;
                                                             }
+                                                        }catch (NumberFormatException e){
+                                                            System.out.println("Invalid ID format. Please enter a numeric value.");
+                                                        }
 
+                                                    case 4:
+                                                        System.out.println("Enter ID of the maintenance to set ready");
+                                                        try{
+                                                            long inputId = Long.parseLong(scanner.nextLine());
+                                                            System.out.println(vmd.findById(inputId));
+                                                            VehiclesMaintenance maintenanceToSetReady = vmd.findById((inputId));
 
-
+                                                            System.out.println("What date should this vehicle end maintenance and be ready? " +
+                                                                    "(use format yyyy-mm-dd)");
+                                                            String inputReadyDate = scanner.nextLine();
+                                                            LocalDate inputDateParsed;
+                                                            try {
+                                                                inputDateParsed = LocalDate.parse(inputReadyDate);
+                                                                vd.findById(inputId).setAvailability(Availability.AVAILABLE);
+                                                                vmd.endMaintenanceAndSetReady(inputDateParsed, maintenanceToSetReady);
+                                                            } catch (DateTimeParseException e) {
+                                                                System.out.println("Invalid input. Please enter date (use format yyyy-MM-dd);\n");
+                                                                maintenanceSection = -1;
+                                                                continue;
+                                                            }
                                                         }catch (NumberFormatException e){
                                                             System.out.println("Invalid ID format. Please enter a numeric value.");
                                                         }

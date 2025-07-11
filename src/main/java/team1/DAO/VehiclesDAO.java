@@ -70,14 +70,14 @@ public class VehiclesDAO {
     }
 
 
-    public void addNewBus() {
-        Vehicles newbus = new Vehicles(VehiclesType.AUTOBUS, Availability.AVAILABLE, 30, "xxxx");
+    public void addNewBus(int capacity, String plate) {
+        Vehicles newbus = new Vehicles(VehiclesType.AUTOBUS, Availability.AVAILABLE, capacity, plate);
         save(newbus);
         System.out.println("new bus added");
     }
 
-    public void addNewTram() {
-        Vehicles newtram = new Vehicles(VehiclesType.TRAM, Availability.AVAILABLE, 60, "xxxx");
+    public void addNewTram(int capacity, String plate) {
+        Vehicles newtram = new Vehicles(VehiclesType.TRAM, Availability.AVAILABLE, capacity, plate);
         save(newtram);
         System.out.println("new tram added");
     }
